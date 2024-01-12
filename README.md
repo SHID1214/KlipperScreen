@@ -1,3 +1,4 @@
 # Moment KlipperScreen
 
-Moment KlipperScreen is based on klipperScreen and has been customized with translation, icon, color, etc. suitable for Moment 3D Pinrter.
+Moment KlipperScreen is based on klipperScreen 
+Translation, icons, colors, etc. have been customized to suit Moment 3D Printer.
