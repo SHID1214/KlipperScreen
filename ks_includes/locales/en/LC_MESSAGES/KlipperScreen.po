@@ -331,25 +331,25 @@ msgid "Invert Z"
 msgstr ""
 
 msgid "Klipper Restart"
-msgstr ""
+msgstr "OS Restart"
 
 msgid "Klipper has disconnected"
-msgstr ""
+msgstr "OS has disconnected"
 
 msgid "Klipper has encountered an error."
-msgstr ""
+msgstr "OS has encountered an error."
 
 msgid "Klipper has shutdown"
-msgstr ""
+msgstr "OS has shutdown"
 
 msgid "Klipper is attempting to start"
-msgstr ""
+msgstr "OS is attempting to start"
 
 msgid "Klipper will reboot"
-msgstr ""
+msgstr "OS will reboot"
 
 msgid "KlipperScreen will reboot"
-msgstr ""
+msgstr "OS Screen will reboot"
 
 msgid "Language"
 msgstr ""

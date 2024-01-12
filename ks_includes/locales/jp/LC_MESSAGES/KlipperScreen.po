@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: KlipperScreen\n"
+"Project-Id-Version: OSScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: \n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -24,7 +24,7 @@ msgid "24 Hour Time"
 msgstr "24時間表記"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "ファームウェアの更新を行うと不具合が解決する場合があります"
+msgstr "ファームウェアの更新を行うと不具合が解決する場合があります."
 
 msgid "ADXL Not Configured"
 msgstr "ADXL が構成されていません"
@@ -274,10 +274,10 @@ msgid "Hide"
 msgstr "隠す"
 
 msgid "Hide sensors in Temp."
-msgstr "温度を非表示にする"
+msgstr "温度を非表示にする."
 
 msgid "Hide temp."
-msgstr "温度を非表示にする"
+msgstr "温度を非表示にする."
 
 msgid "Home All"
 msgstr ""
@@ -330,26 +330,26 @@ msgstr "Y軸を反対にする"
 msgid "Invert Z"
 msgstr "X軸を反対にする"
 
-msgid "Klipper Restart"
-msgstr "Klipperを再起動する"
+msgid "OS Restart"
+msgstr "OSを再起動する"
 
-msgid "Klipper has disconnected"
-msgstr "Klipperの接続が切れました"
+msgid "OS has disconnected"
+msgstr "OSの接続が切れました"
 
-msgid "Klipper has encountered an error."
-msgstr "Klipperのエラーが発生しました"
+msgid "OS has encountered an error."
+msgstr "OSのエラーが発生しました."
 
-msgid "Klipper has shutdown"
-msgstr "Klipperはシャットダウンしました"
+msgid "OS has shutdown"
+msgstr "OSはシャットダウンしました"
 
-msgid "Klipper is attempting to start"
-msgstr "Klipperは起動中です"
+msgid "OS is attempting to start"
+msgstr "OSは起動中です"
 
-msgid "Klipper will reboot"
-msgstr "Klipperは再起動します"
+msgid "OS will reboot"
+msgstr "OSは再起動します"
 
-msgid "KlipperScreen will reboot"
-msgstr "KlipperScreenは再起動します"
+msgid "OSScreen will reboot"
+msgstr "OSScreenは再起動します"
 
 msgid "Language"
 msgstr "言語"
@@ -439,7 +439,7 @@ msgid "New"
 msgstr "新"
 
 msgid ""
-"Not supported for auto-detection, it needs to be configured in klipperscreen."
+"Not supported for auto-detection, it needs to be configured in OSscreen."
 "conf"
 msgstr ""
 
@@ -476,7 +476,7 @@ msgid "Pins"
 msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "マイクロコントローラーをリコンパイル＆フラッシュしてください"
+msgstr "マイクロコントローラーをリコンパイル＆フラッシュしてください."
 
 msgid "Power"
 msgstr "電源"
@@ -514,7 +514,7 @@ msgstr "プローブオフセット"
 msgid "Profile Name:"
 msgstr "プロファイル:"
 
-msgid "Provide KlipperScreen.log when asking for help.\n"
+msgid "Provide OSScreen.log when asking for help.\n"
 msgstr ""
 
 msgid "Quad Gantry Level"
