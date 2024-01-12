@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-10-25 21:10+0300\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"PO-Revision-Date: 2022-12-10 14:52+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -43,25 +43,22 @@ msgstr "Hızlanma:"
 msgid "Accept"
 msgstr "Kabul et"
 
+msgid "Actions"
+msgstr "Eylemler"
+
 msgid "Add profile"
 msgstr "Profil ekle"
-
-msgid "All"
-msgstr "Tümü"
 
 msgid "Apply"
 msgstr "Uygula"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Endstop'a %s%.3f ofset uygulansın mı?"
+msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Prob'a %s%.3f ofset uygulansın mı?"
-
-msgid "Archived"
-msgstr "Arşivlenen"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Nesneyi hariç tutmak istediğinizden emin misiniz?"
@@ -90,9 +87,6 @@ msgstr "Otomatik-Kalibrasyon"
 msgid "Auto-close notifications"
 msgstr "Bildirimleri otomatik kapat"
 
-msgid "Auto-open Extrude On Pause"
-msgstr "Duraklatıldığında Ekstrüzyonu Otomatik Aç"
-
 msgid "Auto-scroll"
 msgstr "Otomatik kaydırma"
 
@@ -115,7 +109,7 @@ msgid "Calibrating"
 msgstr "Kalibre Ediliyor"
 
 msgid "Camera"
-msgstr "Kamera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Maksimumun üzerine ayarlanamaz:"
@@ -153,6 +147,9 @@ msgstr "Kapat"
 msgid "Complete"
 msgstr "Tamamlandı"
 
+msgid "Configuration"
+msgstr "Yapılandırma"
+
 msgid "Confirm Emergency Stop"
 msgstr "Acil Durdurmayı Onaylayın"
 
@@ -166,17 +163,17 @@ msgstr "%s'e Bağlanılıyor"
 msgid "Console"
 msgstr "Konsol"
 
+msgid "Continue"
+msgstr "Devam et"
+
 msgid "Cooldown"
 msgstr "Soğutma"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "DPMS yüklenemedi ve devre dışı bırakıldı"
 
 msgid "Date"
 msgstr "Tarih"
 
 msgid "Delete Directory?"
-msgstr "Dizini Sil?"
+msgstr ""
 
 msgid "Delete File?"
 msgstr "Dosyayı Sil?"
@@ -196,9 +193,6 @@ msgstr "%s Kurtarmak istiyor musunuz?"
 
 msgid "Elapsed:"
 msgstr "Geçen:"
-
-msgid "Ended official support in June 2023"
-msgstr ""
 
 msgid "Error"
 msgstr "Hata"
@@ -245,9 +239,6 @@ msgstr "Dosya"
 msgid "File:"
 msgstr "Dosya:"
 
-msgid "Filter"
-msgstr "Filtre"
-
 msgid "Finding ADXL"
 msgstr "ADXL Bulunuyor"
 
@@ -272,6 +263,9 @@ msgstr "Yazı boyutu"
 msgid "Full Update"
 msgstr "Tam Güncelleme"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Geri git"
 
@@ -290,9 +284,6 @@ msgstr "Sıcaklıktaki sensörleri gizleyin."
 msgid "Hide temp."
 msgstr "Sıcaklığı gizle."
 
-msgid "Home"
-msgstr "Ana Ekran"
-
 msgid "Home All"
 msgstr "Eksenleri Sıfırla"
 
@@ -308,23 +299,20 @@ msgstr "Y Sıfırla"
 msgid "Home Z"
 msgstr "Z  Sıfırla"
 
+msgid "Homing"
+msgstr "Eksen Sıfırlama"
+
 msgid "Host"
 msgstr "Sunucu"
 
 msgid "Hostname"
 msgstr "Ana bilgisayar adı"
 
-msgid "ID"
-msgstr "ID"
-
 msgid "Icon Theme"
 msgstr "Simge Teması"
 
 msgid "Initializing printer..."
 msgstr "Yazıcı başlatılıyor..."
-
-msgid "Initiate a PID calibration for:"
-msgstr "PID kalibrasyonu başlatın:"
 
 msgid "Input Shaper"
 msgstr "İvme Düzenleyicisi"
@@ -347,9 +335,6 @@ msgstr "Y Ters çevir"
 msgid "Invert Z"
 msgstr "Z Ters çevir"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Isıtıcı gücüne bağlı olarak 5 dakikadan fazla sürebilir."
-
 msgid "Klipper Restart"
 msgstr "Klipper Yeniden başlat"
 
@@ -368,12 +353,8 @@ msgstr "Klipper başlatılmaya çalışılıyor"
 msgid "Klipper will reboot"
 msgstr "Klipper yeniden başlayacak"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr "FILEMENT_YUKLE/FILEMENT_KALDIR gizlidir ve extrude'dan kullanılmalıdır"
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen yeniden başlayacak"
 
 msgid "Language"
 msgstr "Dil"
@@ -381,14 +362,8 @@ msgstr "Dil"
 msgid "Large"
 msgstr "Büyük"
 
-msgid "Last Used"
-msgstr "Son kullanılan"
-
 msgid "Layer:"
 msgstr "Katman:"
-
-msgid "Leds"
-msgstr "Ledler"
 
 msgid "Left:"
 msgstr "Kalan:"
@@ -398,9 +373,6 @@ msgstr "Limitler"
 
 msgid "Load"
 msgstr "Yükle"
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Nozzle düşür"
@@ -413,9 +385,6 @@ msgstr "Makrolar"
 
 msgid "Main Menu"
 msgstr "Ana Menü"
-
-msgid "Material"
-msgstr "Malzeme"
 
 msgid "Max"
 msgstr "Maks"
@@ -456,9 +425,6 @@ msgstr "Değiştirilmiş"
 msgid "Moonraker: connected"
 msgstr "Moonraker: bağlandı"
 
-msgid "More"
-msgstr "Daha"
-
 msgid "Move"
 msgstr "Hareket"
 
@@ -477,9 +443,6 @@ msgstr "Asla"
 msgid "New"
 msgstr "Yeni"
 
-msgid "No elegible macros:"
-msgstr "Uygun makro yok:"
-
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -487,17 +450,8 @@ msgstr ""
 "Otomatik algılama desteklenmiyor, klipperscreen.conf dosyasından "
 "yapılandırmanız gerekli"
 
-msgid "Not working or not configured"
-msgstr ""
-
 msgid "Nothing selected"
 msgstr "Hiçbir şey seçilmedi"
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -593,7 +547,7 @@ msgid "Refresh"
 msgstr "Yenile"
 
 msgid "Rename/Move:"
-msgstr "Yeniden Adlandır/Taşı:"
+msgstr ""
 
 msgid "Restart"
 msgstr "Yeniden Başlat"
@@ -665,9 +619,6 @@ msgstr "Göster"
 msgid "Show Heater Power"
 msgstr "Isıtıcı Gücünü Göster"
 
-msgid "Show Scrollbars Buttons"
-msgstr "Kaydırma çubuklarında düğmeleri göster"
-
 msgid "Shutdown"
 msgstr "Kapat"
 
@@ -697,9 +648,6 @@ msgstr "Hız:"
 
 msgid "Square Corner Velocity"
 msgstr "Kare Köşe Hızı"
-
-msgid "Standby"
-msgstr "Hazırda Bekle"
 
 msgid "Start"
 msgstr "Başlat"
@@ -758,12 +706,6 @@ msgstr "Yükleniyor"
 msgid "Uploaded"
 msgstr "Yüklendi"
 
-msgid "Warning"
-msgstr ""
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Hareket hızı (mm/s)"
 
@@ -798,16 +740,10 @@ msgid_plural "hours"
 msgstr[0] "saat"
 msgstr[1] "saatler"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "'rename_existing'i kullanan makrolar gizlendi"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "adı '_' ile başlayan makrolar gizlendi"
-
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "dakika"
-msgstr[1] "dakikalar"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -820,21 +756,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "Continue"
-#~ msgstr "Devam et"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Tam Ekran"
-
-#~ msgid "Actions"
-#~ msgstr "Eylemler"
-
-#~ msgid "Configuration"
-#~ msgstr "Yapılandırma"
-
-#~ msgid "Homing"
-#~ msgstr "Eksen Sıfırlama"
 
 #~ msgid "Disable XY"
 #~ msgstr "XY Devre dışı bırak"
@@ -891,6 +812,9 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Sil"
+
+#~ msgid "Home"
+#~ msgstr "Ana Ekran"
 
 #~ msgid "Off"
 #~ msgstr "Kapa"

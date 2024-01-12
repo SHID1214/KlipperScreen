@@ -2,17 +2,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-12-11 19:05+0000\n"
-"Last-Translator: \"Zs.Antal\" <zsikaiantal@icloud.com>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/hu/>\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: AntoszHUN\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -22,7 +21,7 @@ msgid "(default)"
 msgstr "(alapértelmezett)"
 
 msgid "24 Hour Time"
-msgstr "24 órás idő"
+msgstr "24 Órás Idő"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
 msgstr "A FIRMWARE_RESTART javíthatja a problémát."
@@ -39,31 +38,28 @@ msgstr "Gyorsulás:"
 msgid "Accept"
 msgstr "Elfogad"
 
+msgid "Actions"
+msgstr "Műveletek"
+
 msgid "Add profile"
 msgstr "Profil hozzáadása"
-
-msgid "All"
-msgstr "Mind"
 
 msgid "Apply"
 msgstr "Alkalmaz"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Alkalmazod a(z) %s%.3f végállás eltolást?"
+msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Alkalmazod a(z) %s%.3f szonda eltolást?"
-
-msgid "Archived"
-msgstr "Archivált"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Biztosan kizárod az objektumot?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "Biztosan vészleállítást szeretnél?"
+msgstr "Biztosan Vészleállítást szeretnél?"
 
 msgid "Are you sure you wish to cancel this print?"
 msgstr "Biztosan megszakítod ezt a nyomtatást?"
@@ -85,9 +81,6 @@ msgstr "Automatikus kalibrálás"
 
 msgid "Auto-close notifications"
 msgstr "Értesítések automatikus bezárása"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Automatikus megnyitás adagolás szünetelése után"
 
 msgid "Auto-scroll"
 msgstr "Automatikus görgetés"
@@ -111,13 +104,13 @@ msgid "Calibrating"
 msgstr "Kalibrálás"
 
 msgid "Camera"
-msgstr "Kamera"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Nem állítható a maximum fölé:"
 
 msgid "Cancel"
-msgstr "Mégsem"
+msgstr "Mégse"
 
 msgid "Cancel Print"
 msgstr "Nyomtatás megszakítása"
@@ -135,19 +128,22 @@ msgid "Channel"
 msgstr "Csatorna"
 
 msgid "Check ADXL Wiring"
-msgstr "Ellenőrizd az ADXL kábelezését"
+msgstr "Ellenőrizd az ADXL kábelezést"
 
 msgid "Checking for updates, please wait..."
-msgstr "Frissítések keresése, kérlek, várj..."
+msgstr "Frissítések keresése, kérjük, várj..."
 
 msgid "Clear"
-msgstr "Tisztítás"
+msgstr "Tiszta"
 
 msgid "Close"
 msgstr "Bezárás"
 
 msgid "Complete"
 msgstr "Befejezve"
+
+msgid "Configuration"
+msgstr "Konfiguráció"
 
 msgid "Confirm Emergency Stop"
 msgstr "Vészleállítás megerősítése"
@@ -162,20 +158,20 @@ msgstr "Csatlakozás %s"
 msgid "Console"
 msgstr "Konzol"
 
+msgid "Continue"
+msgstr "Folytat"
+
 msgid "Cooldown"
 msgstr "Lehűtés"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "A DPMS betöltése nem sikerült, ezért le van tiltva"
 
 msgid "Date"
 msgstr "Dátum"
 
 msgid "Delete Directory?"
-msgstr "Törlöd a könyvtárat?"
+msgstr ""
 
 msgid "Delete File?"
-msgstr "Törlöd a fájlt?"
+msgstr "Fájl törlése?"
 
 msgid "Deselect"
 msgstr "Kijelölés törlése"
@@ -193,9 +189,6 @@ msgstr "Vissza akarod állítani %s-t?"
 msgid "Elapsed:"
 msgstr "Eltelt:"
 
-msgid "Ended official support in June 2023"
-msgstr ""
-
 msgid "Error"
 msgstr "Hiba"
 
@@ -212,10 +205,10 @@ msgid "Extrude"
 msgstr "Száladagolás"
 
 msgid "Extrusion +"
-msgstr "Adagolás +"
+msgstr "Extrudálás +"
 
 msgid "Extrusion -"
-msgstr "Adagolás -"
+msgstr "Extrudálás -"
 
 msgid "Failed, adjust position first"
 msgstr "Sikertelen! Előbb állítsd be a pozíciót"
@@ -241,9 +234,6 @@ msgstr "Fájl"
 msgid "File:"
 msgstr "Fájl:"
 
-msgid "Filter"
-msgstr "Szűrő"
-
 msgid "Finding ADXL"
 msgstr "ADXL keresése"
 
@@ -254,7 +244,7 @@ msgid "Finish"
 msgstr "Befejezve"
 
 msgid "Firmware Restart"
-msgstr "Firmware újraindítása"
+msgstr "Firmware Újraindítása"
 
 msgid "Flow:"
 msgstr "Folyam:"
@@ -266,7 +256,10 @@ msgid "Font Size"
 msgstr "Betűméret"
 
 msgid "Full Update"
-msgstr "Teljes frissítés"
+msgstr "Teljes Frissítés"
+
+msgid "Fullscreen"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Visszalépés"
@@ -286,9 +279,6 @@ msgstr "Hőfok szenzorok elrejtése."
 msgid "Hide temp."
 msgstr "Hőfok elrejtése"
 
-msgid "Home"
-msgstr "Kezdőpontok"
-
 msgid "Home All"
 msgstr "X-Y-Z kezdőpont"
 
@@ -304,23 +294,20 @@ msgstr "Y kezdőpont"
 msgid "Home Z"
 msgstr "Z kezdőpont"
 
+msgid "Homing"
+msgstr "Kezdőpont"
+
 msgid "Host"
 msgstr "Gazdagép"
 
 msgid "Hostname"
 msgstr "Gazdanév"
 
-msgid "ID"
-msgstr "ID"
-
 msgid "Icon Theme"
 msgstr "Ikon téma"
 
 msgid "Initializing printer..."
 msgstr "Nyomtató inicializálása..."
-
-msgid "Initiate a PID calibration for:"
-msgstr "PID-kalibráció kezdeményezése:"
 
 msgid "Input Shaper"
 msgstr "Bemeneti alakító"
@@ -343,14 +330,11 @@ msgstr "Fordított Y"
 msgid "Invert Z"
 msgstr "Fordított Z"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "A fűtés teljesítményétől függően több mint 5 percig tarthat."
-
 msgid "Klipper Restart"
-msgstr "A Klipper újraindítása"
+msgstr "Klipper Újraindítása"
 
 msgid "Klipper has disconnected"
-msgstr "A Klipper szétkapcsolt"
+msgstr "Klipper szétkapcsolt"
 
 msgid "Klipper has encountered an error."
 msgstr "A Klipper hibát észlelt."
@@ -359,18 +343,13 @@ msgid "Klipper has shutdown"
 msgstr "A Klipper leállt"
 
 msgid "Klipper is attempting to start"
-msgstr "A Klipper megpróbál elindulni"
+msgstr "Klipper megpróbálja elindítani"
 
 msgid "Klipper will reboot"
 msgstr "A Klipper újraindul"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT rejtett és a száladagolásból kell használni"
+msgid "KlipperScreen will reboot"
+msgstr "A KlipperScreen újraindul"
 
 msgid "Language"
 msgstr "Nyelv"
@@ -378,26 +357,17 @@ msgstr "Nyelv"
 msgid "Large"
 msgstr "Nagy"
 
-msgid "Last Used"
-msgstr "Utoljára használt"
-
 msgid "Layer:"
 msgstr "Réteg:"
 
-msgid "Leds"
-msgstr "LED-ek"
-
 msgid "Left:"
-msgstr "Marad:"
+msgstr "Bal:"
 
 msgid "Limits"
 msgstr "Korlátok"
 
 msgid "Load"
 msgstr "Betöltés"
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Fúvóka le"
@@ -410,9 +380,6 @@ msgstr "Makrók"
 
 msgid "Main Menu"
 msgstr "Főmenü"
-
-msgid "Material"
-msgstr "Anyag"
 
 msgid "Max"
 msgstr "Max"
@@ -453,14 +420,11 @@ msgstr "Módosított"
 msgid "Moonraker: connected"
 msgstr "Moonraker: csatlakoztatva"
 
-msgid "More"
-msgstr "Több"
-
 msgid "Move"
 msgstr "Mozgatás"
 
 msgid "Move Distance (mm)"
-msgstr "Mozgás távolsága (mm)"
+msgstr "Mozgási távolság (mm)"
 
 msgid "Name"
 msgstr "Név"
@@ -474,27 +438,15 @@ msgstr "Soha"
 msgid "New"
 msgstr "Új"
 
-msgid "No elegible macros:"
-msgstr "Nincs választható makró:"
-
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
-"Az automatikus felismerés nem támogatott, ezt a klipperscreen.conf fájlban "
-"kell beállítani."
-
-msgid "Not working or not configured"
-msgstr ""
+"Az automatikus felismerés nem támogatott, a klipperscreenben kell beállítani."
+"conf"
 
 msgid "Nothing selected"
 msgstr "Nincs kiválasztva"
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -521,10 +473,10 @@ msgid "Paused"
 msgstr "Szüneteltetve"
 
 msgid "Perform a full upgrade?"
-msgstr "Teljes frissítést szeretnél?"
+msgstr "Teljes frissítést hajtasz végre?"
 
 msgid "Pins"
-msgstr "Tűk"
+msgstr "Kimenetek"
 
 msgid "Please recompile and flash the micro-controller."
 msgstr "Fordítsd újra és frissítsd a mikrovezérlőt."
@@ -566,7 +518,7 @@ msgid "Profile Name:"
 msgstr "Profil név:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Csatold a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
+msgstr "Add meg a KlipperScreen.log-ot, amikor segítséget kérsz.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Négy állású szint"
@@ -590,7 +542,7 @@ msgid "Refresh"
 msgstr "Frissítés"
 
 msgid "Rename/Move:"
-msgstr "Átnevez/Áthelyez:"
+msgstr ""
 
 msgid "Restart"
 msgstr "Újraindítás"
@@ -662,9 +614,6 @@ msgstr "Mutat"
 msgid "Show Heater Power"
 msgstr "A fűtésteljesítmény megjelenítése"
 
-msgid "Show Scrollbars Buttons"
-msgstr "Görgetősáv gombok megjelenítése"
-
 msgid "Shutdown"
 msgstr "Leállítás"
 
@@ -695,14 +644,11 @@ msgstr "Sebesség:"
 msgid "Square Corner Velocity"
 msgstr "Sebesség a sarkokban"
 
-msgid "Standby"
-msgstr "Készenlét"
-
 msgid "Start"
 msgstr "Indítás"
 
 msgid "Starting WiFi Association"
-msgstr "A WiFi társítás elindítása"
+msgstr "A WiFi Egyesület elindítása"
 
 msgid "Starting recovery for"
 msgstr "Helyreállítás megkezdése"
@@ -714,10 +660,10 @@ msgid "System"
 msgstr "Rendszer"
 
 msgid "System Restart"
-msgstr "Rendszer újraindítása"
+msgstr "Rendszer Újraindítása"
 
 msgid "System Shutdown"
-msgstr "Rendszer leállitás"
+msgstr "Rendszer Leállitás"
 
 msgid "Temp (°C)"
 msgstr "Hőmérséklet (°C)"
@@ -738,7 +684,7 @@ msgid "Unload"
 msgstr "Kiadás"
 
 msgid "Unretract Extra Length"
-msgstr "Extra visszahúzás hossza"
+msgstr "Extra hossz visszahúzása"
 
 msgid "Unretract Speed"
 msgstr "Visszahúzási sebesség"
@@ -747,19 +693,13 @@ msgid "Up To Date"
 msgstr "Naprakész"
 
 msgid "Update"
-msgstr "Frissítés"
+msgstr "Frissít"
 
 msgid "Updating"
 msgstr "Frissítés"
 
 msgid "Uploaded"
 msgstr "Feltöltve"
-
-msgid "Warning"
-msgstr ""
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Mozgási seb. (mm/s)"
@@ -795,16 +735,10 @@ msgid_plural "hours"
 msgstr[0] "óra"
 msgstr[1] "órák"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "a 'rename_existing' használó makrók el vannak rejtve"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "a '_' jellel kezdődő nevű makrók el vannak rejtve"
-
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "perc"
-msgstr[1] "percek"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -817,3 +751,87 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
+
+#~ msgid "Disable XY"
+#~ msgstr "XY Letiltása"
+
+#~ msgid "Slicer Time correction (%)"
+#~ msgstr "Szeletelő idő javítása (%)"
+
+#~ msgid "Calibrated, save configuration to make it permanent"
+#~ msgstr "Kalibrálva! Mentsd el a konfigurációt, hogy az állandó legyen"
+
+#~ msgid "Decrease"
+#~ msgstr "Csökkent"
+
+#~ msgid "Increase"
+#~ msgstr "Növel"
+
+#, python-format
+#~ msgid "Sending Power ON signal to: %s"
+#~ msgstr "Bekapcsolási jel küldése ide: %s"
+
+#~ msgid "Sort:"
+#~ msgstr "Fajta:"
+
+#~ msgid "Calibrating..."
+#~ msgstr "Kalibrálás..."
+
+#~ msgid "Z+"
+#~ msgstr "Z+"
+
+#~ msgid "Z-"
+#~ msgstr "Z-"
+
+#~ msgid "X+"
+#~ msgstr "X+"
+
+#~ msgid "X-"
+#~ msgstr "X-"
+
+#~ msgid "Y+"
+#~ msgstr "Y+"
+
+#~ msgid "Y-"
+#~ msgstr "Y-"
+
+#, python-format
+#~ msgid "Retry #%s"
+#~ msgstr "Újra #%s"
+
+#~ msgid "Add Printer"
+#~ msgstr "Nyomtató hozzáadása"
+
+#~ msgid "Initializing"
+#~ msgstr "Inicializálás"
+
+#~ msgid "Delete"
+#~ msgstr "Töröl"
+
+#~ msgid "Home"
+#~ msgstr "Kezdőpontok"
+
+#~ msgid "Off"
+#~ msgstr "Ki"
+
+#~ msgid "View Mesh"
+#~ msgstr "Háló nézet"
+
+#~ msgid "Machine"
+#~ msgstr "Gép"
+
+#~ msgid "Sort by: "
+#~ msgstr "Sorrend: "
+
+#~ msgid "Bltouch found applied offset"
+#~ msgstr "A Bltouch alkalmazott eltolást talált"
+
+#~ msgid ""
+#~ "Check /tmp/KlipperScreen.log for more information.\n"
+#~ "Please submit an issue on GitHub for help."
+#~ msgstr ""
+#~ "Nézd a /tmp/KlipperScreen.log további információért.\n"
+#~ "Segítségért küldj be egy hibajegyet a GitHubon."
+
+#~ msgid "Probe found applied offset"
+#~ msgstr "A szonda alkalmazott eltolást talált"

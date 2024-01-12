@@ -5,12 +5,16 @@ from gi.repository import Gtk, GLib
 from ks_includes.screen_panel import ScreenPanel
 
 
-class Panel(ScreenPanel):
+def create_panel(*args):
+    return PrinterSelect(*args)
+
+
+class PrinterSelect(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         printers = self._config.get_printers()
 
-        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
+        grid = self._gtk.HomogeneousGrid()
         scroll = self._gtk.ScrolledWindow()
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scroll.add(grid)

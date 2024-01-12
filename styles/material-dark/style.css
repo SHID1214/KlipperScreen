@@ -1,250 +1,222 @@
 /* Material-dark theme created by Alfredo Monclus 2021 */
-@define-color text #e2e2e2;
-@define-color bg #121212;
-@define-color buttons-bg #090909;
-@define-color color1 #d46900;
-@define-color color2 #ed3c63;
-@define-color color3 #849900;
-@define-color color4 #007db4;
-
-@define-color echo #006412;
-@define-color warning #EF6C00;
-@define-color error #B71C1C;
-
-@define-color active #d46900;
-@define-color active-dark #282828;
-@define-color lines #a2a2a2;
-@define-color slider #d81549;
 
 * {
-    color: @text;
+    color: #e2e2e2;
 }
 
-list row,
-treeview.view,
-button,
 window {
-    background-color: @bg;
+    background-color: #121212;
 }
 
-button.color1 {
-    background-color: @buttons-bg;
-    border-color: @color1;
-    border-radius: 1em;
+button {
+    background-color: #121212;
 }
 
-button.color2 {
-    background-color: @buttons-bg;
-    border-color: @color2;
-    border-radius: 1em;
-}
-
-button.color3 {
-    background-color: @buttons-bg;
-    border-color: @color3;
-    border-radius: 1em;
-}
-
-button.color4 {
-    background-color: @buttons-bg;
-    border-color: @color4;
-    border-radius: 1em;
+button:active {
+    background-color: #d8a415;
 }
 
 .button_active {
-    background-color: @active-dark;
+    background-color: #282828;
     border-width: .25em;
     border-radius: 1em;
 }
 
-button.color1:active,
-button.color2:active,
-button.color3:active,
-button.color4:active,
-button.update:active,
-button.invalid:active,
-.dialog button:active {
+button.color1 {
+    background-color: #090909;
+    border-color: #d46900;
+    border-radius: 1em;
+}
+
+button.color2 {
+    background-color: #090909;
+    border-color: #ed3c63;
+    border-radius: 1em;
+}
+
+button.color3 {
+    background-color: #090909;
+    border-color: #849900;
+    border-radius: 1em;
+}
+
+button.color4 {
+    background-color: #090909;
+    border-color: #007db4;
+    border-radius: 1em;
+}
+
+button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
 }
 
-button.update,
-button.invalid {
-    background-color: @buttons-bg;
-    border: 0;
-    border-bottom: .3em solid;
-    border-radius: .75em;
+button.active {
+    background-color: #ee6002;
 }
 
 button.update {
-    border-bottom-color: @echo;
-}
-
-button.invalid {
-    border-bottom-color: @error;
-}
-
-combobox box button {
-    background-color: @active-dark;
-    border-color: @bg;
-}
-
-treeview.view check,
-switch {
-    background-color: @active-dark;
-}
-
-treeview.view check:checked,
-switch:checked {
-    background-color: @echo;
-}
-
-entry {
-    background-color: @active-dark;
-    border-color: @active-dark;
-}
-
-label {
-    color: @text;
-}
-
-menu {
-    background-color: @bg;
-    border-color: @lines;
-}
-
-menuitem {
-    background-color: @bg;
-    border-color: @lines;
-}
-
-trough {
-    background-color: @active-dark;
-    color: @text;
-}
-
-trough highlight,
-trough progress {
-    background-color: @slider;
-    color: @text;
-    border-color: @bg;
-}
-
-scale-mark {
-    color: @text;
-}
-
-scrollbar,
-scrollbar button,
-scrollbar trough {
-    background-color: @bg;
-}
-
-scrollbar slider {
-    background-color: @active-dark;
-}
-
-textview .time {
-    color: @lines;
-}
-
-.dialog {
-    border: @bg;
-    background-color: @bg;
-}
-
-.dialog button {
-    background-color: @buttons-bg;
+    background-color: #090909;
+    border: 0;
+    border-bottom: .3em solid;
+    border-bottom-color: #849900;
     border-radius: .75em;
 }
 
-.horizontal_togglebuttons {
-    border-color: @bg;
-    background-color: @buttons-bg;
+button.invalid {
+    background-color: #090909;
+    border: 0;
+    border-bottom: .3em solid;
+    border-bottom-color: #B71C1C;
+    border-radius: .75em;
 }
 
-button:active,
-.horizontal_togglebuttons_active,
-button.active {
-    background-color: @active;
+combobox box button {
+    background-color: #1f1f1f;
+    border-color: #121212;
+}
+
+switch {
+    background-color: #1f1f1f;
+}
+
+switch:checked {
+    background-color: #849900;
+}
+
+entry {
+    background-color: #1f1f1f;
+    border-color: #1f1f1f;
+}
+
+label {
+    color: #e2e2e2;
+}
+
+menu {
+    background-color: #121212;
+    border-color: #a2a2a2;
+}
+
+menuitem {
+    background-color: #121212;
+    border-color: #a2a2a2;
+}
+
+trough {
+    background-color: #1f1f1f;
+    color: #e2e2e2;
+}
+
+trough highlight, trough progress {
+    background-color: #d81549;
+    color: #e2e2e2;
+    border-color: #121212;
+}
+
+scale-mark {
+    color: #e2e2e2;
+}
+
+scrollbar, scrollbar button, scrollbar trough {
+    background-color: #121212;
+}
+
+scrollbar slider {
+    background-color: #2f2f2f;
+}
+
+textview .time {
+    color: #9E9E9E;
+}
+
+.popup {
+    background-color: #006064;
+}
+
+.dialog {
+    border: #121212;
+    background-color: #121212;
+}
+
+.dialog button {
+    background-color: #090909;
+    border-bottom-color: #1f1f1f;
+    border-radius: .75em;
+}
+
+.dialog button:nth-child(1) {
+    border-bottom-color: #849900;
+}
+
+.dialog button:nth-child(2) {
+    border-bottom-color: #B71C1C;
+}
+
+.tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
+    border-color: #121212;
+    background-color: #090909;
+}
+
+.distbutton_active {
+    background-color: #d46900;
 }
 
 .fan_slider {
-    color: @text;
+    color: #e2e2e2;
 }
 
 .message_popup {
-    border-bottom-color: @text;
+    border-bottom-color: #e2e2e2;
 }
 
-.message_popup_echo,
-.message_popup_echo button {
-    background-color: @echo;
+.message_popup_echo, .message_popup_echo button {
+    background-color: #006412;
 }
 
-.message_popup_warning,
-.message_popup_warning button {
-    background-color: @warning;
+.message_popup_warning, .message_popup_warning button {
+    background-color: #EF6C00;
 }
 
-.message_popup_error,
-.message_popup_error button {
-    background-color: @error;
+.message_popup_error, .message_popup_error button {
+    background-color: #B71C1C;
 }
 
-.numpad_key {
-    border-color: @bg;
-    background-color: @buttons-bg;
+.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
+    border-color: #121212;
+    background-color: #090909;
 }
 
-.printing-status,
-.printing-progress-text,
+.printing-status {
+    color: #e2e2e2;
+}
+
+.printing-progress-text {
+    color: #e2e2e2;
+}
+
 .printing-status-label {
-    color: @text;
+    color: #9E9E9E;
 }
 
 .message {
-    border-color: @error;
-    color: @text;
-    background-color: @error;
+    border-color: #B71C1C;
+    color: #e2e2e2;
+    background-color: #B71C1C;
 }
 
 .message button {
-    background-color: @text;
-    color: @bg;
+    background-color: #e2e2e2;
+    color: #121212;
 }
 
 .warning {
-    background-color: @warning;
+    background-color: #EF6C00;
 }
 
 .error {
-    background-color: @error;
+    background-color: #B71C1C;
 }
 
 .keyboard_pad {
-    background-color: @buttons-bg;
-}
-
-.dialog-error {
-    border-bottom-color: @error;
-}
-
-.dialog-warning {
-    border-bottom-color: @warning;
-}
-
-.dialog-info {
-    border-bottom-color: @color4;
-}
-
-.dialog-default {
-    border-bottom-color: @color3;
-}
-
-.dialog-secondary {
-     border-bottom-color: @color2;
-}
-
-.dialog-primary {
-     border-bottom-color: @color1;
+    background-color: #090909; /*base02*/
 }

@@ -1,13 +1,19 @@
 import logging
 import re
+
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
+
 from ks_includes.screen_panel import ScreenPanel
 
 
-class Panel(ScreenPanel):
+def create_panel(*args):
+    return FWRetractionPanel(*args)
+
+
+class FWRetractionPanel(ScreenPanel):
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
@@ -106,16 +112,22 @@ class Panel(ScreenPanel):
     def add_option(self, option, optname, units, value, digits, maxval):
         logging.info(f"Adding option: {option}")
 
-        name = Gtk.Label(
-            hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
-            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+        name = Gtk.Label()
         name.set_markup(f"<big><b>{optname}</b></big> ({units})")
+        name.set_hexpand(True)
+        name.set_vexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_valign(Gtk.Align.CENTER)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
         minimum = 1 if option in ["retract_speed", "unretract_speed"] else 0
         self.values[option] = value
         # adj (value, lower, upper, step_increment, page_increment, page_size)
         adj = Gtk.Adjustment(value, minimum, maxval, 1, 5, 0)
-        scale = Gtk.Scale(adjustment=adj, digits=digits, hexpand=True,
-                          has_origin=True)
+        scale = Gtk.Scale.new(orientation=Gtk.Orientation.HORIZONTAL, adjustment=adj)
+        scale.set_digits(digits)
+        scale.set_hexpand(True)
+        scale.set_has_origin(True)
         scale.get_style_context().add_class("option_slider")
         scale.connect("button-release-event", self.set_opt_value, option)
 

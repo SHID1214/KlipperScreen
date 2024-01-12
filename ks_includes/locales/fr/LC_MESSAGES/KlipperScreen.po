@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-11-14 17:04+0000\n"
-"Last-Translator: Bahoué <stef.griv@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/fr/>\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"PO-Revision-Date: 2022-11-30 18:11-0300\n"
+"Last-Translator: O. Robardet\n"
+"Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -44,25 +43,22 @@ msgstr "Accélération:"
 msgid "Accept"
 msgstr "Accepter"
 
+msgid "Actions"
+msgstr "Actions"
+
 msgid "Add profile"
 msgstr "Ajouter un profil"
-
-msgid "All"
-msgstr "Tous"
 
 msgid "Apply"
 msgstr "Appliquer"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "Appliquer %s%.3f décalage vers Endstop ?"
+msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "Appliquer %s%.3f décalage pour sonder ?"
-
-msgid "Archived"
-msgstr "Archivé"
+msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Êtes-vous sûr de vouloir exclure l’objet ?"
@@ -74,13 +70,13 @@ msgid "Are you sure you wish to cancel this print?"
 msgstr "Êtes-vous sûr de vouloir annuler cette impression ?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "Voulez-vous vraiment désactiver les moteurs?"
+msgstr "Voulez-vous vraiment désactiver les moteurs ?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "Êtes-vous sûr de vouloir redémarrer le système?"
+msgstr "Êtes-vous sûr de vouloir redémarrer le système ?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "Êtes-vous sûr de vouloir arrêter le système?"
+msgstr "Êtes-vous sûr de vouloir arrêter le système ?"
 
 msgid "Auto"
 msgstr "Auto"
@@ -90,9 +86,6 @@ msgstr "Calibration Automatique"
 
 msgid "Auto-close notifications"
 msgstr "Fermeture automatique des notifications"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Ouverture automatique de l'extrusion en cas de pause"
 
 msgid "Auto-scroll"
 msgstr "Défilement automatique"
@@ -104,7 +97,7 @@ msgid "Bed Mesh"
 msgstr "Maillage du plateau"
 
 msgid "Bed screw configuration:"
-msgstr "Configuration des vis du plateau:"
+msgstr "Configuration des vis:"
 
 msgid "Calibrate"
 msgstr "Calibrer"
@@ -116,7 +109,7 @@ msgid "Calibrating"
 msgstr "Calibrage"
 
 msgid "Camera"
-msgstr "Caméra"
+msgstr ""
 
 msgid "Can't set above the maximum:"
 msgstr "Impossible de définir au-dessus du maximum:"
@@ -128,7 +121,7 @@ msgid "Cancel Print"
 msgstr "Annuler l'impression"
 
 msgid "Cancelled"
-msgstr "Annulé"
+msgstr "Annulée"
 
 msgid "Cancelling"
 msgstr "Annulation"
@@ -154,6 +147,9 @@ msgstr "Fermer"
 msgid "Complete"
 msgstr "Impression terminée"
 
+msgid "Configuration"
+msgstr "Configuration"
+
 msgid "Confirm Emergency Stop"
 msgstr "Confirmer l'arrêt d'urgence"
 
@@ -167,20 +163,20 @@ msgstr "Connexion à %s"
 msgid "Console"
 msgstr "Console"
 
-msgid "Cooldown"
-msgstr "Refroidissement"
+msgid "Continue"
+msgstr "Continuer"
 
-msgid "DPMS has failed to load and has been disabled"
-msgstr "Le DPMS n'a pas réussi à se charger et a été désactivé"
+msgid "Cooldown"
+msgstr "Refroidir"
 
 msgid "Date"
 msgstr "Date"
 
 msgid "Delete Directory?"
-msgstr "Supprimer le répertoire?"
+msgstr ""
 
 msgid "Delete File?"
-msgstr "Supprimer le fichier?"
+msgstr "Supprimer le fichier ?"
 
 msgid "Deselect"
 msgstr "Désélectionner"
@@ -193,13 +189,10 @@ msgstr "Distance (mm)"
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "Voulez-vous récupérer %s?"
+msgstr "Voulez-vous récupérer %s ?"
 
 msgid "Elapsed:"
 msgstr "Écoulé:"
-
-msgid "Ended official support in June 2023"
-msgstr ""
 
 msgid "Error"
 msgstr "Erreur"
@@ -246,9 +239,6 @@ msgstr "Fichier"
 msgid "File:"
 msgstr "Fichier:"
 
-msgid "Filter"
-msgstr "Filtre"
-
 msgid "Finding ADXL"
 msgstr "Recherche de l’ADXL"
 
@@ -256,10 +246,10 @@ msgid "Fine Tuning"
 msgstr "Réglages précis"
 
 msgid "Finish"
-msgstr "Terminé"
+msgstr "Terminée"
 
 msgid "Firmware Restart"
-msgstr "Redémarrage du firmware"
+msgstr "Redémarrer Firmware"
 
 msgid "Flow:"
 msgstr "Flux:"
@@ -271,7 +261,10 @@ msgid "Font Size"
 msgstr "Taille de la police"
 
 msgid "Full Update"
-msgstr "Mise à jour complète"
+msgstr "Mettre à jour"
+
+msgid "Fullscreen"
+msgstr ""
 
 msgid "Go Back"
 msgstr "Retour"
@@ -291,9 +284,6 @@ msgstr "Masquer les capteurs dans Températures"
 msgid "Hide temp."
 msgstr "Masquer temp."
 
-msgid "Home"
-msgstr "Accueil"
-
 msgid "Home All"
 msgstr "Origine XYZ"
 
@@ -309,23 +299,20 @@ msgstr "Origine Y"
 msgid "Home Z"
 msgstr "Origine Z"
 
+msgid "Homing"
+msgstr "Origine"
+
 msgid "Host"
 msgstr "Hôte"
 
 msgid "Hostname"
 msgstr "Nom d’hôte"
 
-msgid "ID"
-msgstr "ID"
-
 msgid "Icon Theme"
 msgstr "Thème"
 
 msgid "Initializing printer..."
 msgstr "Démarrage de l'imprimante..."
-
-msgid "Initiate a PID calibration for:"
-msgstr "Lancer un étalonnage PID pour :"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -337,7 +324,7 @@ msgid "Invalid"
 msgstr "Invalide"
 
 msgid "Invalid password"
-msgstr "Mot de passe invalide"
+msgstr ""
 
 msgid "Invert X"
 msgstr "Inverser l'axe X"
@@ -347,10 +334,6 @@ msgstr "Inverser l'axe Y"
 
 msgid "Invert Z"
 msgstr "Inverser l'axe Z"
-
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
-"Cela peut prendre plus de 5 minutes en fonction de la puissance du chauffage."
 
 msgid "Klipper Restart"
 msgstr "Redémarrer Klipper"
@@ -370,14 +353,8 @@ msgstr "Klipper tente de démarrer"
 msgid "Klipper will reboot"
 msgstr "Klipper va redémarrer"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT sont cachés et doivent être utilisés à partir "
-"de l'extrusion"
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen va redémarrer"
 
 msgid "Language"
 msgstr "Langue"
@@ -385,14 +362,8 @@ msgstr "Langue"
 msgid "Large"
 msgstr "Grande"
 
-msgid "Last Used"
-msgstr "Dernière utilisation"
-
 msgid "Layer:"
 msgstr "Couche:"
-
-msgid "Leds"
-msgstr "Leds"
 
 msgid "Left:"
 msgstr "Restant:"
@@ -402,9 +373,6 @@ msgstr "Limites"
 
 msgid "Load"
 msgstr "Charger"
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Rapprocher la buse"
@@ -417,9 +385,6 @@ msgstr "Macros"
 
 msgid "Main Menu"
 msgstr "Menu principal"
-
-msgid "Material"
-msgstr "Matériau"
 
 msgid "Max"
 msgstr "Max"
@@ -460,9 +425,6 @@ msgstr "Modifié"
 msgid "Moonraker: connected"
 msgstr "Moonraker: connecté"
 
-msgid "More"
-msgstr "Plus"
-
 msgid "Move"
 msgstr "Mouvement"
 
@@ -481,9 +443,6 @@ msgstr "Jamais"
 msgid "New"
 msgstr "Nouveau"
 
-msgid "No elegible macros:"
-msgstr "Macros non éligibles :"
-
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -491,17 +450,8 @@ msgstr ""
 "Non pris en charge pour la détection automatique, il doit être configuré "
 "dans klipperscreen.conf"
 
-msgid "Not working or not configured"
-msgstr ""
-
 msgid "Nothing selected"
 msgstr "Rien de sélectionné"
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -528,7 +478,7 @@ msgid "Paused"
 msgstr "En pause"
 
 msgid "Perform a full upgrade?"
-msgstr "Effectuer une mise à jour complète?"
+msgstr "Effectuer une mise à jour complète ?"
 
 msgid "Pins"
 msgstr "Pins"
@@ -543,7 +493,7 @@ msgid "Power On Printer"
 msgstr "Allumer l'imprimante"
 
 msgid "Pressure Advance:"
-msgstr "Avance de pression:"
+msgstr "Pressure Advance:"
 
 msgid "Print"
 msgstr "Imprimer"
@@ -574,7 +524,6 @@ msgstr "Nom du profil:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
 msgstr ""
-"Fournissez le fichier KlipperScreen.log lorsque vous demandez de l'aide.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Portique à quatre niveaux"
@@ -598,7 +547,7 @@ msgid "Refresh"
 msgstr "Rafraîchir"
 
 msgid "Rename/Move:"
-msgstr "Renommer/déplacer :"
+msgstr ""
 
 msgid "Restart"
 msgstr "Redémarrer"
@@ -670,9 +619,6 @@ msgstr "Afficher"
 msgid "Show Heater Power"
 msgstr "Afficher la puissance de chauffe"
 
-msgid "Show Scrollbars Buttons"
-msgstr "Boutons d'affichage des barres de défilement"
-
 msgid "Shutdown"
 msgstr "Arrêter"
 
@@ -683,7 +629,7 @@ msgid "Slicer"
 msgstr "Slicer"
 
 msgid "Slicer:"
-msgstr "Trancheur:"
+msgstr "Slicer:"
 
 msgid "Small"
 msgstr "Petite"
@@ -702,9 +648,6 @@ msgstr "Vitesse:"
 
 msgid "Square Corner Velocity"
 msgstr "Vélocité des angles droits"
-
-msgid "Standby"
-msgstr "En attente"
 
 msgid "Start"
 msgstr "Démarrer"
@@ -755,19 +698,13 @@ msgid "Up To Date"
 msgstr "À jour"
 
 msgid "Update"
-msgstr "Mise à jour"
+msgstr "Mettre à jour"
 
 msgid "Updating"
 msgstr "Mise à jour"
 
 msgid "Uploaded"
 msgstr "Envoyé"
-
-msgid "Warning"
-msgstr ""
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
 
 msgid "XY Move Speed (mm/s)"
 msgstr "Vitesse de déplacement XY (mm/s)"
@@ -803,16 +740,10 @@ msgid_plural "hours"
 msgstr[0] "heure"
 msgstr[1] "heures"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "les macros qui utilisent 'rename_existing' sont cachées"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "les macros dont le nom commence par '_' sont cachées"
-
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] "minute"
-msgstr[1] "minutes"
+msgstr[0] ""
+msgstr[1] ""
 
 msgid "mm"
 msgstr "mm"
@@ -825,18 +756,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "Continue"
-#~ msgstr "Continuer"
-
-#~ msgid "Actions"
-#~ msgstr "Actions"
-
-#~ msgid "Configuration"
-#~ msgstr "Configuration"
-
-#~ msgid "Homing"
-#~ msgstr "Origine"
 
 #~ msgid "Disable XY"
 #~ msgstr "Désactiver XY"
@@ -893,6 +812,9 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Effacer"
+
+#~ msgid "Home"
+#~ msgstr "Accueil"
 
 #~ msgid "Off"
 #~ msgstr "Éteindre"

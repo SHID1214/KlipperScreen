@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: SRBJ\n"
 "Language-Team: \n"
@@ -38,10 +38,10 @@ msgstr "Acceleration:"
 msgid "Accept"
 msgstr "OK"
 
-msgid "Add profile"
-msgstr ""
+msgid "Actions"
+msgstr "Muligheder"
 
-msgid "All"
+msgid "Add profile"
 msgstr ""
 
 msgid "Apply"
@@ -53,9 +53,6 @@ msgstr ""
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
-
-msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
@@ -83,9 +80,6 @@ msgid "Auto-calibrate"
 msgstr "Automatisk kalibrering"
 
 msgid "Auto-close notifications"
-msgstr ""
-
-msgid "Auto-open Extrude On Pause"
 msgstr ""
 
 msgid "Auto-scroll"
@@ -148,6 +142,9 @@ msgstr "Luk"
 msgid "Complete"
 msgstr "Færdig"
 
+msgid "Configuration"
+msgstr "Konfiguration"
+
 msgid "Confirm Emergency Stop"
 msgstr "Bekræft Nødstop"
 
@@ -161,11 +158,11 @@ msgstr "Forbinder til %s"
 msgid "Console"
 msgstr "Terminal"
 
+msgid "Continue"
+msgstr "Fortsæt"
+
 msgid "Cooldown"
 msgstr "Afkøling"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr ""
 
 msgid "Date"
 msgstr "Dato"
@@ -191,9 +188,6 @@ msgstr "Vil du gendanne %s?"
 
 msgid "Elapsed:"
 msgstr "Tid:"
-
-msgid "Ended official support in June 2023"
-msgstr ""
 
 msgid "Error"
 msgstr "Fejl"
@@ -240,9 +234,6 @@ msgstr "Fil"
 msgid "File:"
 msgstr "Fil:"
 
-msgid "Filter"
-msgstr ""
-
 msgid "Finding ADXL"
 msgstr "At finde ADXL"
 
@@ -267,6 +258,9 @@ msgstr "Skriftstørrelse"
 msgid "Full Update"
 msgstr "Fuld Opdatering"
 
+msgid "Fullscreen"
+msgstr ""
+
 msgid "Go Back"
 msgstr "Gå tilbage"
 
@@ -285,9 +279,6 @@ msgstr "Skjul sensorer i Temp."
 msgid "Hide temp."
 msgstr ""
 
-msgid "Home"
-msgstr "Home"
-
 msgid "Home All"
 msgstr "Home alle"
 
@@ -303,23 +294,20 @@ msgstr "Home Y"
 msgid "Home Z"
 msgstr "Home Z"
 
+msgid "Homing"
+msgstr "Homing"
+
 msgid "Host"
 msgstr ""
 
 msgid "Hostname"
 msgstr "Værtsnavn"
 
-msgid "ID"
-msgstr ""
-
 msgid "Icon Theme"
 msgstr "Ikon-tema"
 
 msgid "Initializing printer..."
 msgstr "Initialiserer printer..."
-
-msgid "Initiate a PID calibration for:"
-msgstr ""
 
 msgid "Input Shaper"
 msgstr ""
@@ -342,9 +330,6 @@ msgstr "Invertér Y"
 msgid "Invert Z"
 msgstr "Invertér Z"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr ""
-
 msgid "Klipper Restart"
 msgstr "Klipper Genstart"
 
@@ -363,12 +348,8 @@ msgstr "Klipper forsøger at starte"
 msgid "Klipper will reboot"
 msgstr "Klipper vil genstarte"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen vil genstarte"
 
 msgid "Language"
 msgstr "Sprog"
@@ -376,13 +357,7 @@ msgstr "Sprog"
 msgid "Large"
 msgstr "Stor"
 
-msgid "Last Used"
-msgstr ""
-
 msgid "Layer:"
-msgstr ""
-
-msgid "Leds"
 msgstr ""
 
 msgid "Left:"
@@ -393,9 +368,6 @@ msgstr "Grænser"
 
 msgid "Load"
 msgstr "Indlæs"
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Sænk Nozzle"
@@ -408,9 +380,6 @@ msgstr "Makroer"
 
 msgid "Main Menu"
 msgstr "Hovedmenu"
-
-msgid "Material"
-msgstr ""
 
 msgid "Max"
 msgstr ""
@@ -451,9 +420,6 @@ msgstr "Ændret"
 msgid "Moonraker: connected"
 msgstr "Moonraker: tilsluttet"
 
-msgid "More"
-msgstr ""
-
 msgid "Move"
 msgstr "Flytning"
 
@@ -472,25 +438,13 @@ msgstr ""
 msgid "New"
 msgstr "Ny"
 
-msgid "No elegible macros:"
-msgstr ""
-
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
 msgstr ""
 
-msgid "Not working or not configured"
-msgstr ""
-
 msgid "Nothing selected"
 msgstr "Intet valgt"
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -658,9 +612,6 @@ msgstr "At vise"
 msgid "Show Heater Power"
 msgstr ""
 
-msgid "Show Scrollbars Buttons"
-msgstr ""
-
 msgid "Shutdown"
 msgstr ""
 
@@ -690,9 +641,6 @@ msgstr "Hastighed:"
 
 msgid "Square Corner Velocity"
 msgstr "Hastighed for 90° hjørne"
-
-msgid "Standby"
-msgstr ""
 
 msgid "Start"
 msgstr "Start"
@@ -751,12 +699,6 @@ msgstr "Opdatering"
 msgid "Uploaded"
 msgstr "Uploadet"
 
-msgid "Warning"
-msgstr ""
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Flyt hastighed (mm/s)"
 
@@ -791,12 +733,6 @@ msgid_plural "hours"
 msgstr[0] "time"
 msgstr[1] "timer"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr ""
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr ""
-
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] ""
@@ -813,15 +749,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr ""
-
-#~ msgid "Continue"
-#~ msgstr "Fortsæt"
-
-#~ msgid "Actions"
-#~ msgstr "Muligheder"
-
-#~ msgid "Homing"
-#~ msgstr "Homing"
 
 #~ msgid "Disable XY"
 #~ msgstr "Deaktivér XY"
@@ -878,6 +805,9 @@ msgstr ""
 
 #~ msgid "Delete"
 #~ msgstr "Slet"
+
+#~ msgid "Home"
+#~ msgstr "Home"
 
 #~ msgid "Off"
 #~ msgstr "Sluk"

@@ -1,18 +1,6 @@
 # Translations
 
-Translations are hosted on Weblate:
-
-<a href="https://hosted.weblate.org/engage/klipperscreen/">
-    <img src="https://hosted.weblate.org/widget/klipperscreen/open-graph.png" alt="Weblate" />
-</a>
-
-Thanks to the Weblate team for supporting the Open-Source community. 
-
-## Manual way:
-
-This is currently discouraged, but if you want you can make your changes manually
-
-### Updating an existing translation:
+## Updating an existing translation:
 
 You can use an editor such as [poedit](https://poedit.net/) to assist in translations.
 
@@ -23,7 +11,7 @@ To test your translation:
 In poedit go to `File -> Compile to MO`. Save it on the same folder, and restart KlipperScreen
 
 
-### Adding a new Language:
+## Adding a new Language:
 
 Example using poedit
 
@@ -40,5 +28,5 @@ Once you have restarted KlipperScreen, select it from the list in the settings.
 If you edited and recompiled, you need to restart KlipperScreen to reload the translation.
 
 
-### Contributing:
+## Contributing:
 [Attach your translation on a GitHub issue or create a PR](Contact.md)

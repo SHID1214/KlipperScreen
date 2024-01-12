@@ -1,31 +1,27 @@
 # -*- coding: utf-8 -*-
+import contextlib
 import logging
 import os
 import pathlib
+
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gdk, GdkPixbuf, Gio, Gtk, Pango
 
 
-def find_widget(widget, wanted_type):
-    # Returns a widget of wanted_type or None
-    if isinstance(widget, wanted_type):
-        return widget
-    if isinstance(widget, (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box)):
-        for _ in widget.get_children():
-            result = find_widget(_, wanted_type)
-            if result is not None:
-                return result
-
-
 def format_label(widget, lines=2):
-    label = find_widget(widget, Gtk.Label)
-    if label is not None:
-        label.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.set_line_wrap(True)
-        label.set_ellipsize(Pango.EllipsizeMode.END)
-        label.set_lines(lines)
+    if type(widget) == Gtk.Label:
+        return widget
+    if type(widget) in (Gtk.Container, Gtk.Bin, Gtk.Button, Gtk.Alignment, Gtk.Box):
+        for _ in widget.get_children():
+            lbl = format_label(_)
+            if lbl is not None:
+                lbl.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+                lbl.set_line_wrap(True)
+                lbl.set_ellipsize(True)
+                lbl.set_ellipsize(Pango.EllipsizeMode.END)
+                lbl.set_lines(lines)
 
 
 class KlippyGtk:
@@ -110,6 +106,13 @@ class KlippyGtk:
         for key in self.color_list:
             self.color_list[key]['state'] = 0
 
+    @staticmethod
+    def Label(label, style=None):
+        la = Gtk.Label(label)
+        if style is not None:
+            la.get_style_context().add_class(style)
+        return la
+
     def Image(self, image_name=None, width=None, height=None):
         if image_name is None:
             return Gtk.Image()
@@ -151,9 +154,12 @@ class KlippyGtk:
     def Button(self, image_name=None, label=None, style=None, scale=None, position=Gtk.PositionType.TOP, lines=2):
         if self.font_size_type == "max" and label is not None and scale is None:
             image_name = None
-        b = Gtk.Button(hexpand=True, vexpand=True, can_focus=False, image_position=position, always_show_image=True)
+        b = Gtk.Button()
         if label is not None:
             b.set_label(label.replace("\n", " "))
+        b.set_hexpand(True)
+        b.set_vexpand(True)
+        b.set_can_focus(False)
         if image_name is not None:
             if scale is None:
                 scale = self.button_image_scale
@@ -161,11 +167,8 @@ class KlippyGtk:
                 scale = scale * 1.4
             width = height = self.img_scale * scale
             b.set_image(self.Image(image_name, width, height))
-            spinner = Gtk.Spinner(width_request=width, height_request=height, no_show_all=True)
-            spinner.hide()
-            box = find_widget(b, Gtk.Box)
-            if box:
-                box.add(spinner)
+        b.set_image_position(position)
+        b.set_always_show_image(True)
 
         if label is not None:
             format_label(b, lines)
@@ -174,51 +177,18 @@ class KlippyGtk:
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    @staticmethod
-    def Button_busy(widget, busy):
-        spinner = find_widget(widget, Gtk.Spinner)
-        image = find_widget(widget, Gtk.Image)
-        if busy:
-            widget.set_sensitive(False)
-            if image:
-                widget.set_always_show_image(False)
-                image.hide()
-            if spinner:
-                spinner.start()
-                spinner.show()
-        else:
-            if image:
-                widget.set_always_show_image(True)
-                image.show()
-            if spinner:
-                spinner.stop()
-                spinner.hide()
-            widget.set_sensitive(True)
+    def Dialog(self, screen, buttons, content, callback=None, *args):
+        dialog = Gtk.Dialog()
+        dialog.set_default_size(screen.width, screen.height)
+        dialog.set_resizable(False)
+        dialog.set_transient_for(screen)
+        dialog.set_modal(True)
 
-    def Dialog(self, title, buttons, content, callback=None, *args):
-        dialog = Gtk.Dialog(title=title, modal=True, transient_for=self.screen,
-                            default_width=self.width, default_height=self.height)
-        if not self.screen.windowed:
-            dialog.fullscreen()
-
-        max_buttons = 3 if self.screen.vertical_mode else 4
-        if len(buttons) > max_buttons:
-            buttons = buttons[:max_buttons]
-        if len(buttons) > 2:
-            dialog.get_action_area().set_layout(Gtk.ButtonBoxStyle.EXPAND)
-            button_hsize = -1
-        else:
-            button_hsize = int((self.width / 3))
         for button in buttons:
-            if 'style' in button:
-                style = button['style']
-            else:
-                style = 'dialog-default'
             dialog.add_button(button['name'], button['response'])
             button = dialog.get_widget_for_response(button['response'])
-            button.set_size_request(button_hsize, round(self.height / 5))
-            button.get_style_context().add_class(style)
-            format_label(button, 2)
+            button.set_size_request((screen.width - 30) / 3, screen.height / 5)
+            format_label(button, 3)
 
         dialog.connect("response", self.screen.reset_screensaver_timeout)
         dialog.connect("response", callback, *args)
@@ -241,7 +211,7 @@ class KlippyGtk:
                 Gdk.Cursor.new_for_display(Gdk.Display.get_default(), Gdk.CursorType.BLANK_CURSOR))
 
         self.screen.dialogs.append(dialog)
-        logging.info(f"Showing dialog {dialog.get_title()} {dialog.get_size()}")
+        logging.info(f"Showing dialog {dialog}")
         return dialog
 
     def remove_dialog(self, dialog, *args):
@@ -254,16 +224,30 @@ class KlippyGtk:
             return
         logging.debug(f"Cannot remove dialog {dialog}")
 
+    @staticmethod
+    def HomogeneousGrid(width=None, height=None):
+        g = Gtk.Grid()
+        g.set_row_homogeneous(True)
+        g.set_column_homogeneous(True)
+        if width is not None and height is not None:
+            g.set_size_request(width, height)
+        return g
+
     def ToggleButton(self, text):
-        b = Gtk.ToggleButton(label=text, hexpand=True, vexpand=True)
+        b = Gtk.ToggleButton(text)
+        b.props.relief = Gtk.ReliefStyle.NONE
+        b.set_hexpand(True)
+        b.set_vexpand(True)
         b.connect("clicked", self.screen.reset_screensaver_timeout)
         return b
 
-    def ScrolledWindow(self, steppers=True):
-        scroll = Gtk.ScrolledWindow(hexpand=True, vexpand=True, overlay_scrolling=False)
+    @staticmethod
+    def ScrolledWindow():
+        scroll = Gtk.ScrolledWindow()
+        scroll.set_property("overlay-scrolling", False)
+        scroll.set_vexpand(True)
         scroll.add_events(Gdk.EventMask.BUTTON_PRESS_MASK |
                           Gdk.EventMask.TOUCH_MASK |
                           Gdk.EventMask.BUTTON_RELEASE_MASK)
-        if self.screen._config.get_main_config().getboolean("show_scroll_steppers", fallback=False) and steppers:
-            scroll.get_vscrollbar().get_style_context().add_class("with-steppers")
+        scroll.set_kinetic_scrolling(True)
         return scroll

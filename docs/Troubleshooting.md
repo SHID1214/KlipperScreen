@@ -1,111 +1,54 @@
 
-# Troubleshooting
-
-## First Steps
+# First Steps
 
 The first step to troubleshooting any problem is getting the cause of the error.
 
 * Find KlipperScreen.log:
 
-!!! warning "Important"
+!!! important
     This log file should be provided if you ask for support.
 
 Depending on your setup the file could be accessible from the web interface alongside other logs
 
-|                        Mainsail                         |                       Fluidd                        |
-|:-------------------------------------------------------:|:---------------------------------------------------:|
-| ![mainsail_logs](img/troubleshooting/logs_mainsail.png) | ![fluidd_logs](img/troubleshooting/logs_fluidd.png) |
+Mainsail | Fluidd
+:-:|:-:
+![m_logs](img/troubleshooting/logs_mainsail.png) | ![f_logs](img/troubleshooting/logs_fluidd.png)
 
 if you can't find it in the web interface, use sftp to grab the log (for example Filezilla, WinSCP)
 Located at `~/printer_data/logs`or in `/tmp/` if the former doesn't exist.
 
-## System logs
+If KlipperScreen.log doesn't exist, run `systemctl status KlipperScreen`<br>
+(or `journalctl -xe -u KlipperScreen`)
 
-If [KlipperScreen.log](#first-steps) doesn't exist open a terminal in the host (typically from SSH) and
-copy all the relevant logs to the folder described above that can be seen and copied from the webui:
-
-```sh
-systemctl status KlipperScreen > ~/printer_data/logs/KliperScreen_systemctl.log
-journalctl -xe -u KlipperScreen > ~/printer_data/logs/KliperScreen_journalctl.log
-cp /var/log/Xorg.0.log ~/printer_data/logs/KliperScreen_Xorg.log
-```
-
-
-Alternatively you can inspect them directly on the terminal:
-
-```sh
-systemctl status KlipperScreen
-```
-```sh
-journalctl -xe -u KlipperScreen
-```
-```sh
-cat /var/log/Xorg.0.log
-```
-
+Check the file `/var/log/Xorg.0.log` where you can find issues with the X server.
 
 ## Screen shows console instead of KlipperScreen
 
-![boot](img/troubleshooting/boot.png)
+If you see this line in the logs (`systemctl status KlipperScreen`):
+```sh
+xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
+```
+[Follow this steps](Troubleshooting/VC_ERROR.md)
 
+If you see this line in the logs (`systemctl status KlipperScreen`):
 
+```sh
+KlipperScreen-start.sh: (EE) no screens found(EE)
+```
 
-!!! abstract "If you see this line in the [system logs](#system-logs):"
-    ```sh
-    xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
-    ```
-    [Follow this steps](Troubleshooting/VC_ERROR.md)
+[First check the screen](Troubleshooting/Physical_Install.md)
 
-!!! abstract "If you see this line in the [system logs](#system-logs):"
-    ```sh
-    xinit[948]: /usr/lib/xorg/Xorg: symbol lookup error: /usr/lib/xorg/modules/drivers/fbturbo_drv.so: undefined symbol: shadowUpdatePackedWeak
-    ```
-    [Follow this steps](Troubleshooting/FBturbo.md)
+[If it's not any of the above follow this steps](Troubleshooting/Showing_console.md)
 
-!!! abstract "If you see this line in the [system logs](#system-logs):"
-    ```sh
-    KlipperScreen-start.sh: (EE) no screens found(EE)
-    ```
-    This is usually not the main cause of the error. [Start by checking the screen](Troubleshooting/Physical_Install.md)
+## Screen is all white or blank or no signal
 
-    Drivers not installed or misconfigured can cause this too, continue looking the logs for more clues.
+If the screen never shows the console even during startup, Then it's typically an improperly installed screen,
 
-!!! abstract "If you see this line in the [system logs](#system-logs):"
-    ```sh
-    modprobe: FATAL: Module g2d_23 not found in directory /lib/modules/6.1.21-v8+
-    ```
-    This error is common on RaspberryOS when using FBturbo, it's not a related issue.
+You may see this line in the logs (`systemctl status KlipperScreen`):
 
-!!! abstract "If you see this line in the [system logs](#system-logs):"
-    ```sh
-    (EE) Cannot run in framebuffer mode. Please specify busIDs for all framebuffer devices
-    ```
-    This has been known to happen on RaspberryOS Bookworm Lite on Pi5
-
-    ```sh
-    sudo nano /etc/X11/xorg.conf.d/99-vc4.conf
-    ```
-    paste this into the file:
-    ```
-    Section "OutputClass"
-      Identifier "vc4"
-      MatchDriver "vc4"
-      Driver "modesetting"
-      Option "PrimaryGPU" "true"
-    EndSection
-    ```
-    reboot
-
-
-[Maybe it's the wrong framebuffer](Troubleshooting/Framebuffer.md)
-
-If you can't fix it, [try using a desktop distro as described here.](Troubleshooting/Last_resort.md)
-
-If you want to contribute a solution: [Contact](Contact.md)
-
-## Screen is always ***white*** / ***black*** or ***`No signal`***
-
-If the screen never shows the console even during startup, Then it's typically an improperly installed screen.
+```sh
+KlipperScreen-start.sh: (EE) no screens found(EE)
+```
 
 [Follow this steps](Troubleshooting/Physical_Install.md)
 
@@ -113,15 +56,10 @@ If the screen never shows the console even during startup, Then it's typically a
 ## The screen shows colors or 'No signal' when idle
 
 In KliperScreen settings find 'Screen DPMS' and turn it off.
-
-![dpms](img/troubleshooting/dpms.gif)
-
-Your screen doesn't seem to support turning off via software.
-
-KlipperScreen will enable an internal screensaver to make it all black, and hopefully avoid burn-in.
-If you find a way of turning it off, please share it: [Contact](Contact.md)
+Your screen doesn't seem to support turning off via software, the best you can do is to turn it all black.
 
 ## Touch issues
+
 
 [Follow this steps](Troubleshooting/Touch_issues.md)
 
@@ -129,7 +67,11 @@ If you find a way of turning it off, please share it: [Contact](Contact.md)
 
 [Follow this steps](Troubleshooting/Network.md)
 
+## OctoPrint
+
+KlipperScreen was never intended to be used with OctoPrint, and there is no support for it.
+
 ## Other issues
 
 If you found an issue not listed here, or can't make it work, please provide all the log files
-a description of your hw, and a description of the issue when [asking for support](Contact.md)
+a description of your hw, and a description of the issue when asking for support.

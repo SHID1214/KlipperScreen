@@ -1,12 +1,19 @@
-import logging
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
+
+from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
+import logging
 
-class Panel(ScreenPanel):
+
+def create_panel(*args):
+    return ZCalibratePanel(*args)
+
+
+class ZCalibratePanel(ScreenPanel):
     widgets = {}
     distances = ['.01', '.05', '.1', '.5', '1', '5']
     distance = distances[-2]
@@ -18,12 +25,12 @@ class Panel(ScreenPanel):
         if self.probe:
             self.z_offset = float(self.probe['z_offset'])
         logging.info(f"Z offset: {self.z_offset}")
-        self.widgets['zposition'] = Gtk.Label(label="Z: ?")
+        self.widgets['zposition'] = Gtk.Label("Z: ?")
 
-        pos = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
+        pos = self._gtk.HomogeneousGrid()
         pos.attach(self.widgets['zposition'], 0, 1, 2, 1)
         if self.z_offset is not None:
-            self.widgets['zoffset'] = Gtk.Label(label="?")
+            self.widgets['zoffset'] = Gtk.Label("?")
             pos.attach(Gtk.Label(_("Probe Offset") + ": "), 0, 2, 2, 1)
             pos.attach(Gtk.Label(_("Saved")), 0, 3, 1, 1)
             pos.attach(Gtk.Label(_("New")), 1, 3, 1, 1)
@@ -43,18 +50,18 @@ class Panel(ScreenPanel):
 
         functions = []
         pobox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
-
-        if "Z_ENDSTOP_CALIBRATE" in self._printer.available_commands:
+        if self._printer.config_section_exists("stepper_z") \
+                and not self._printer.get_config_section("stepper_z")['endstop_pin'].startswith("probe"):
             self._add_button("Endstop", "endstop", pobox)
             functions.append("endstop")
-        if "PROBE_CALIBRATE" in self._printer.available_commands:
+        if self.probe:
             self._add_button("Probe", "probe", pobox)
             functions.append("probe")
-        if "BED_MESH_CALIBRATE" in self._printer.available_commands and "probe" not in functions:
+        if self._printer.config_section_exists("bed_mesh") and "probe" not in functions:
             # This is used to do a manual bed mesh if there is no probe
             self._add_button("Bed mesh", "mesh", pobox)
             functions.append("mesh")
-        if "DELTA_CALIBRATE" in self._printer.available_commands:
+        if "delta" in self._printer.get_config_section("printer")['kinematics']:
             if "probe" in functions:
                 self._add_button("Delta Automatic", "delta", pobox)
                 functions.append("delta")
@@ -64,8 +71,9 @@ class Panel(ScreenPanel):
 
         logging.info(f"Available functions for calibration: {functions}")
 
-        self.labels['popover'] = Gtk.Popover(position=Gtk.PositionType.BOTTOM)
+        self.labels['popover'] = Gtk.Popover()
         self.labels['popover'].add(pobox)
+        self.labels['popover'].set_position(Gtk.PositionType.BOTTOM)
 
         if len(functions) > 1:
             self.buttons['start'].connect("clicked", self.on_popover_clicked)
@@ -78,9 +86,14 @@ class Panel(ScreenPanel):
             self.widgets[i].set_direction(Gtk.TextDirection.LTR)
             self.widgets[i].connect("clicked", self.change_distance, i)
             ctx = self.widgets[i].get_style_context()
-            ctx.add_class("horizontal_togglebuttons")
+            if (self._screen.lang_ltr and j == 0) or (not self._screen.lang_ltr and j == len(self.distances) - 1):
+                ctx.add_class("distbutton_top")
+            elif (not self._screen.lang_ltr and j == 0) or (self._screen.lang_ltr and j == len(self.distances) - 1):
+                ctx.add_class("distbutton_bottom")
+            else:
+                ctx.add_class("distbutton")
             if i == self.distance:
-                ctx.add_class("horizontal_togglebuttons_active")
+                ctx.add_class("distbutton_active")
             distgrid.attach(self.widgets[i], j, 0, 1, 1)
 
         self.widgets['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
@@ -88,7 +101,8 @@ class Panel(ScreenPanel):
         distances.pack_start(self.widgets['move_dist'], True, True, 0)
         distances.pack_start(distgrid, True, True, 0)
 
-        grid = Gtk.Grid(column_homogeneous=True)
+        grid = Gtk.Grid()
+        grid.set_column_homogeneous(True)
         if self._screen.vertical_mode:
             grid.attach(self.buttons['zpos'], 0, 1, 1, 1)
             grid.attach(self.buttons['zneg'], 0, 2, 1, 1)
@@ -118,23 +132,20 @@ class Panel(ScreenPanel):
 
     def start_calibration(self, widget, method):
         self.labels['popover'].popdown()
-        self.buttons['start'].set_sensitive(False)
         if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
-            self._screen._ws.klippy.gcode_script("G28")
-        self._screen._ws.klippy.gcode_script("SET_GCODE_OFFSET Z=0")
-        if method == "mesh":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
+
+        if method == "probe":
+            self._move_to_position()
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.PROBE_CALIBRATE)
+        elif method == "mesh":
             self._screen._ws.klippy.gcode_script("BED_MESH_CALIBRATE")
-        else:
-            self._screen._ws.klippy.gcode_script("BED_MESH_CLEAR")
-            if method == "probe":
-                self._move_to_position()
-                self._screen._ws.klippy.gcode_script("PROBE_CALIBRATE")
-            elif method == "delta":
-                self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE")
-            elif method == "delta_manual":
-                self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE METHOD=manual")
-            elif method == "endstop":
-                self._screen._ws.klippy.gcode_script("Z_ENDSTOP_CALIBRATE")
+        elif method == "delta":
+            self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE")
+        elif method == "delta_manual":
+            self._screen._ws.klippy.gcode_script("DELTA_CALIBRATE METHOD=manual")
+        elif method == "endstop":
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.Z_ENDSTOP_CALIBRATE)
 
     def _move_to_position(self):
         x_position = y_position = None
@@ -143,6 +154,10 @@ class Panel(ScreenPanel):
         if self.ks_printer_cfg is not None:
             x_position = self.ks_printer_cfg.getfloat("calibrate_x_position", None)
             y_position = self.ks_printer_cfg.getfloat("calibrate_y_position", None)
+        elif 'z_calibrate_position' in self._config.get_config():
+            # OLD global way, this should be deprecated
+            x_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_x_position", None)
+            y_position = self._config.get_config()['z_calibrate_position'].getfloat("calibrate_y_position", None)
 
         if self.probe:
             if "sample_retract_dist" in self.probe:
@@ -209,13 +224,19 @@ class Panel(ScreenPanel):
         logging.info(f"Moving to X:{x_position} Y:{y_position}")
         self._screen._ws.klippy.gcode_script(f'G0 X{x_position} Y{y_position} F3000')
 
-    def activate(self):
-        if self._printer.get_stat("manual_probe", "is_active"):
+    def process_busy(self, busy):
+        if busy:
+            for button in self.buttons:
+                self.buttons[button].set_sensitive(False)
+        elif self._printer.get_stat("manual_probe", "is_active"):
             self.buttons_calibrating()
         else:
             self.buttons_not_calibrating()
 
     def process_update(self, action, data):
+        if action == "notify_busy":
+            self.process_busy(data)
+            return
         if action == "notify_status_update":
             if self._printer.get_stat("toolhead", "homed_axes") != "xyz":
                 self.widgets['zposition'].set_text("Z: ?")
@@ -242,22 +263,22 @@ class Panel(ScreenPanel):
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
-        self.widgets[f"{self.distance}"].get_style_context().remove_class("horizontal_togglebuttons_active")
-        self.widgets[f"{distance}"].get_style_context().add_class("horizontal_togglebuttons_active")
+        self.widgets[f"{self.distance}"].get_style_context().remove_class("distbutton_active")
+        self.widgets[f"{distance}"].get_style_context().add_class("distbutton_active")
         self.distance = distance
 
     def move(self, widget, direction):
-        self._screen._ws.klippy.gcode_script(f"TESTZ Z={direction}{self.distance}")
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.testz_move(f"{direction}{self.distance}"))
 
     def abort(self, widget):
         logging.info("Aborting calibration")
-        self._screen._ws.klippy.gcode_script("ABORT")
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.ABORT)
         self.buttons_not_calibrating()
         self._screen._menu_go_back()
 
     def accept(self, widget):
         logging.info("Accepting Z position")
-        self._screen._ws.klippy.gcode_script("ACCEPT")
+        self._screen._ws.klippy.gcode_script(KlippyGcodes.ACCEPT)
 
     def buttons_calibrating(self):
         self.buttons['start'].get_style_context().remove_class('color3')

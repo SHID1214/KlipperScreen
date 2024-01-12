@@ -1,19 +1,5 @@
-@define-color color1 #ED6500;
-@define-color color2 #B10080;
-@define-color color3 #009384;
-@define-color color4 #A7E100;
-@define-color bg #13181C;
-@define-color active #404E57;
-@define-color echo #367554;
-@define-color warning #f9a825;
-@define-color error #981E1F;
-@define-color text white;
-@define-color text-inv black;
-@define-color lines #cccccc;
-@define-color switch-scale-bg #3584e4;
-
 * {
-    color: @text;
+    color: white;
     font-size: KS_FONT_SIZEpx;
     -GtkComboBox-appears-as-list: 0;
     text-shadow: none;
@@ -21,53 +7,14 @@
     border: 0;
 }
 
-button:disabled {
-    opacity: .2;
-}
-
-list row,
-treeview.view,
 window {
-    background-color: @bg;
+    background-color: #13181C;
     -gtk-icon-shadow: none;
-}
-
-switch slider {
-    border: 0;
-}
-
-switch,
-treeview.view check {
-    margin: 0.75em;
-    min-width: 6em;
-    min-height: 3em;
-    border: 0;
-    border-radius: 3em;
-}
-
-treeview.view check {
-    background-color: rgb(32,41,47);
-    -gtk-icon-source: -gtk-icontheme("switch-off-symbolic");
-    background-repeat: no-repeat;
-    background-position: left center;
-    background-size : 3em 3em;
-    background-image: image(url("./styles/circle.svg"));
-    -gtk-icon-transform: translateX(1.5em);
-}
-treeview.view check:checked {
-    background-color : rgb(53,132,228);
-    background-position: right center;
-    -gtk-icon-source: -gtk-icontheme("switch-on-symbolic");
-    -gtk-icon-transform: translateX(-1.5em);
-}
-
-expander label {
-    padding : 1em;
 }
 
 button {
     background-image: none;
-    background-color: @bg;
+    background-color: #13181C;
     margin: .25em;
     padding: .2em .5em 0;
     border-radius: 0;
@@ -75,10 +22,8 @@ button {
     -gtk-icon-shadow: none;
 }
 
-button:active,
-.button_active,
-button.active {
-    background-color: @active;
+button:active, .button_active {
+    background-color: #304C62;
 }
 
 button:disabled,
@@ -103,31 +48,35 @@ button label {
 }
 
 button.color1 {
-    border-bottom: .4em solid @color1;
+    border-bottom: .4em solid #ED6500;
     margin: .3em;
     min-height: 3em;
 }
 
 button.color2 {
-    border-bottom: .4em solid @color2;
+    border-bottom: .4em solid #B10080;
     margin: .3em;
     min-height: 3em;
 }
 
 button.color3 {
-    border-bottom: .4em solid @color3;
+    border-bottom: .4em solid #009384;
     margin: .3em;
     min-height: 3em;
 }
 
 button.color4 {
-    border-bottom: .4em solid @color4;
+    border-bottom: .4em solid #A7E100;
     margin: .3em;
     min-height: 3em;
 }
 
 button.status {
-    background-color: @bg;
+    background-color: #13181C;
+}
+
+button.active {
+    background-color: #20303D;
 }
 
 button.file-list {
@@ -135,21 +84,21 @@ button.file-list {
 }
 
 button.update {
-    background: @color3;
-    border: .4em solid @color3;
+    background: #009384;
+    border: .4em solid #009384;
     border-radius: 0.4em;
     font-weight: bold;
 }
 
 button.invalid {
-    background: @error;
-    border: .4em solid @error;
+    background: #e61e1e;
+    border: .4em solid #e61e1e;
     border-radius: 0.4em;
     font-weight: bold;
 }
 
 combobox box button {
-    border: .05em solid @lines;
+    border: .05em solid #cccccc;
     padding: .5em 1em;
 }
 
@@ -157,42 +106,53 @@ combobox arrow {
     min-width: 1em;
 }
 
+switch {
+    margin: 0.75em;
+    min-width: 6em;
+    min-height: 3em;
+    border: 0;
+    border-radius: 3em;
+}
+
+switch slider {
+    border: 0;
+}
+
 entry {
     font-size: 1em;
-    background-color: @active;
-    border: .2em solid @bg;
+    background-color: #20292F;
+    border: .2em solid #13181C;
     padding: .2em;
 }
 
 label {
-    color: @text;
+    color: white;
 }
 
 menu {
-    background-color: @bg;
-    border: .1em solid @lines;
+    background-color: #13181C;
+    border: .1em solid #cccccc;
 }
 
 menuitem {
-    background-color: @bg;
-    border: .1em solid @lines;
+    background-color: #13181C;
+    border: .1em solid #cccccc;
     border-bottom: 0;
     border-top: 0;
 }
 
 trough {
     min-height: 2em;
-    background-color: @active;
-    color: @text;
-    border: 1px solid @text-inv;
+    background-color: #404E57;
+    color: white;
+    border: 1px solid black;
 }
 
-trough highlight,
-trough progress {
+trough highlight, trough progress {
     min-height: 2em;
-    background-color: @switch-scale-bg;
-    color: @text;
-    border: 1px solid @text-inv;
+    background-color: #3584e4;
+    color: white;
+    border: 1px solid black;
 }
 
 trough progress.left {
@@ -207,7 +167,7 @@ scale {
 }
 
 scale mark {
-    color: @text;
+    color: white;
 }
 
 scale trough slider {
@@ -215,36 +175,15 @@ scale trough slider {
     min-width: 2em;
 }
 
-scrollbar,
-scrollbar button,
-scrollbar trough {
+scrollbar, scrollbar button, scrollbar trough {
     border: none;
-    background-color: @bg;
-    min-height: 1em;
+    background-color: #13181C;
 }
 
 scrollbar slider {
-    min-width: 2.5em;
+    min-width: 2em;
     border-radius: .7em;
-    background-color: @active;
-}
-
-scrollbar.vertical.with-steppers {
-    -GtkScrollbar-has-backward-stepper: true;
-    -GtkScrollbar-has-forward-stepper: true;
-}
-
-scrollbar.vertical.with-steppers button.down {
-    -gtk-icon-source: -gtk-icontheme("pan-down-symbolic");
-}
-
-scrollbar.vertical.with-steppers button.up {
-    -gtk-icon-source: -gtk-icontheme("pan-up-symbolic");
-}
-
-undershoot.top,
-undershoot.bottom {
-    background-image: none;
+    background-color: #404E57;
 }
 
 separator {
@@ -252,18 +191,21 @@ separator {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-textview,
-textview text {
+textview, textview text {
     background: transparent;
     font-family: Free Mono;
 }
 
 textview .time {
-    color: @lines;
+    color: grey;
 }
 
 trough {
     margin: .5em .5em;
+}
+
+.popup {
+    background-color: black;
 }
 
 .action_bar {
@@ -280,48 +222,60 @@ trough {
 }
 
 .dialog {
-    border: .1em solid @text-inv;
+    border: .1em solid black;
     padding: 2.5em;
-    background-color: @text-inv;
+    background-color: black;
     margin: 1em;
 }
 
 .dialog button {
     padding: 1.5em;
+    border-bottom: .4em solid #009384;
     margin-top: 1em;
 }
 
-.horizontal_togglebuttons_active {
-    background-color: @active;
-    font-weight: 600;
+.dialog button:nth-child(1) {
+    border-bottom-color: green;
 }
 
-.horizontal_togglebuttons {
-    border-style: solid;
-    border-color: @lines;
-    border-width: .15em;
-    border-right-width: 0;
+.dialog button:nth-child(2) {
+    border-bottom-color: red;
+}
+
+.distbutton_active {
+    background-color: #20303D;
+}
+
+.distbutton_top {
+    border: .15em solid white;
+    border-right: 0;
+    border-top-left-radius: .75em;
+    border-bottom-left-radius: .75em;
+    margin-right: 0;
+    min-height: 3em;
+}
+
+.distbutton {
+    border: .15em solid white;
+    border-left: .15em solid #ccc;
+    border-right: 0;
     margin-left: 0;
     margin-right: 0;
     min-height: 3em;
 }
 
-.horizontal_togglebuttons:first-child {
-    border-top-left-radius: .75em;
-    border-bottom-left-radius: .75em;
-    margin-left: .25em;
-}
-
-.horizontal_togglebuttons:last-child {
-    border-top-right-radius: .75em;
-    border-bottom-right-radius: .75em;
-    border-right-width: .15em;
-    margin-right: .25em;
+.distbutton_bottom {
+    border: .15em solid white;
+    border-left: .15em solid #ccc;
+    border-top-right-radius: .7em;
+    border-bottom-right-radius: .7em;
+    margin-left: 0;
+    min-height: 3em;
 }
 
 .fan_slider {
     margin: 0 1em 0 1em;
-    color: @text;
+    color: white;
 }
 
 .frame-item {
@@ -332,10 +286,6 @@ trough {
 
 .heatergraph {
     min-height: 350px;
-}
-
-.heater-list scrollbar slider{
-    min-width: 1.5em;
 }
 
 .heater-grid {
@@ -355,11 +305,11 @@ trough {
 }
 
 .heater-grid-temp {
-    min-width: 5.5em;
+    min-width: 8em;
 }
 
-.heater-grid-temp-power {
-    min-width: 8em;
+.keyboard_box {
+    margin-top: 38px;
 }
 
 .keyboard_matchbox {
@@ -379,7 +329,7 @@ trough {
 }
 
 .message_popup {
-    border: .1em solid @lines;
+    border: .1em solid white;
     border-radius: 1em;
     padding: 1em;
     margin: 0;
@@ -389,28 +339,24 @@ trough {
     padding: 1em;
 }
 
-.message_popup_echo,
-.message_popup_echo button {
-    background-color: @echo;
+.message_popup_echo, .message_popup_echo button {
+    background-color: #367554;
 }
 
-.message_popup_warning,
-.message_popup_warning button {
-    background-color: @warning;
+.message_popup_warning, .message_popup_warning button {
+    background-color: #f9a825;
 }
 
-.message_popup_error,
-.message_popup_error button {
-    background-color: @error;
+.message_popup_error, .message_popup_error button {
+    background-color: #9e2f3a;
 }
 
-.numpad_key {
-    border: .15em;
-    border-style: solid;
-    border-color: @lines;
+.numpad{
+    margin-top: 30px;
 }
 
 .numpad_tleft {
+    border: .15em solid white;
     border-bottom: 0;
     border-right: 0;
     border-top-left-radius: .7em;
@@ -418,46 +364,54 @@ trough {
 }
 
 .numpad_top {
+    border: .15em solid white;
     border-bottom: 0;
     border-right: 0;
     margin: .15em 0 0 0;
 }
 
 .numpad_tright {
+    border: .15em solid white;
     border-bottom: 0;
     border-top-right-radius: .7em;
     margin: .15em .15em 0 0;
 }
 
 .numpad_left {
+    border: .15em solid white;
     border-right: 0;
     border-bottom: 0;
     margin: 0 0 0 .15em;
 }
 
 .numpad_button {
+    border: .15em solid white;
     border-right: 0;
     border-bottom: 0;
     margin: 0;
 }
 
 .numpad_right {
+    border: .15em solid white;
     border-bottom: 0;
     margin: 0 .15em 0 0;
 }
 
 .numpad_bleft {
+    border: .15em solid white;
     border-right: 0;
     border-bottom-left-radius: .7em;
     margin: 0 0 .15em .15em;
 }
 
 .numpad_bottom {
+    border: .15em solid white;
     border-right: 0;
     margin: 0 0 .15em 0;
 }
 
 .numpad_bright {
+    border: .15em solid white;
     border-bottom-right-radius: .7em;
     margin: 0 .15em .15em 0;
 }
@@ -482,19 +436,21 @@ trough {
 }
 
 .printing-status {
+    color: #f0f0f0;
     font-style: italic;
-    margin: 0;
-    font-weight: bold;
+    margin: 0 0 0 0;
 }
 
 .printing-progress-text {
     font-size: 1.25em;
     font-weight: bold;
+    color: white;
 }
 
 .printing-status-label {
     padding-top: .25em;
     padding-bottom: .15em;
+    color: #ccc;
     font-size: 1.25em;
 }
 
@@ -508,22 +464,46 @@ trough {
     font-size: 0.95em;
 }
 
+.tempbutton_top {
+    border: .15em solid white;
+    border-bottom: 0;
+    border-top-left-radius: .75em;
+    border-top-right-radius: .75em;
+    margin-bottom: 0;
+}
+
+.tempbutton {
+    border: .15em solid white;
+    border-top: .15em solid #ccc;
+    border-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.tempbutton_bottom {
+    border: .15em solid white;
+    border-top: .15em solid #ccc;
+    border-bottom-left-radius: .7em;
+    border-bottom-right-radius: .7em;
+    margin-top: 0;
+}
+
 .updater-item {
     min-height: 3em;
     padding: .2em;
 }
 
 .message {
-    border: .1em solid @error;
+    border: .1em solid #981E1F;
     font-size: 1em;
     padding: 2.5em;
-    color: @text;
-    background-color: @error;
+    color: white;
+    background-color: #981E1F;
 }
 
 .message button {
-    background-color: @text;
-    color: @text-inv;
+    background-color: white;
+    color: black;
     padding: 2em 2.5em 2em 2.5em;
 }
 
@@ -542,26 +522,21 @@ trough {
 }
 
 popover {
-    background-color: @bg;
+    background-color: #222;
 }
 
 popover button {
-    background-color: @bg;
+    background-color: #222;
 }
 
-.screensaver,
-.screensaver button,
-.screensaver button:hover,
-.screensaver button:focus,
-.screensaver button:active {
+.screensaver, .screensaver button, .screensaver button:hover, .screensaver button:focus, .screensaver button:active {
     background-color: black;
     border: 0;
     margin: 0;
 }
 
-.option_slider_max trough highlight,
-trough progress {
-    background-color: @error;
+.option_slider_max trough highlight, trough progress {
+    background-color: darkred;
 }
 
 .filament_sensor {
@@ -573,44 +548,34 @@ trough progress {
 }
 
 .filament_sensor_detected {
-    background-color: @echo;
+    background-color: darkgreen;
 }
 
 .filament_sensor_empty {
-    background-color: @error;
+    background-color: darkred;
 }
 
-.buttons_slim,
-.buttons_slim label {
+.buttons_slim, .buttons_slim label {
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 0;
     padding-bottom: 0;
 }
 
-.graph_label {border-left-width: .4em; border-left-style: solid;}
-
-.dialog-error {
-    border-bottom: .4em solid @error;
-}
-
-.dialog-warning {
-    border-bottom: .4em solid @warning;
-}
-
-.dialog-info {
-    border-bottom: .4em solid @color4;
-}
-
-.dialog-default {
-    border-bottom: .4em solid @color3;
-}
-
-.dialog-secondary {
-    border-bottom: .4em solid @color2;
-}
-
-.dialog-primary {
-    border-bottom: .4em solid @color1;
-}
-
+/* Hardcoded values until creation of dynamic CSS updates */
+.graph_label_hidden {padding-left: .9em;} /* .4em on top of normal button padding */
+.graph_label_extruder {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder1 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder3 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_extruder4 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_heater_bed {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_1 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_3 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_fan_4 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_1 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_2 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_3 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_4 {border-left-width: .4em; border-left-style: solid;}
+.graph_label_sensor_5 {border-left-width: .4em; border-left-style: solid;}

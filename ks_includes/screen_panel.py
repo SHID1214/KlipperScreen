@@ -26,8 +26,10 @@ class ScreenPanel:
         self.title = title
         self.devices = {}
         self.active_heaters = []
-        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.content.get_style_context().add_class("content")
+        self.content.set_hexpand(True)
+        self.content.set_vexpand(True)
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
         self.bts = self._gtk.bsidescale
 
@@ -58,11 +60,11 @@ class ScreenPanel:
             return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
-    def menu_item_clicked(self, widget, item):
+    def menu_item_clicked(self, widget, panel_type, item):
         if 'extra' in item:
-            self._screen.show_panel(item['panel'], item['name'], extra=item['extra'])
+            self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False, extra=item['extra'])
             return
-        self._screen.show_panel(item['panel'], item['name'])
+        self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False)
 
     def load_menu(self, widget, name, title=None):
         logging.info(f"loading menu {name}")
@@ -119,13 +121,13 @@ class ScreenPanel:
 
     @staticmethod
     def format_time(seconds):
-        if seconds is None or seconds < 1:
+        if seconds is None or seconds <= 0:
             return "-"
         days = seconds // 86400
         seconds %= 86400
         hours = seconds // 3600
         seconds %= 3600
-        minutes = round(seconds / 60)
+        minutes = seconds // 60
         seconds %= 60
         return f"{f'{days:2.0f}d ' if days > 0 else ''}" \
                f"{f'{hours:2.0f}h ' if hours > 0 else ''}" \
@@ -157,13 +159,6 @@ class ScreenPanel:
             if size < unit:
                 return f"{(1024 * size / unit):.1f} {suffix}"
 
-    @staticmethod
-    def prettify(name: str):
-        name = name.replace("_", " ")
-        if name.islower():
-            name = name.title()
-        return name
-
     def update_temp(self, dev, temp, target, power, lines=1):
         if temp is None:
             return
@@ -184,13 +179,9 @@ class ScreenPanel:
                 # The label should wrap, but it doesn't work
                 # this is a workaround
                 new_label_text += "\n  "
-            new_label_text += f" {int(power * 100):3}%"
+            new_label_text += f" {int(power*100):3}%"
 
         if dev in self.labels:
             self.labels[dev].set_label(new_label_text)
-            if show_power:
-                self.labels[dev].get_style_context().add_class("heater-grid-temp-power")
-            else:
-                self.labels[dev].get_style_context().remove_class("heater-grid-temp-power")
         elif dev in self.devices:
             self.devices[dev]["temp"].get_child().set_label(new_label_text)

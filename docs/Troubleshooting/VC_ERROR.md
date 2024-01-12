@@ -1,10 +1,9 @@
 # Cannot open virtual Console
 
-If you see this line in the [log](../Troubleshooting.md):
-!!! abstract "Log"
-    ```sh
-    xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
-    ```
+If you see this line in the logs:
+```sh
+xf86OpenConsole: Cannot open virtual console 2 (Permission denied)
+```
 
 * Run `cat /etc/X11/Xwrapper.config`
 
@@ -24,16 +23,9 @@ Restart KlipperScreen:
 sudo service KlipperScreen restart
 ```
 
-If it's still failing:
-
-add `needs_root_rights=yes` to `/etc/X11/Xwrapper.config`:
-
+If it's still failing as a last resort add `needs_root_rights=yes` to `/etc/X11/Xwrapper.config`:
 ```sh
 sudo bash -c "echo needs_root_rights=yes>>/etc/X11/Xwrapper.config"
 ```
 
-Restart KlipperScreen:
-```sh
-sudo service KlipperScreen restart
-```
-
+restart KS.

@@ -125,29 +125,28 @@ def patch_threading_excepthook():
 
 # Rotating file handler based on Klipper and Moonraker's implementation
 class KlipperScreenLoggingHandler(logging.handlers.RotatingFileHandler):
-    def __init__(self, filename, **kwargs):
+    def __init__(self, software_version, filename, **kwargs):
         super(KlipperScreenLoggingHandler, self).__init__(filename, **kwargs)
         self.rollover_info = {
             'header': f"{'-' * 20}KlipperScreen Log Start{'-' * 20}",
-            'version': f"KlipperScreen Version: {get_software_version()}",
-            'py_ver': f"Python version: {sys.version_info.major}.{sys.version_info.minor}",
+            'version': f"Git Version: {software_version}",
         }
-        self.log_start()
+        lines = [line for line in self.rollover_info.values() if line]
+        if self.stream is not None:
+            self.stream.write("\n".join(lines) + "\n")
 
     def set_rollover_info(self, name, item):
         self.rollover_info[name] = item
 
     def doRollover(self):
         super(KlipperScreenLoggingHandler, self).doRollover()
-        self.log_start()
-
-    def log_start(self):
-        for line in self.rollover_info.values():
-            logging.info(line)
+        lines = [line for line in self.rollover_info.values() if line]
+        if self.stream is not None:
+            self.stream.write("\n".join(lines) + "\n")
 
 
 # Logging based on Arksine's logging setup
-def setup_logging(log_file):
+def setup_logging(log_file, software_version):
     root_logger = logging.getLogger()
     queue = Queue()
     queue_handler = logging.handlers.QueueHandler(queue)
@@ -160,7 +159,7 @@ def setup_logging(log_file):
     stdout_hdlr.setFormatter(stdout_fmt)
     fh = listener = None
     try:
-        fh = KlipperScreenLoggingHandler(log_file, maxBytes=4194304, backupCount=1)
+        fh = KlipperScreenLoggingHandler(software_version, log_file, maxBytes=4194304, backupCount=1)
         formatter = logging.Formatter('%(asctime)s [%(filename)s:%(funcName)s()] - %(message)s')
         fh.setFormatter(formatter)
         listener = logging.handlers.QueueListener(queue, fh, stdout_hdlr)

@@ -1,21 +1,29 @@
 import logging
+
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib, Pango
+
+from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
+
+
+def create_panel(*args):
+    return FanPanel(*args)
 
 
 CHANGEABLE_FANS = ["fan", "fan_generic"]
 
 
-class Panel(ScreenPanel):
+class FanPanel(ScreenPanel):
     def __init__(self, screen, title):
         super().__init__(screen, title)
         self.fan_speed = {}
         self.devices = {}
         # Create a grid for all devices
-        self.labels['devices'] = Gtk.Grid(valign=Gtk.Align.CENTER)
+        self.labels['devices'] = Gtk.Grid()
+        self.labels['devices'].set_valign(Gtk.Align.CENTER)
 
         self.load_fans()
 
@@ -53,12 +61,17 @@ class Panel(ScreenPanel):
 
         logging.info(f"Adding fan: {fan}")
         changeable = any(fan.startswith(x) or fan == x for x in CHANGEABLE_FANS)
-        name = Gtk.Label(halign=Gtk.Align.START, valign=Gtk.Align.CENTER, hexpand=True, vexpand=True,
-                         wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
+        name = Gtk.Label()
         fan_name = _("Part Fan") if fan == "fan" else fan.split()[1]
         name.set_markup(f"\n<big><b>{fan_name}</b></big>\n")
+        name.set_hexpand(True)
+        name.set_vexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_valign(Gtk.Align.CENTER)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        fan_col = Gtk.Box(spacing=5)
+        fan_col = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         stop_btn = self._gtk.Button("cancel", None, "color1")
         stop_btn.set_hexpand(False)
         stop_btn.connect("clicked", self.update_fan_speed, fan, 0)
@@ -69,7 +82,7 @@ class Panel(ScreenPanel):
         speed = float(self._printer.get_fan_speed(fan))
         if changeable:
             speed = round(speed * 100)
-            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL, min=0, max=100, step=1)
+            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL, min=0, max=100, step=1)
             scale.set_value(speed)
             scale.set_digits(0)
             scale.set_hexpand(True)
@@ -80,7 +93,10 @@ class Panel(ScreenPanel):
             fan_col.add(scale)
             fan_col.add(max_btn)
         else:
-            scale = Gtk.ProgressBar(hexpand=True, show_text=True, fraction=speed)
+            scale = Gtk.ProgressBar()
+            scale.set_fraction(speed)
+            scale.set_show_text(True)
+            scale.set_hexpand(True)
             fan_col.pack_start(scale, True, True, 10)
 
         fan_row = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -119,7 +135,7 @@ class Panel(ScreenPanel):
         value = self.devices[fan]['scale'].get_value()
 
         if fan == "fan":
-            self._screen._ws.klippy.gcode_script(f"M106 S{value * 2.55:.0f}")
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.set_fan_speed(value))
         else:
             self._screen._ws.klippy.gcode_script(f"SET_FAN_SPEED FAN={fan.split()[1]} SPEED={float(value) / 100}")
         # Check the speed in case it wasn't applied

@@ -1,14 +1,19 @@
 import logging
 import os
+
 import gi
 import netifaces
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk, GLib, Pango
+from gi.repository import Gtk, Gdk, GLib, Pango
 from ks_includes.screen_panel import ScreenPanel
 
 
-class Panel(ScreenPanel):
+def create_panel(*args):
+    return NetworkPanel(*args)
+
+
+class NetworkPanel(ScreenPanel):
     initialized = False
 
     def __init__(self, screen, title):
@@ -19,10 +24,10 @@ class Panel(ScreenPanel):
         self.prev_network = None
         self.update_timeout = None
         self.network_interfaces = netifaces.interfaces()
-        self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('wl')]
+        self.wireless_interfaces = [iface for iface in self.network_interfaces if iface.startswith('w')]
         self.wifi = None
         self.use_network_manager = os.system('systemctl is-active --quiet NetworkManager.service') == 0
-        if self.wireless_interfaces:
+        if len(self.wireless_interfaces) > 0:
             logging.info(f"Found wireless interfaces: {self.wireless_interfaces}")
             if self.use_network_manager:
                 logging.info("Using NetworkManager")
@@ -31,8 +36,6 @@ class Panel(ScreenPanel):
                 logging.info("Using wpa_cli")
                 from ks_includes.wifi import WifiManager
             self.wifi = WifiManager(self.wireless_interfaces[0])
-        else:
-            logging.info(_("No wireless interface has been found"))
 
         # Get IP Address
         gws = netifaces.gateways()
@@ -42,30 +45,41 @@ class Panel(ScreenPanel):
             ints = netifaces.interfaces()
             if 'lo' in ints:
                 ints.pop(ints.index('lo'))
-            self.interface = ints[0] if len(ints) > 0 else 'lo'
+            if len(ints) > 0:
+                self.interface = ints[0]
+            else:
+                self.interface = 'lo'
+
+        res = netifaces.ifaddresses(self.interface)
+        if netifaces.AF_INET in res and len(res[netifaces.AF_INET]) > 0:
+            ip = res[netifaces.AF_INET][0]['addr']
+        else:
+            ip = None
 
         self.labels['networks'] = {}
 
-        self.labels['interface'] = Gtk.Label(hexpand=True)
-        self.labels['interface'].set_text(f' {_("Interface")}: {self.interface}  ')
-
-        self.labels['ip'] = Gtk.Label(hexpand=True)
-        ifadd = netifaces.ifaddresses(self.interface)
-        if ifadd.get(netifaces.AF_INET):
-            self.labels['ip'].set_text(f"IP: {ifadd[netifaces.AF_INET][0]['addr']}  ")
-
-        reload_networks = self._gtk.Button("refresh", None, "color1", self.bts)
+        self.labels['interface'] = Gtk.Label()
+        self.labels['interface'].set_text(" %s: %s  " % (_("Interface"), self.interface))
+        self.labels['interface'].set_hexpand(True)
+        self.labels['ip'] = Gtk.Label()
+        self.labels['ip'].set_hexpand(True)
+        reload_networks = self._gtk.Button("refresh", None, "color1", .66)
         reload_networks.connect("clicked", self.reload_networks)
         reload_networks.set_hexpand(False)
 
-        sbox = Gtk.Box(hexpand=True, vexpand=False)
+        sbox = Gtk.Box()
+        sbox.set_hexpand(True)
+        sbox.set_vexpand(False)
         sbox.add(self.labels['interface'])
-        sbox.add(self.labels['ip'])
+        if ip is not None:
+            self.labels['ip'].set_text(f"IP: {ip}  ")
+            sbox.add(self.labels['ip'])
         sbox.add(reload_networks)
 
         scroll = self._gtk.ScrolledWindow()
 
-        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True)
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        box.set_vexpand(True)
 
         self.labels['networklist'] = Gtk.Grid()
 
@@ -82,7 +96,7 @@ class Panel(ScreenPanel):
             if self.update_timeout is None:
                 self.update_timeout = GLib.timeout_add_seconds(5, self.update_all_networks)
         else:
-            self.labels['networkinfo'] = Gtk.Label()
+            self.labels['networkinfo'] = Gtk.Label("")
             self.labels['networkinfo'].get_style_context().add_class('temperature_entry')
             box.pack_start(self.labels['networkinfo'], False, False, 0)
             self.update_single_network_info()
@@ -93,15 +107,13 @@ class Panel(ScreenPanel):
         self.labels['main_box'] = box
         self.initialized = True
 
-    def load_networks(self, widget=None):
+    def load_networks(self):
         networks = self.wifi.get_networks()
         if not networks:
             return
         for net in networks:
             self.add_network(net, False)
         self.update_all_networks()
-        if widget:
-            GLib.timeout_add_seconds(10, self._gtk.Button_busy, widget, False)
         self.content.show_all()
         return False
 
@@ -124,36 +136,48 @@ class Panel(ScreenPanel):
         connected_ssid = self.wifi.get_connected_ssid()
         if netinfo is None:
             logging.debug("Couldn't get netinfo")
-            netinfo = {'connected': connected_ssid == ssid}
+            if connected_ssid == ssid:
+                netinfo = {'connected': True}
+            else:
+                netinfo = {'connected': False}
 
-        name = Gtk.Label(hexpand=True, halign=Gtk.Align.START, wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR)
         if connected_ssid == ssid:
             display_name += " (" + _("Connected") + ")"
-            name.set_markup(f"<big><b>{display_name}</b></big>")
-        else:
-            name.set_label(display_name)
 
-        info = Gtk.Label(halign=Gtk.Align.START)
-        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, vexpand=True,
-                         halign=Gtk.Align.START, valign=Gtk.Align.CENTER)
+        name = Gtk.Label("")
+        name.set_markup(f"<big><b>{display_name}</b></big>")
+        name.set_hexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_line_wrap(True)
+        name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
+
+        info = Gtk.Label()
+        info.set_halign(Gtk.Align.START)
+        labels = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         labels.add(name)
         labels.add(info)
+        labels.set_vexpand(True)
+        labels.set_valign(Gtk.Align.CENTER)
+        labels.set_halign(Gtk.Align.START)
 
-        connect = self._gtk.Button("load", None, "color3", self.bts)
+        connect = self._gtk.Button("load", None, "color3", .66)
         connect.connect("clicked", self.connect_network, ssid)
         connect.set_hexpand(False)
         connect.set_halign(Gtk.Align.END)
 
-        delete = self._gtk.Button("delete", None, "color3", self.bts)
+        delete = self._gtk.Button("delete", None, "color3", .66)
         delete.connect("clicked", self.remove_wifi_network, ssid)
         delete.set_hexpand(False)
         delete.set_halign(Gtk.Align.END)
 
-        network = Gtk.Box(spacing=5, hexpand=True, vexpand=False)
+        network = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         network.get_style_context().add_class("frame-item")
+        network.set_hexpand(True)
+        network.set_vexpand(False)
+
         network.add(labels)
 
-        buttons = Gtk.Box(spacing=5)
+        buttons = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         if network_id != -1 or netinfo['connected']:
             buttons.pack_end(connect, False, False, 0)
             buttons.pack_end(delete, False, False, 0)
@@ -185,14 +209,18 @@ class Panel(ScreenPanel):
         if show:
             self.labels['networklist'].show()
 
-    def add_new_network(self, widget, ssid):
+    def add_new_network(self, widget, ssid, connect=False):
         self._screen.remove_keyboard()
-        result = self.wifi.add_network(ssid, self.labels['network_psk'].get_text())
+        psk = self.labels['network_psk'].get_text()
+        result = self.wifi.add_network(ssid, psk)
+
         self.close_add_network()
-        if result:
-            self.connect_network(widget, ssid, False)
-        else:
-            self._screen.show_popup_message(f"Error adding network {ssid}")
+
+        if connect:
+            if result:
+                self.connect_network(widget, ssid, False)
+            else:
+                self._screen.show_popup_message(f"Error adding network {ssid}")
 
     def back(self):
         if self.show_add:
@@ -236,7 +264,14 @@ class Panel(ScreenPanel):
         self.check_missing_networks()
 
     def connect_network(self, widget, ssid, showadd=True):
-        isdef = any(net['ssid'] == ssid for netid, net in self.wifi.get_supplicant_networks().items())
+
+        snets = self.wifi.get_supplicant_networks()
+        isdef = False
+        for netid, net in snets.items():
+            if net['ssid'] == ssid:
+                isdef = True
+                break
+
         if not isdef:
             if showadd:
                 self.show_add_network(widget, ssid)
@@ -248,10 +283,12 @@ class Panel(ScreenPanel):
         ]
 
         scroll = self._gtk.ScrolledWindow()
-        self.labels['connecting_info'] = Gtk.Label(
-            label=_("Starting WiFi Association"), halign=Gtk.Align.START, valign=Gtk.Align.START, wrap=True)
+        self.labels['connecting_info'] = Gtk.Label(_("Starting WiFi Association"))
+        self.labels['connecting_info'].set_halign(Gtk.Align.START)
+        self.labels['connecting_info'].set_valign(Gtk.Align.START)
         scroll.add(self.labels['connecting_info'])
-        self._gtk.Dialog(_("Starting WiFi Association"), buttons, scroll, self._gtk.remove_dialog)
+        dialog = self._gtk.Dialog(self._screen, buttons, scroll, self._gtk.remove_dialog)
+        dialog.set_title(_("Starting WiFi Association"))
         self._screen.show_all()
 
         if ssid in list(self.networks):
@@ -299,21 +336,26 @@ class Panel(ScreenPanel):
         if "add_network" in self.labels:
             del self.labels['add_network']
 
-        label = Gtk.Label(label=_("PSK for") + ' ssid', hexpand=False)
-        self.labels['network_psk'] = Gtk.Entry(hexpand=True)
-        self.labels['network_psk'].connect("activate", self.add_new_network, ssid)
+        label = self._gtk.Label(_("PSK for") + ' ssid')
+        label.set_hexpand(False)
+        self.labels['network_psk'] = Gtk.Entry()
+        self.labels['network_psk'].set_text('')
+        self.labels['network_psk'].set_hexpand(True)
+        self.labels['network_psk'].connect("activate", self.add_new_network, ssid, True)
         self.labels['network_psk'].connect("focus-in-event", self._screen.show_keyboard)
 
         save = self._gtk.Button("sd", _("Save"), "color3")
         save.set_hexpand(False)
-        save.connect("clicked", self.add_new_network, ssid)
+        save.connect("clicked", self.add_new_network, ssid, True)
 
         box = Gtk.Box()
         box.pack_start(self.labels['network_psk'], True, True, 5)
         box.pack_start(save, False, False, 5)
 
-        self.labels['add_network'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5, valign=Gtk.Align.CENTER,
-                                             hexpand=True, vexpand=True)
+        self.labels['add_network'] = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=5)
+        self.labels['add_network'].set_valign(Gtk.Align.CENTER)
+        self.labels['add_network'].set_hexpand(True)
+        self.labels['add_network'].set_vexpand(True)
         self.labels['add_network'].pack_start(label, True, True, 5)
         self.labels['add_network'].pack_start(box, True, True, 5)
 
@@ -328,71 +370,64 @@ class Panel(ScreenPanel):
         return True
 
     def update_network_info(self, ssid):
+
         info = freq = encr = chan = lvl = ipv4 = ipv6 = ""
 
         if ssid not in list(self.networks) or ssid not in self.labels['networks']:
             logging.info(f"Unknown SSID {ssid}")
             return
         netinfo = self.wifi.get_network_info(ssid)
-        if netinfo.get('connected') or self.wifi.get_connected_ssid() == ssid:
+        if "connected" in netinfo:
+            connected = netinfo['connected']
+        else:
+            connected = False
+
+        if connected or self.wifi.get_connected_ssid() == ssid:
+            stream = os.popen('hostname -f')
+            hostname = stream.read().strip()
             ifadd = netifaces.ifaddresses(self.interface)
-            if ifadd.get(netifaces.AF_INET):
-                ipv4 = f"<b>IPv4:</b> {ifadd[netifaces.AF_INET][0]['addr']}"
+            if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
+                ipv4 = f"<b>IPv4:</b> {ifadd[netifaces.AF_INET][0]['addr']} "
                 self.labels['ip'].set_text(f"IP: {ifadd[netifaces.AF_INET][0]['addr']}  ")
-            if ifadd.get(netifaces.AF_INET6):
-                ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]}"
-            info = f'<b>{_("Hostname")}:</b> {os.uname().nodename}\n{ipv4}\n{ipv6}'
-        else:
-            self.labels['networks'][ssid]['name'].set_label(_("Hidden") if ssid.startswith("\x00") else f"{ssid}")
-            if "psk" in netinfo:
-                info = _("Password saved")
-        if "encryption" in netinfo and netinfo['encryption'] != "off":
-            encr = netinfo['encryption'].upper()
+            if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
+                ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]} "
+            info = '<b>' + _("Hostname") + f':</b> {hostname}\n{ipv4}\n{ipv6}\n'
+        elif "psk" in netinfo:
+            info = _("Password saved")
+        if "encryption" in netinfo:
+            if netinfo['encryption'] != "off":
+                encr = netinfo['encryption'].upper()
         if "frequency" in netinfo:
-            freq = "2.4 GHz" if netinfo['frequency'][:1] == "2" else "5 Ghz"
+            freq = "2.4 GHz" if netinfo['frequency'][0:1] == "2" else "5 Ghz"
         if "channel" in netinfo:
-            chan = f'{_("Channel")} {netinfo["channel"]}'
+            chan = _("Channel") + f' {netinfo["channel"]}'
         if "signal_level_dBm" in netinfo:
-            lvl = f'{netinfo["signal_level_dBm"]} {"%" if self.use_network_manager else _("dBm")}'
-            icon = self.signal_strength(int(netinfo["signal_level_dBm"]))
-            if 'icon' not in self.labels['networks'][ssid]:
-                self.labels['networks'][ssid]['row'].add(icon)
-                self.labels['networks'][ssid]['row'].reorder_child(icon, 0)
-                self.labels['networks'][ssid]['icon'] = icon
-            self.labels['networks'][ssid]['icon'] = icon
+            lvl = f'{netinfo["signal_level_dBm"]} ' + _("dBm")
 
-        self.labels['networks'][ssid]['info'].set_markup(f"{info}\n<small>{encr}  {freq}  {chan}  {lvl}</small>")
-        self.labels['networks'][ssid]['row'].show_all()
-
-    def signal_strength(self, signal_level):
-        # networkmanager uses percentage not dbm
-        # the bars of nmcli are aligned near this breakpoints
-        exc = 77 if self.use_network_manager else -50
-        good = 60 if self.use_network_manager else -60
-        fair = 35 if self.use_network_manager else -70
-        if signal_level > exc:
-            return self._gtk.Image('wifi_excellent')
-        elif signal_level > good:
-            return self._gtk.Image('wifi_good')
-        elif signal_level > fair:
-            return self._gtk.Image('wifi_fair')
-        else:
-            return self._gtk.Image('wifi_weak')
+        self.labels['networks'][ssid]['info'].set_markup(f"{info} <small>{encr}  {freq}  {chan}  {lvl}</small>")
+        self.labels['networks'][ssid]['info'].show_all()
 
     def update_single_network_info(self):
+
+        stream = os.popen('hostname -f')
+        hostname = stream.read().strip()
         ifadd = netifaces.ifaddresses(self.interface)
-        ipv6 = f"{ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]}" if ifadd.get(netifaces.AF_INET6) else ""
-        if netifaces.AF_INET in ifadd and ifadd[netifaces.AF_INET]:
-            ipv4 = f"{ifadd[netifaces.AF_INET][0]['addr']} "
+        ipv4 = ""
+        ipv6 = ""
+        if netifaces.AF_INET in ifadd and len(ifadd[netifaces.AF_INET]) > 0:
+            ipv4 = f"<b>IPv4:</b> {ifadd[netifaces.AF_INET][0]['addr']} "
             self.labels['ip'].set_text(f"IP: {ifadd[netifaces.AF_INET][0]['addr']}  ")
-        else:
-            ipv4 = ""
-        self.labels['networkinfo'].set_markup(
+        if netifaces.AF_INET6 in ifadd and len(ifadd[netifaces.AF_INET6]) > 0:
+            ipv6 = f"<b>IPv6:</b> {ifadd[netifaces.AF_INET6][0]['addr'].split('%')[0]} "
+        connected = (
             f'<b>{self.interface}</b>\n\n'
-            f'<b>{_("Hostname")}:</b> {os.uname().nodename}\n'
-            f'<b>IPv4:</b> {ipv4}\n'
-            f'<b>IPv6:</b> {ipv6}'
+            f'<small><b>' + _("Connected") + f'</b></small>\n'
+            + '<b>' + _("Hostname") + f':</b> {hostname}\n'
+            f'{ipv4}\n'
+            f'{ipv6}\n'
         )
+
+        self.labels['networkinfo'].set_markup(connected)
         self.labels['networkinfo'].show_all()
         return True
 
@@ -400,10 +435,8 @@ class Panel(ScreenPanel):
         self.networks = {}
         self.labels['networklist'].remove_column(0)
         if self.wifi is not None and self.wifi.initialized:
-            if widget:
-                self._gtk.Button_busy(widget, True)
             self.wifi.rescan()
-            GLib.idle_add(self.load_networks, widget)
+            GLib.idle_add(self.load_networks)
 
     def activate(self):
         if self.initialized:

@@ -13,7 +13,6 @@ class KlippyFiles:
         self.callbacks = []
         self.files = {}
         self.filelist = []
-        self.directories = []
         self.gcodes_path = None
 
     def initialize(self):
@@ -28,7 +27,6 @@ class KlippyFiles:
         self.callbacks = None
         self.files = None
         self.filelist = None
-        self.directories = None
         self.gcodes_path = None
 
     def _callback(self, result, method, params):
@@ -44,7 +42,8 @@ class KlippyFiles:
                         newfiles.append(file)
                         self.add_file(item, False)
 
-                self.run_callbacks(newfiles, deletedfiles)
+                if newfiles or len(deletedfiles) > 0:
+                    self.run_callbacks(newfiles, deletedfiles)
 
                 if len(deletedfiles) > 0:
                     for file in deletedfiles:
@@ -61,7 +60,8 @@ class KlippyFiles:
                     if fullpath not in self.filelist:
                         newfiles.append(fullpath)
 
-                self.run_callbacks(newfiles)
+                if newfiles:
+                    self.run_callbacks(newfiles)
         elif method == "server.files.metadata":
             if "error" in result.keys():
                 logging.debug(f"Error in getting metadata for {params['filename']}. Retrying in 6 seconds")
@@ -85,13 +85,6 @@ class KlippyFiles:
                         fdir = os.path.dirname(params['filename'])
                         thumbnail['path'] = os.path.join(fdir, thumbnail['relative_path'])
             self.run_callbacks(mods=[params['filename']])
-        elif method == "server.files.get_directory":
-            if 'result' not in result or 'dirs' not in result['result']:
-                return
-            for x in result['result']['dirs']:
-                if x not in self.directories and not x['dirname'].startswith('.'):
-                    self.directories.append(x)
-                    self.get_dir_info(f"{params['path']}/{x['dirname']}")
 
     def add_file(self, item, notify=True):
         if 'filename' not in item and 'path' not in item:
@@ -173,7 +166,6 @@ class KlippyFiles:
 
     def refresh_files(self):
         self._screen._ws.klippy.get_file_list(self._callback)
-        self._screen._ws.klippy.get_dir_info(self._callback)
         return False
 
     def remove_file(self, filename, notify=True):
@@ -207,6 +199,3 @@ class KlippyFiles:
         if filename not in self.files:
             return {"path": None, "modified": 0, "size": 0}
         return self.files[filename]
-
-    def get_dir_info(self, directory):
-        self._screen._ws.klippy.get_dir_info(self._callback, directory=directory)

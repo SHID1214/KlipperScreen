@@ -5,121 +5,98 @@ create a blank file in `~/printer_data/config/KlipperScreen.conf`, if the file a
 
 Write in the file only the options that need to be changed, and restart KlipperScreen.
 
-
-!!! failure "Critical"
-    Each configuration option should be on a newline, as they are presented here.
-
-    The line endings should be of UNIX style (LF).
-
-
 ## Include files
-```{ .ini .no-copy }
-# [include conf.d/*.conf]
+```py
+[include conf.d/*.conf]
 # Include another configuration file. Wildcards (*) will expand to match anything.
 ```
 
 
 ## Main Options
-The options listed here are not editable from within the user interface.
-```{ .ini .no-copy }
+The options listed here are not changeable from within the ui.
+```py
 [main]
-
 # Time in seconds before the Job Status page closes itself after a successful job/print
 # 0 means disabled
-# job_complete_timeout: 0
+job_complete_timeout: 0
 
 # Time in seconds before the Job Status closes itself if an error is encountered
-# job_error_timeout: 0
+job_error_timeout: 0
 
 # Allows the cursor to be displayed on the screen
-# show_cursor: False
+show_cursor: False
 
 # If multiple printers are defined, this can be set the name of the one to show at startup.
-# default_printer: MyPrinter
+default_printer: Ender 3 Pro
 
-# To define a full set of custom menus (instead of merging user entries with default entries)
+# To define a full set of custom menues (instead of merging user entries with default entries)
 # set this to False. See Menu section below.
-# use_default_menu: True
+use_default_menu: True
 
 # Define one or more moonraker power devices that turn on/off with the screensaver (CSV list)
-# screen_on_devices: example1, example2
-# screen_off_devices:  example1, example2
+screen_on_devices: example1, example2
+screen_off_devices:  example1, example2
 ```
-
-!!! tip
-    It is strongly recommended that you do not add settings to the config file if you don't need them
 
 ## Printer Options
 Multiple printers can be defined
-```{ .ini .no-copy }
+```py
 # Define printer and name. Name is anything after the first printer word
-[printer MyPrinter]
+[printer Ender 3 Pro]
 # Define the moonraker host/port if different from 127.0.0.1 and 7125
 moonraker_host: 127.0.0.1
 # ports 443 and 7130 will use https/wss
 moonraker_port: 7125
-# Moonraker API key if this host is not connecting from a trusted client IP
-# moonraker_api_key: False
+# Moonraker API key if this is not connecting from a trusted client IP
+moonraker_api_key: False
 
-# Define the z_babystep intervals in a CSV list. Currently only 2 are supported, the last value is default
-# z_babystep_values: 0.01, 0.05
+# Define the z_babystep intervals in a CSV list. Currently only 2 are supported
+z_babystep_values: 0.01, 0.05
 
 # Override the movement speed and set a specific for this printer.
 # These setting overrides the settings configured in the UI. If specified,
 # the values configured in the UI will not be used.
-# this is not recommended and may be removed in the future, use the ui settings
-# move_speed_xy: 500
-# move_speed_z: 300
+move_speed_xy: 500
+move_speed_z: 300
 
 # Define one or more moonraker power devices that turn on this printer (CSV list)
 # Default is the printer name
-# power_devices: example1, example2
+power_devices: example1, example2
 
 # Define what items should be shown in titlebar besides the extruder and bed
 # the name must be the same as defined in the klipper config
 # valid options are temperature_sensors or temperature_fans, or heater_generic
-# titlebar_items: chamber, MCU, Pi
+titlebar_items: chamber, MCU, Pi
 
 # The style of the user defined items in the titlebar
 # Can be 'full' indicating that the full name is shown, 'short' for the first letter, or None (default) for no name
-# titlebar_name_type: None
+titlebar_name_type: None
 
 # Z probe calibrate position
 # By default is the middle of the bed
-# example:
-# calibrate_x_position: 100
-# calibrate_y_position: 100
-
+calibrate_x_position: 100
+calibrate_y_position: 100
 
 # Bed Screws
-# define the screw positons required for odd number of screws in a comma separated list (CSV)
+# define the screw positons required for odd number of screws in a comma separated list
 # possible values are: bl, br, bm, fl, fr, fm, lm, rm, center
 # they correspond to back-left, back-right, back-middle, front-left, front-right, front-middle, left-middle, right-middle
-# example:
-# screw_positions: bl, br, fm
+screw_positions: ""
 
 # Rotation is useful if the screen is not directly in front of the machine.
 # Valid values are 0 90 180 270
-# screw_rotation: 0
+screw_rotation: 0
 
-# Define distances and speeds for the extrude panel. CSV list 2 to 4 integers the second value is default
-# extrude_distances: 5, 10, 15, 25
-# extrude_speeds: 1, 2, 5, 25
+# Define distances and speeds for the extrude panel. CSV list 2 to 4 integers
+extrude_distances: 5, 10, 15, 25
+extrude_speeds: 1, 2, 5, 25
 
-# Define distances for the move panel. comma-separated list with 2 to 7 floats and/or integers
-# move_distances: 0.1, 0.5, 1, 5, 10, 25, 50
-
-# Camera needs to be configured in moonraker:
-# https://moonraker.readthedocs.io/en/latest/configuration/#webcam
+# Camera configuration
+camera_url: http://127.0.0.1/webcam/?action=stream
 ```
 
 ## Preheat Options
-
-!!! question "Added one the others disappeared, Is this normal?"
-    Adding a custom preheat section will cause the defaults to not load, this is
-    the intended behaviour.
-
-```ini
+```py
 [preheat my_temp_setting]
 extruder: 195
 extruder1: 60
@@ -135,11 +112,10 @@ heater_generic: 60
 gcode: MY_HEATSOAK_MACRO
 ```
 
-There is a special preheat setting named cooldown to *do additional things* when the _cooldown_ button is pressed
-*do not* add `TURN_OFF_ALL_HEATERS` or you will remove the ability to turn off individual heaters with this button.
+There is a special preheat setting named cooldown to do additional things when the _cooldown_ button is pressed
 for example:
 
-```ini
+```py
 [preheat cooldown]
 gcode: M107
 ```
@@ -150,11 +126,8 @@ different items and there are several panel options available. It is possible to
 button press. There are two menus available in KlipperScreen, __main and __print. The __main menu is displayed while the
 printer is idle. The __print menu is accessible from the printing status page.
 
-!!! info
-    A predefined set of menus is already provided
-
 A menu item is configured as follows:
-```{ .ini .no-copy }
+```py
 [menu __main my_menu_item]
 # To build a sub-menu of this menu item, you would next use [menu __main my_menu_item sub_menu_item]
 name: Item Name
@@ -179,13 +152,12 @@ enable: {{ printer.power_devices.count > 0 }}
 Available panels are listed here: [docs/panels.md](Panels.md)
 
 Certain variables are available for conditional testing of the enable statement:
-```{ .yaml .no-copy }
+```py
 printer.extruders.count # Number of extruders
 printer.temperature_devices.count # Number of temperature related devices that are not extruders
 printer.fans.count # Number of fans
 printer.power_devices.count # Number of power devices configured in Moonraker
 printer.gcode_macros.count # Number of gcode macros
-printer.gcode_macros.list # List of names of the gcode macros
 printer.output_pins.count # Number of fans
 
 printer.bltouch # Available if bltouch section defined in config
@@ -206,7 +178,7 @@ printer.pause_resume # Pause resume section of Klipper
 
 
 A sample configuration of a main menu would be as follows:
-```{ .yaml+jinja .no-copy }
+```py
 [menu __main homing]
 name: Homing
 icon: home
@@ -216,19 +188,16 @@ name: Preheat
 icon: heat-up
 panel: preheat
 
+[menu __main print]
+name: Print
+icon: print
+panel: print
+
 [menu __main homing homeall]
 name: Home All
 icon: home
 method: printer.gcode.script
 params: {"script":"G28"}
-
-[menu __main homing mymacro]
-name: My Macro
-icon: home
-method: printer.gcode.script
-params: {"script":"MY_MACRO"}
-enable: {{ 'MY_MACRO' in printer.gcode_macros.list }}
-
 ```
 
 ## KlipperScreen behaviour towards configuration
@@ -250,6 +219,6 @@ If include files are defined then, they will be merged first.
 The default config is included here: (do not edit use as reference)
 _${KlipperScreen_Directory}/ks_includes/default.conf_
 
-*Do not* copy the entire default.conf file, just configure the settings needed.
+Preferably *do not* copy the entire default.conf file, just configure the settings needed.
 
-If no config file is found, then when a setting is changed in the settings panel, a new configuration file should be created automatically.
+If no config file is found, then when a setting is changed in the settings panel, a new configuration file will be created automatically.

@@ -1,33 +1,16 @@
 /* Material-darker theme created by Alfredo Monclus 2021 */
-@define-color color_1 #e2e2e2;
-@define-color color_2 #2196f3;
-@define-color color_3 #fb8c00;
-@define-color color_4 #9E9E9E;
-@define-color color_5 #121212;
-@define-color background-color_2 #1c1c1c;
-@define-color background-color_3 #424242;
-@define-color background-color_4 #252525;
-@define-color background-color_5 #2f5631;
-@define-color background-color_6 #006064;
-@define-color background-color_7 #545454;
-@define-color background-color_8 #006412;
-@define-color background-color_9 #EF6C00;
-@define-color background-color_10 #B71C1C;
-@define-color background-color_12 #f9b274;
-@define-color background-color_13 #CF6679;
-@define-color background-color_14 #090909;
-@define-color border-color_6 #a2a2a2;
-@define-color border-color_7 #282828;
 
 * {
     color: #e2e2e2;
     font-family: RobotoMedium;
 }
 
-list row,
-treeview.view,
 window {
     background-color: #121212;
+}
+
+.active_device {
+    background-color: #1c1c1c;
 }
 
 button {
@@ -44,22 +27,13 @@ button:active {
     background-color: #424242;
 }
 
-button.color1,
-button.color2,
-button.color3,
-button.color4 {
+button.color1, button.color2, button.color3, button.color4 {
     background-color: #252525;
     border-color: #252525;
     border-radius: .25em;
 }
 
-button.color1:active,
-button.color2:active,
-button.color3:active,
-button.color4:active,
-button.update:active,
-button.invalid:active,
-.dialog button:active {
+button.color1:active, button.color2:active, button.color3:active, button.color4:active, button.update:active, button.invalid:active, .dialog button:active {
     border-style: none;
     background-color: #424242;
 }
@@ -85,12 +59,10 @@ combobox box button {
     border-color: #121212;
 }
 
-treeview.view check,
 switch {
     background-color: #1c1c1c;
 }
 
-treeview.view check:checked,
 switch:checked {
     background-color: #2f5631;
 }
@@ -114,8 +86,7 @@ trough {
     color: #e2e2e2;
 }
 
-trough highlight,
-trough progress {
+trough highlight, trough progress {
     background-color: #2f5631;
     color: #e2e2e2;
 }
@@ -124,9 +95,7 @@ scale-mark {
     color: #e2e2e2;
 }
 
-scrollbar,
-scrollbar button,
-scrollbar trough {
+scrollbar, scrollbar button, scrollbar trough {
     background-color: #121212;
 }
 
@@ -138,8 +107,8 @@ textview .time {
     color: #9E9E9E;
 }
 
-.active_device {
-    background-color: #1c1c1c;
+.popup {
+    background-color: #006064;
 }
 
 .dialog {
@@ -149,41 +118,25 @@ textview .time {
 
 .dialog button {
     background-color: #252525;
+    border-bottom-color: #252525;
     border-radius: .25em;
 }
 
-
-.dialog-error {
-    border-bottom-color: #CF6679;
+.dialog button:nth-child(1) {
+    border-bottom-color: #2f5631;
 }
 
-.dialog-warning {
-    border-bottom-color: #f9b274;
+.dialog button:nth-child(2) {
+    border-bottom-color: #B71C1C;
 }
 
-.dialog-info {
-    border-bottom-color: @color4;
-}
-
-.dialog-default {
-    border-bottom-color: @color3;
-}
-
-.dialog-secondary {
-     border-bottom-color: @color2;
-}
-
-.dialog-primary {
-     border-bottom-color: @color1;
-}
-
-.horizontal_togglebuttons  {
+.tempbutton_top, .tempbutton, .tempbutton_bottom, .distbutton_top, .distbutton, .distbutton_bottom  {
     border-color: #545454;
     border-width: .1em;
     background-color: #252525;
 }
 
-.horizontal_togglebuttons_active {
+.distbutton_active {
     background-color: #545454;
 }
 
@@ -195,22 +148,19 @@ textview .time {
     border-bottom-color: #e2e2e2;
 }
 
-.message_popup_echo,
-.message_popup_echo button {
+.message_popup_echo, .message_popup_echo button {
     background-color: #006412;
 }
 
-.message_popup_warning,
-.message_popup_warning button {
+.message_popup_warning, .message_popup_warning button {
     background-color: #EF6C00;
 }
 
-.message_popup_error,
-.message_popup_error button {
+.message_popup_error, .message_popup_error button {
     background-color: #B71C1C;
 }
 
-.numpad_key {
+.numpad_tleft, .numpad_top, .numpad_tright, .numpad_left, .numpad_button, .numpad_right, .numpad_bleft, .numpad_bottom, .numpad_bright {
     border-color: #545454;
     background-color: #252525;
 }
@@ -238,6 +188,14 @@ textview .time {
     color: #121212;
 }
 
+.warning {
+    background-color: #f9b274;
+}
+
+.error {
+    background-color: #CF6679;
+}
+
 .keyboard_pad {
-    background-color: #090909;
+    background-color: #090909; /*base02*/
 }

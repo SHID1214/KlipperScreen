@@ -1,4 +1,4 @@
-# Physical installation issues
+# Physical install issues
 
 If the screen never shows the console even during startup, Then it's typically an improperly installed screen,
 
@@ -8,9 +8,8 @@ If the screen never shows the console even during startup, Then it's typically a
 ## Cable issues
 
 * Check that the cable is inserted properly:
-it shouldn't be loose, and in the case of ribbon cables like DSI make sure the contacts face the right way
-* If the touchscreen is connected via USB, try another port if available,
-  if you are using a HUB try connecting the touch directly without the HUB.
+it shouldn't be loose, and in the case of DSI make sure the contacts face the right way
+* If the touchscreen is connected via USB, try another port if available, if you are using a HUB try connecting the touch directly without the HUB.
 * If the board has more than one HDMI try the other port
 
 ## Driver issues
@@ -24,3 +23,6 @@ Some screens need drivers installed the most common cases are:
 ### Goodtft (generic/clones)
 * [Goodtft Wiki](http://www.lcdwiki.com)
 * [repo LCD-show](https://github.com/goodtft/LCD-show)
+
+!!! critical
+    remember to add `lite` when installing. See [LCD-SHOW](Showing_console.md#lcd-show)

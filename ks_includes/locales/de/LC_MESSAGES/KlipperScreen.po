@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-11-16 02:51+0000\n"
-"Last-Translator: bbraeu <braeu.bernhard@gmail.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/de/>\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"PO-Revision-Date: 2022-11-30 18:10-0300\n"
+"Last-Translator: livinhack\n"
+"Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.2-dev\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -44,25 +43,22 @@ msgstr "Beschleunigung:"
 msgid "Accept"
 msgstr "OK"
 
+msgid "Actions"
+msgstr "Aktionen"
+
 msgid "Add profile"
 msgstr "Profil hinzufügen"
-
-msgid "All"
-msgstr "Alle"
 
 msgid "Apply"
 msgstr "Anwenden"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr "%s%.3f Offset auf Endschalter anwenden?"
+msgstr "%s%.3f Offset auf Endstop anwenden"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr "%s%.3f Offset auf Sonde anwenden?"
-
-msgid "Archived"
-msgstr "Archiviert"
+msgstr "%s%.3f Offset auf Probe anwenden"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Möchtest du das Objekt wirklich ausschließen?"
@@ -90,9 +86,6 @@ msgstr "Automatisch kalibrieren"
 
 msgid "Auto-close notifications"
 msgstr "Benachrichtigungen automatisch schließen"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Extrudieren bei Pause automatisch öffnen"
 
 msgid "Auto-scroll"
 msgstr "Auto-scroll"
@@ -154,6 +147,9 @@ msgstr "Schließen"
 msgid "Complete"
 msgstr "Fertiggestellt"
 
+msgid "Configuration"
+msgstr "Einstellungen"
+
 msgid "Confirm Emergency Stop"
 msgstr "Not-Aus bestätigen"
 
@@ -167,11 +163,11 @@ msgstr "Verbinden zu %s"
 msgid "Console"
 msgstr "Konsole"
 
+msgid "Continue"
+msgstr "Fortsetzen"
+
 msgid "Cooldown"
 msgstr "Abkühlen"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "DPMS konnte nicht geladen werden und wurde deaktiviert"
 
 msgid "Date"
 msgstr "Datum"
@@ -198,9 +194,6 @@ msgstr "Möchtest du zurück zu %s?"
 msgid "Elapsed:"
 msgstr "Laufzeit:"
 
-msgid "Ended official support in June 2023"
-msgstr ""
-
 msgid "Error"
 msgstr "Fehler"
 
@@ -214,13 +207,13 @@ msgid "Extra Large"
 msgstr "Extra groß"
 
 msgid "Extrude"
-msgstr "Extrudieren"
+msgstr "Fördern"
 
 msgid "Extrusion +"
-msgstr "Extrudieren +"
+msgstr "Fördern +"
 
 msgid "Extrusion -"
-msgstr "Extrudieren -"
+msgstr "Fördern -"
 
 msgid "Failed, adjust position first"
 msgstr "Fehlgeschlagen, Position zuerst anpassen"
@@ -246,9 +239,6 @@ msgstr "Datei"
 msgid "File:"
 msgstr "Datei:"
 
-msgid "Filter"
-msgstr "Filter"
-
 msgid "Finding ADXL"
 msgstr "ADXL finden"
 
@@ -273,6 +263,9 @@ msgstr "Schriftgröße"
 msgid "Full Update"
 msgstr "Vollständige Aktualisierung"
 
+msgid "Fullscreen"
+msgstr "Vollbild"
+
 msgid "Go Back"
 msgstr "Zurück"
 
@@ -291,23 +284,23 @@ msgstr "Sensoren in Temp ausblenden."
 msgid "Hide temp."
 msgstr "Temp. ausblenden"
 
-msgid "Home"
-msgstr "Grundposition"
-
 msgid "Home All"
-msgstr "Alle Achsen referenzieren"
+msgstr "Alle Achsen zurücksetzen"
 
 msgid "Home X"
-msgstr "X referenzieren"
+msgstr "Achse X neupositionieren"
 
 msgid "Home XY"
-msgstr "XY referenzieren"
+msgstr "Achse XY neupositionieren"
 
 msgid "Home Y"
-msgstr "Y referenzieren"
+msgstr "Achse Y neupositionieren"
 
 msgid "Home Z"
-msgstr "Z referenzieren"
+msgstr "Achse Z neupositionieren"
+
+msgid "Homing"
+msgstr "Grundposition"
 
 msgid "Host"
 msgstr "Host"
@@ -315,17 +308,11 @@ msgstr "Host"
 msgid "Hostname"
 msgstr "Hostname"
 
-msgid "ID"
-msgstr "ID"
-
 msgid "Icon Theme"
 msgstr "Icon Theme"
 
 msgid "Initializing printer..."
 msgstr "Drucker wird initialisiert..."
-
-msgid "Initiate a PID calibration for:"
-msgstr "Initiieren einer PID-Kalibrierung für:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -348,9 +335,6 @@ msgstr "Achse Y invertieren"
 msgid "Invert Z"
 msgstr "Achse Z invertieren"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Je nach Leistung der Heizung kann dies mehr als 5 Minuten dauern."
-
 msgid "Klipper Restart"
 msgstr "Klipper Neustart"
 
@@ -364,19 +348,13 @@ msgid "Klipper has shutdown"
 msgstr "Klipper abgeschaltet"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipper versucht zu starten"
+msgstr "Klipper veruscht zu starten"
 
 msgid "Klipper will reboot"
 msgstr "Klipper startet neu"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"Filament_Laden/Filament_Entladen sind versteckt und sollten von extrudieren "
-"aus verwendet werden"
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen startet neu"
 
 msgid "Language"
 msgstr "Sprache"
@@ -384,14 +362,8 @@ msgstr "Sprache"
 msgid "Large"
 msgstr "Groß"
 
-msgid "Last Used"
-msgstr "Zuletzt verwendet"
-
 msgid "Layer:"
 msgstr "Schicht:"
-
-msgid "Leds"
-msgstr "Leds"
 
 msgid "Left:"
 msgstr "Restzeit:"
@@ -401,9 +373,6 @@ msgstr "Grenzwerte"
 
 msgid "Load"
 msgstr "Laden"
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Düse absenken"
@@ -416,9 +385,6 @@ msgstr "Makros"
 
 msgid "Main Menu"
 msgstr "Hauptmenü"
-
-msgid "Material"
-msgstr "Material"
 
 msgid "Max"
 msgstr "Max"
@@ -459,9 +425,6 @@ msgstr "Modifiziert"
 msgid "Moonraker: connected"
 msgstr "Moonraker: Verbunden"
 
-msgid "More"
-msgstr "Mehr"
-
 msgid "Move"
 msgstr "Bewegen"
 
@@ -480,9 +443,6 @@ msgstr "Niemals"
 msgid "New"
 msgstr "Neu"
 
-msgid "No elegible macros:"
-msgstr "Keine wählbaren Makros:"
-
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -490,17 +450,8 @@ msgstr ""
 "Wird für die automatische Erkennung nicht unterstützt, muss in Klipperscreen."
 "conf konfiguriert werden"
 
-msgid "Not working or not configured"
-msgstr ""
-
 msgid "Nothing selected"
 msgstr "Nichts ausgewählt"
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -572,7 +523,7 @@ msgid "Profile Name:"
 msgstr "Profilname:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Wenn Hilfe benötigt wird KlipperScreen.log angeben.\n"
+msgstr "Stelle die KlipperScreen.log zur Verfügung wenn du hilfe benötigst\n"
 
 msgid "Quad Gantry Level"
 msgstr "Quad Gantry Level"
@@ -596,7 +547,7 @@ msgid "Refresh"
 msgstr "Aktualisieren"
 
 msgid "Rename/Move:"
-msgstr "Umbenennen/Bewegen:"
+msgstr "Umbenennen/Bewegen"
 
 msgid "Restart"
 msgstr "Neustart"
@@ -668,9 +619,6 @@ msgstr "Zeigen"
 msgid "Show Heater Power"
 msgstr "Heizleistung anzeigen"
 
-msgid "Show Scrollbars Buttons"
-msgstr "Zeige Scrollbar Schaltfläche"
-
 msgid "Shutdown"
 msgstr "Ausschalten"
 
@@ -700,9 +648,6 @@ msgstr "Geschwindigkeit:"
 
 msgid "Square Corner Velocity"
 msgstr "Eckgeschwindigkeit"
-
-msgid "Standby"
-msgstr "Standby"
 
 msgid "Start"
 msgstr "Starten"
@@ -763,12 +708,6 @@ msgstr "Aktualisiere"
 msgid "Uploaded"
 msgstr "Hochgeladen"
 
-msgid "Warning"
-msgstr ""
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr "XY Bewegungsgeschwindigkeit (mm/s)"
 
@@ -803,12 +742,6 @@ msgid_plural "hours"
 msgstr[0] "Stunde"
 msgstr[1] "Stunden"
 
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "Makros, die 'rename_existing' verwenden, sind ausgeblendet"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "Makros mit einem Namen, der mit '_' beginnt, sind ausgeblendet"
-
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "Minute"
@@ -825,21 +758,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "Continue"
-#~ msgstr "Fortsetzen"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Vollbild"
-
-#~ msgid "Actions"
-#~ msgstr "Aktionen"
-
-#~ msgid "Configuration"
-#~ msgstr "Einstellungen"
-
-#~ msgid "Homing"
-#~ msgstr "Grundposition"
 
 #~ msgid "Disable XY"
 #~ msgstr "XY-Achse deaktivieren"
@@ -896,6 +814,9 @@ msgstr "mm³/s"
 
 #~ msgid "Delete"
 #~ msgstr "Löschen"
+
+#~ msgid "Home"
+#~ msgstr "Grundposition"
 
 #~ msgid "Off"
 #~ msgstr "Aus"

@@ -1,28 +1,24 @@
-import re
 import logging
+
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Pango
+
 from ks_includes.KlippyGcodes import KlippyGcodes
 from ks_includes.screen_panel import ScreenPanel
 
 
-class Panel(ScreenPanel):
+def create_panel(*args):
+    return MovePanel(*args)
+
+
+class MovePanel(ScreenPanel):
     distances = ['.1', '.5', '1', '5', '10', '25', '50']
     distance = distances[-2]
 
     def __init__(self, screen, title):
         super().__init__(screen, title)
-
-        if self.ks_printer_cfg is not None:
-            dis = self.ks_printer_cfg.get("move_distances", '')
-            if re.match(r'^[0-9,\.\s]+$', dis):
-                dis = [str(i.strip()) for i in dis.split(',')]
-                if 1 < len(dis) <= 7:
-                    self.distances = dis
-                    self.distance = self.distances[-2]
-
         self.settings = {}
         self.menu = ['move_menu']
         self.buttons = {
@@ -46,10 +42,8 @@ class Panel(ScreenPanel):
         self.buttons['motors_off'].connect("clicked", self._screen._confirm_send_action,
                                            _("Are you sure you wish to disable motors?"),
                                            "printer.gcode.script", script)
-        adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
-        adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
-        adjust.set_hexpand(False)
-        grid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
+
+        grid = self._gtk.HomogeneousGrid()
         if self._screen.vertical_mode:
             if self._screen.lang_ltr:
                 grid.attach(self.buttons['x+'], 2, 1, 1, 1)
@@ -61,7 +55,6 @@ class Panel(ScreenPanel):
                 grid.attach(self.buttons['x-'], 2, 1, 1, 1)
                 grid.attach(self.buttons['z+'], 0, 2, 1, 1)
                 grid.attach(self.buttons['z-'], 2, 2, 1, 1)
-            grid.attach(adjust, 1, 2, 1, 1)
             grid.attach(self.buttons['y+'], 1, 0, 1, 1)
             grid.attach(self.buttons['y-'], 1, 1, 1, 1)
 
@@ -86,25 +79,32 @@ class Panel(ScreenPanel):
             self.labels[i].set_direction(Gtk.TextDirection.LTR)
             self.labels[i].connect("clicked", self.change_distance, i)
             ctx = self.labels[i].get_style_context()
-            ctx.add_class("horizontal_togglebuttons")
+            if (self._screen.lang_ltr and j == 0) or (not self._screen.lang_ltr and j == len(self.distances) - 1):
+                ctx.add_class("distbutton_top")
+            elif (not self._screen.lang_ltr and j == 0) or (self._screen.lang_ltr and j == len(self.distances) - 1):
+                ctx.add_class("distbutton_bottom")
+            else:
+                ctx.add_class("distbutton")
             if i == self.distance:
-                ctx.add_class("horizontal_togglebuttons_active")
+                ctx.add_class("distbutton_active")
             distgrid.attach(self.labels[i], j, 0, 1, 1)
 
         for p in ('pos_x', 'pos_y', 'pos_z'):
             self.labels[p] = Gtk.Label()
-        self.labels['move_dist'] = Gtk.Label(label=_("Move Distance (mm)"))
+        adjust = self._gtk.Button("settings", None, "color2", 1, Gtk.PositionType.LEFT, 1)
+        adjust.connect("clicked", self.load_menu, 'options', _('Settings'))
+        adjust.set_hexpand(False)
+        self.labels['move_dist'] = Gtk.Label(_("Move Distance (mm)"))
 
-        bottomgrid = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
+        bottomgrid = self._gtk.HomogeneousGrid()
         bottomgrid.set_direction(Gtk.TextDirection.LTR)
         bottomgrid.attach(self.labels['pos_x'], 0, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_y'], 1, 0, 1, 1)
         bottomgrid.attach(self.labels['pos_z'], 2, 0, 1, 1)
         bottomgrid.attach(self.labels['move_dist'], 0, 1, 3, 1)
-        if not self._screen.vertical_mode:
-            bottomgrid.attach(adjust, 3, 0, 1, 2)
+        bottomgrid.attach(adjust, 3, 0, 1, 2)
 
-        self.labels['move_menu'] = Gtk.Grid(row_homogeneous=True, column_homogeneous=True)
+        self.labels['move_menu'] = self._gtk.HomogeneousGrid()
         self.labels['move_menu'].attach(grid, 0, 0, 1, 3)
         self.labels['move_menu'].attach(bottomgrid, 0, 3, 1, 1)
         self.labels['move_menu'].attach(distgrid, 0, 4, 1, 1)
@@ -114,11 +114,8 @@ class Panel(ScreenPanel):
         printer_cfg = self._printer.get_config_section("printer")
         # The max_velocity parameter is not optional in klipper config.
         max_velocity = int(float(printer_cfg["max_velocity"]))
-        if max_velocity <= 1:
-            logging.error(f"Error getting max_velocity\n{printer_cfg}")
-            max_velocity = 50
         if "max_z_velocity" in printer_cfg:
-            max_z_velocity = max(int(float(printer_cfg["max_z_velocity"])), 10)
+            max_z_velocity = int(float(printer_cfg["max_z_velocity"]))
         else:
             max_z_velocity = max_velocity
 
@@ -141,7 +138,16 @@ class Panel(ScreenPanel):
             name = list(option)[0]
             self.add_option('options', self.settings, name, option[name])
 
+    def process_busy(self, busy):
+        buttons = ("home", "motors_off")
+        for button in buttons:
+            if button in self.buttons:
+                self.buttons[button].set_sensitive(not busy)
+
     def process_update(self, action, data):
+        if action == "notify_busy":
+            self.process_busy(data)
+            return
         if action != "notify_status_update":
             return
         homed_axes = self._printer.get_stat("toolhead", "homed_axes")
@@ -169,8 +175,8 @@ class Panel(ScreenPanel):
 
     def change_distance(self, widget, distance):
         logging.info(f"### Distance {distance}")
-        self.labels[f"{self.distance}"].get_style_context().remove_class("horizontal_togglebuttons_active")
-        self.labels[f"{distance}"].get_style_context().add_class("horizontal_togglebuttons_active")
+        self.labels[f"{self.distance}"].get_style_context().remove_class("distbutton_active")
+        self.labels[f"{distance}"].get_style_context().add_class("distbutton_active")
         self.distance = distance
 
     def move(self, widget, axis, direction):
@@ -183,33 +189,43 @@ class Panel(ScreenPanel):
         if speed is None:
             speed = self._config.get_config()['main'].getint(config_key, 20)
         speed = 60 * max(1, speed)
-        script = f"{KlippyGcodes.MOVE_RELATIVE}\nG0 {axis}{dist} F{speed}"
-        self._screen._send_action(widget, "printer.gcode.script", {"script": script})
+
+        self._screen._ws.klippy.gcode_script(f"{KlippyGcodes.MOVE_RELATIVE}\n{KlippyGcodes.MOVE} {axis}{dist} F{speed}")
         if self._printer.get_stat("gcode_move", "absolute_coordinates"):
             self._screen._ws.klippy.gcode_script("G90")
 
     def add_option(self, boxname, opt_array, opt_name, option):
-        name = Gtk.Label(hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER, wrap=True)
+        name = Gtk.Label()
         name.set_markup(f"<big><b>{option['name']}</b></big>")
+        name.set_hexpand(True)
+        name.set_vexpand(True)
+        name.set_halign(Gtk.Align.START)
+        name.set_valign(Gtk.Align.CENTER)
+        name.set_line_wrap(True)
         name.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR)
 
-        dev = Gtk.Box(spacing=5,
-                      hexpand=True, vexpand=False, valign=Gtk.Align.CENTER)
+        dev = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=5)
         dev.get_style_context().add_class("frame-item")
+        dev.set_hexpand(True)
+        dev.set_vexpand(False)
+        dev.set_valign(Gtk.Align.CENTER)
         dev.add(name)
 
         if option['type'] == "binary":
-            box = Gtk.Box(hexpand=False)
-            switch = Gtk.Switch(hexpand=False, vexpand=False,
-                                width_request=round(self._gtk.font_size * 7),
-                                height_request=round(self._gtk.font_size * 3.5),
-                                active=self._config.get_config().getboolean(option['section'], opt_name))
+            box = Gtk.Box()
+            box.set_vexpand(False)
+            switch = Gtk.Switch()
+            switch.set_hexpand(False)
+            switch.set_vexpand(False)
+            switch.set_active(self._config.get_config().getboolean(option['section'], opt_name))
             switch.connect("notify::active", self.switch_config_option, option['section'], opt_name)
+            switch.set_property("width-request", round(self._gtk.font_size * 7))
+            switch.set_property("height-request", round(self._gtk.font_size * 3.5))
             box.add(switch)
             dev.add(box)
         elif option['type'] == "scale":
             dev.set_orientation(Gtk.Orientation.VERTICAL)
-            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
+            scale = Gtk.Scale.new_with_range(orientation=Gtk.Orientation.HORIZONTAL,
                                              min=option['range'][0], max=option['range'][1], step=option['step'])
             scale.set_hexpand(True)
             scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
@@ -237,9 +253,9 @@ class Panel(ScreenPanel):
 
     def home(self, widget):
         if "delta" in self._printer.get_config_section("printer")['kinematics']:
-            self._screen._send_action(widget, "printer.gcode.script", {"script": 'G28'})
+            self._screen._ws.klippy.gcode_script(KlippyGcodes.HOME)
             return
         name = "homing"
         disname = self._screen._config.get_menu_name("move", name)
         menuitems = self._screen._config.get_menu_items("move", name)
-        self._screen.show_panel("menu", disname, items=menuitems)
+        self._screen.show_panel(name, "menu", disname, 1, False, items=menuitems)

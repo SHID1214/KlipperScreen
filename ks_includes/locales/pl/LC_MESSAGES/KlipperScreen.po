@@ -1,20 +1,19 @@
-# Daviteusz <daviteusz0@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: Polish (KlipperScreen)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-06 08:35-0300\n"
-"PO-Revision-Date: 2023-10-23 14:32+0000\n"
-"Last-Translator: Daviteusz <daviteusz0@gmail.com>\n"
-"Language-Team: Polish <https://hosted.weblate.org/projects/klipperscreen/"
-"klipperscreen/pl/>\n"
+"POT-Creation-Date: 2023-06-21 16:13-0300\n"
+"PO-Revision-Date: 2023-06-29 22:18+0000\n"
+"Last-Translator: Daviteusz <imefiu3@gmail.com>\n"
+"Language-Team: Polish <https://translate.daviteusz.eu/projects/klipperscreen/"
+"translate/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
+"X-Generator: Weblate 4.18.1\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -33,7 +32,7 @@ msgid "ADXL Not Configured"
 msgstr "ADXL nieskonfigurowany"
 
 msgid "Abort"
-msgstr "Przerwij"
+msgstr "Anuluj"
 
 msgid "Acceleration:"
 msgstr "Przyśpieszenie:"
@@ -41,11 +40,11 @@ msgstr "Przyśpieszenie:"
 msgid "Accept"
 msgstr "Akceptuj"
 
+msgid "Actions"
+msgstr "Akcje"
+
 msgid "Add profile"
 msgstr "Dodaj profil"
-
-msgid "All"
-msgstr "Wszystkie"
 
 msgid "Apply"
 msgstr "Zastosuj"
@@ -57,9 +56,6 @@ msgstr "Zastosować przesunięcie %s%.3f do krańcówki?"
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
 msgstr "Zastosować przesunięcie %s%.3f do sondy?"
-
-msgid "Archived"
-msgstr "Zarchiwizowane"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "Czy na pewno chcesz wykluczyć obiekt?"
@@ -87,9 +83,6 @@ msgstr "Automatyczna kalibracja"
 
 msgid "Auto-close notifications"
 msgstr "Automatycznie zamykaj powiadomienia"
-
-msgid "Auto-open Extrude On Pause"
-msgstr "Otwieraj menu wytłaczania podczas wstrzymania"
 
 msgid "Auto-scroll"
 msgstr "Automatyczne przewijanie"
@@ -151,6 +144,9 @@ msgstr "Zamknij"
 msgid "Complete"
 msgstr "Zakończone"
 
+msgid "Configuration"
+msgstr "Konfiguracja"
+
 msgid "Confirm Emergency Stop"
 msgstr "Potwierdzaj awaryjny stop"
 
@@ -164,11 +160,11 @@ msgstr "Łączenie z %s"
 msgid "Console"
 msgstr "Konsola"
 
+msgid "Continue"
+msgstr "Kontynuuj"
+
 msgid "Cooldown"
 msgstr "Studzenie"
-
-msgid "DPMS has failed to load and has been disabled"
-msgstr "Nie udało się wczytać DPMS i został on wyłączony"
 
 msgid "Date"
 msgstr "Data"
@@ -194,9 +190,6 @@ msgstr "Czy chcesz przywrócić sprawność %s?"
 
 msgid "Elapsed:"
 msgstr "Upłynęło:"
-
-msgid "Ended official support in June 2023"
-msgstr ""
 
 msgid "Error"
 msgstr "Błąd"
@@ -243,9 +236,6 @@ msgstr "Plik"
 msgid "File:"
 msgstr "Plik:"
 
-msgid "Filter"
-msgstr "Filtruj"
-
 msgid "Finding ADXL"
 msgstr "Wyszukiwanie ADXL"
 
@@ -270,8 +260,11 @@ msgstr "Rozmiar czcionki"
 msgid "Full Update"
 msgstr "Aktualizuj wszystko"
 
+msgid "Fullscreen"
+msgstr "Pełny ekran"
+
 msgid "Go Back"
-msgstr "Powróć"
+msgstr "Wróć"
 
 msgid "Height:"
 msgstr "Wysokość:"
@@ -283,13 +276,10 @@ msgid "Hide"
 msgstr "Ukryj"
 
 msgid "Hide sensors in Temp."
-msgstr "Ukryj sensory w sekcji temperatur"
+msgstr "Ukryj sensory w obszarze Temperatura"
 
 msgid "Hide temp."
 msgstr "Ukryj temp."
-
-msgid "Home"
-msgstr "Bazuj"
 
 msgid "Home All"
 msgstr "Bazuj wszystkie"
@@ -306,23 +296,20 @@ msgstr "Bazuj Y"
 msgid "Home Z"
 msgstr "Bazuj Z"
 
+msgid "Homing"
+msgstr "Bazowanie"
+
 msgid "Host"
-msgstr "Host"
+msgstr "Gospodarz"
 
 msgid "Hostname"
 msgstr "Nazwa hosta"
-
-msgid "ID"
-msgstr "ID"
 
 msgid "Icon Theme"
 msgstr "Motyw ikon"
 
 msgid "Initializing printer..."
 msgstr "Inicjowanie drukarki..."
-
-msgid "Initiate a PID calibration for:"
-msgstr "Rozpoczęcie kalibracji PID dla:"
 
 msgid "Input Shaper"
 msgstr "Input Shaper"
@@ -345,9 +332,6 @@ msgstr "Odwróć Y"
 msgid "Invert Z"
 msgstr "Odwróć Z"
 
-msgid "It may take more than 5 minutes depending on the heater power."
-msgstr "Może to potrwać dłużej niż 5 minut w zależności od mocy grzałki."
-
 msgid "Klipper Restart"
 msgstr "Restartuj Klipper"
 
@@ -366,14 +350,8 @@ msgstr "Klipper próbuje się uruchomić"
 msgid "Klipper will reboot"
 msgstr "Klipper uruchomi się ponownie"
 
-msgid "KlipperScreen will drop support in June 2024"
-msgstr ""
-
-msgid ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
-msgstr ""
-"LOAD_FILAMENT/UNLOAD_FILAMENT są ukryte i powinny być używane z menu "
-"wytłaczania"
+msgid "KlipperScreen will reboot"
+msgstr "KlipperScreen uruchomi się ponownie"
 
 msgid "Language"
 msgstr "Język"
@@ -381,14 +359,8 @@ msgstr "Język"
 msgid "Large"
 msgstr "Duży"
 
-msgid "Last Used"
-msgstr "Ostatnie użycie"
-
 msgid "Layer:"
 msgstr "Warstwa:"
-
-msgid "Leds"
-msgstr "Oświetlenie"
 
 msgid "Left:"
 msgstr "Pozostało:"
@@ -398,9 +370,6 @@ msgstr "Limity"
 
 msgid "Load"
 msgstr "Ładuj"
-
-msgid "Loading..."
-msgstr ""
 
 msgid "Lower Nozzle"
 msgstr "Obniż dyszę"
@@ -413,9 +382,6 @@ msgstr "Makra"
 
 msgid "Main Menu"
 msgstr "Menu główne"
-
-msgid "Material"
-msgstr "Materiał"
 
 msgid "Max"
 msgstr "Maks"
@@ -456,9 +422,6 @@ msgstr "Zmodyfikowane"
 msgid "Moonraker: connected"
 msgstr "Moonraker: połączony"
 
-msgid "More"
-msgstr "Więcej"
-
 msgid "Move"
 msgstr "Ruch"
 
@@ -477,9 +440,6 @@ msgstr "Nigdy"
 msgid "New"
 msgstr "Nowe"
 
-msgid "No elegible macros:"
-msgstr "Brak odpowiednich makr:"
-
 msgid ""
 "Not supported for auto-detection, it needs to be configured in klipperscreen."
 "conf"
@@ -487,17 +447,8 @@ msgstr ""
 "Nieobsługiwany do automatycznego wykrywania, musi być skonfigurowany w pliku "
 "klipperscreen.conf"
 
-msgid "Not working or not configured"
-msgstr ""
-
 msgid "Nothing selected"
 msgstr "Nic nie wybrano"
-
-msgid "Notification log empty"
-msgstr ""
-
-msgid "Notifications"
-msgstr ""
 
 #, python-format
 msgid "Outdated by %d"
@@ -540,7 +491,7 @@ msgid "Power On Printer"
 msgstr "Zasilanie włączone"
 
 msgid "Pressure Advance:"
-msgstr "Pressure Advance:"
+msgstr "Natężenie docisku:"
 
 msgid "Print"
 msgstr "Drukuj"
@@ -570,7 +521,7 @@ msgid "Profile Name:"
 msgstr "Nazwa profilu:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "Podaj KlipperScreen.log prosząc o pomoc.\n"
+msgstr "Przekaż KlipperScreen.log, prosząc o pomoc.\n"
 
 msgid "Quad Gantry Level"
 msgstr "Poziom bramy"
@@ -666,9 +617,6 @@ msgstr "Pokaż"
 msgid "Show Heater Power"
 msgstr "Pokaż moc grzałki"
 
-msgid "Show Scrollbars Buttons"
-msgstr "Pokaż przyciski pasków przewijania"
-
 msgid "Shutdown"
 msgstr "Wyłącz"
 
@@ -697,10 +645,7 @@ msgid "Speed:"
 msgstr "Prędkość:"
 
 msgid "Square Corner Velocity"
-msgstr "Prędkość na rogu kwadratu"
-
-msgid "Standby"
-msgstr "Tryb gotowości"
+msgstr "Prędkość w narożniku prostokątnym"
 
 msgid "Start"
 msgstr "Start"
@@ -759,12 +704,6 @@ msgstr "Aktualizowanie"
 msgid "Uploaded"
 msgstr "Przesłane"
 
-msgid "Warning"
-msgstr ""
-
-msgid "WebRTC is not supported by the backend trying Stream"
-msgstr ""
-
 msgid "XY Move Speed (mm/s)"
 msgstr "Prędkość ruchu XY (mm/s)"
 
@@ -788,9 +727,9 @@ msgstr "Przesunięcie Z:"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] "zatwierdzenie"
-msgstr[1] "zatwierdzenia"
-msgstr[2] "zatwierdzeń"
+msgstr[0] "zmianę"
+msgstr[1] "zmiany"
+msgstr[2] "zmian"
 
 msgid "dBm"
 msgstr "dBm"
@@ -800,12 +739,6 @@ msgid_plural "hours"
 msgstr[0] "godzina"
 msgstr[1] "godziny"
 msgstr[2] "godzin"
-
-msgid "macros that use 'rename_existing' are hidden"
-msgstr "makra używające \"rename_existing\" są ukryte"
-
-msgid "macros with a name starting with '_' are hidden"
-msgstr "makra z nazwą zaczynającą się od \"_\" są ukryte"
 
 msgid "minute"
 msgid_plural "minutes"
@@ -824,21 +757,6 @@ msgstr "mm/s²"
 
 msgid "mm³/s"
 msgstr "mm³/s"
-
-#~ msgid "Continue"
-#~ msgstr "Kontynuuj"
-
-#~ msgid "Fullscreen"
-#~ msgstr "Pełny ekran"
-
-#~ msgid "Actions"
-#~ msgstr "Akcje"
-
-#~ msgid "Configuration"
-#~ msgstr "Konfiguracja"
-
-#~ msgid "Homing"
-#~ msgstr "Bazowanie"
 
 #~ msgid "Disable XY"
 #~ msgstr "Wyłącz XY"

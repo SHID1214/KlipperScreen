@@ -26,9 +26,100 @@ In general, if the device can show a GNU/Linux desktop, then KlipperScreen shoul
 Follow the manufacturer instructions on how to install your screen. In general if you see a white screen, then it's not properly installed, ensure that you at least see a console, Then [install](Installation.md) KlipperScreen, if you are having troubles refer to the [troubleshooting page](Troubleshooting.md) for further information.
 
 ## Screen rotation
+Configure the server to start in the desired orientation, there are many ways to achieve this, here is one:
 
-[Moved to Rotation](Troubleshooting/Rotation.md)
+
+Create /usr/share/X11/xorg.conf.d/90-monitor.conf
+```bash
+sudo nano /usr/share/X11/xorg.conf.d/90-monitor.conf
+```
+
+Paste this section modifying the options to suit your needs:
+```
+Section "Monitor"
+    Identifier "DPI-1"
+    # This identifier would be the same as the name of the connector printed by xrandr.
+    # it can be "HDMI-0" "DisplayPort-0", "DSI-0", "DVI-0", "DPI-0" etc
+
+    Option "Rotate" "left"
+    # Valid rotation options are normal,inverted,left,right
+
+
+    Option "PreferredMode" "1920x1080"
+    # May be necesary if you are not getting your prefered resolution.
+EndSection
+```
+Save the file and restart KlipperScreen.
+
+```bash
+sudo service KlipperScreen restart
+```
+
+TODO: LCDSHOW way
 
 ## Touchscreen touch rotation
+If your touchscreen isn't registering touches properly after the screen has been rotated, you will need to apply a
+transformation matrix.
 
-[Moved to Touch issues](../Troubleshooting/Touch_issues/#touch-rotation-and-matrix)
+First you will need your device name, on a terminal run:
+
+```sh
+DISPLAY=:0 xinput
+```
+
+Output:
+```sh
+⎡ Virtual core pointer                          id=2    [master pointer  (3)]
+⎜   ↳ Virtual core XTEST pointer                id=4    [slave  pointer  (2)]
+⎜   ↳ ADS7846 Touchscreen                       id=6    [slave  pointer  (2)]
+⎣ Virtual core keyboard                         id=3    [master keyboard (2)]
+    ↳ Virtual core XTEST keyboard               id=5    [slave  keyboard (3)]
+```
+In this case the device is the ADS7846 Touchscreen, yours may be different
+
+You can test a change by running:
+
+```sh
+DISPLAY=:0 xinput set-prop "<device name>" 'Coordinate Transformation Matrix' <matrix>
+```
+
+Where the matrix can be one of the following options:
+
+* 0°: `1 0 0 0 1 0 0 0 1`
+* 90° Clockwise: `0 -1 1 1 0 0 0 0 1`
+* 90° Counter-Clockwise: `0 1 0 -1 0 1 0 0 1`
+* 180° (Inverts X and Y): `-1 0 1 0 -1 1 0 0 1`
+* invert Y: `-1 0 1 1 1 0 0 0 1`
+* invert X: `-1 0 1 0 1 0 0 0 1`
+
+For example:
+
+```sh
+DISPLAY=:0 xinput set-prop "ADS7846 Touchscreen" 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1
+```
+
+To make this permanent, modify the file `/etc/udev/rules.d/51-touchscreen.rules` and add following line:
+
+```sh
+ACTION=="add", ATTRS{name}=="<device name>", ENV{LIBINPUT_CALIBRATION_MATRIX}="<matrix>"
+```
+
+As an alternative if the above doesn't work:
+
+edit /usr/share/X11/xorg.conf.d/40-libinput.conf
+
+for example:
+```sh
+Section "InputClass"
+        Identifier "libinput touchscreen catchall"
+        MatchIsTouchscreen "on"
+        MatchDevicePath "/dev/input/event*"
+        Driver "libinput"
+        Option "TransformationMatrix" "0 -1 1 1 0 0 0 0 1"
+EndSection
+```
+
+More info about input transformation can be found in:
+
+* [Ubuntu wiki InputCoordinateTransformation](https://wiki.ubuntu.com/X/InputCoordinateTransformation)
+* [Libinput docs](https://wayland.freedesktop.org/libinput/doc/1.9.0/absolute_axes.html)
