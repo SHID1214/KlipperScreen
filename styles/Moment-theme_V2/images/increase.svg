@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-b3dd0347-2426-4204-93c7-011f5c485f7a" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-85455497-5701-4449-b091-8e693d167c0b {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="uuid-3723d24f-66fd-4976-a7eb-dadcf1163822" data-name="Edit / Add_Plus">
+    <path id="uuid-acf567f8-199a-47cd-a034-a3e2f4b54069" data-name="Vector" class="uuid-85455497-5701-4449-b091-8e693d167c0b" d="m6,12h6m0,0h6m-6,0v6m0-6v-6"/>
+  </g>
+</svg>

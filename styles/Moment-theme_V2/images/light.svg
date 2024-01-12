@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-3a093ca0-468c-425f-9726-2d063e7cec96" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-382e6ce0-9fcb-4ea2-9188-fcc6f8d870b2 {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="uuid-268e5c63-0b5d-454b-8613-8785c015efcb" data-name="Environment / Bulb">
+    <path id="uuid-e5010bf1-aa0c-4afc-93e7-953f1d342366" data-name="Vector" class="uuid-382e6ce0-9fcb-4ea2-9188-fcc6f8d870b2" d="m9,21h6M12,3c-3.314,0-6,2.686-6,6,0,1.215.361,2.345.981,3.289.954,1.453,1.43,2.178,1.492,2.287.551.965.449.625.519,1.734.008.125.008.313.008.69,0,.552.448,1,1,1h4c.552,0,1-.448,1-1,0-.377,0-.566.008-.69.069-1.109-.033-.769.518-1.734.062-.109.539-.834,1.493-2.287.62-.945.981-2.075.981-3.289,0-3.314-2.687-6-6-6Z"/>
+  </g>
+</svg>
