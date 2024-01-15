@@ -749,3 +749,6 @@ msgstr ""
 
 msgid "mm³/s"
 msgstr ""
+
+msgid "KlipperScreen"
+msgstr "OS Screen"
