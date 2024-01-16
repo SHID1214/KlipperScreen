@@ -104,7 +104,7 @@ msgid "Calibrating"
 msgstr "校正中"
 
 msgid "Camera"
-msgstr ""
+msgstr "カメラ"
 
 msgid "Can't set above the maximum:"
 msgstr "上限値を超えて設定できません:"
@@ -128,9 +128,9 @@ msgid "Channel"
 msgstr "チャンネル"
 
 msgid "Check ADXL Wiring"
-msgstr "ADXL Wiring を検査する"
+msgstr "ADXL加速度計配線を確認してください"
 
-msgid "Checking for updates, please wait..."
+msgid "更新を確認しています。お待ちください···"
 msgstr ""
 
 msgid "Clear"
@@ -159,7 +159,7 @@ msgid "Console"
 msgstr "コンソール"
 
 msgid "Continue"
-msgstr "継続"
+msgstr "続き"
 
 msgid "Cooldown"
 msgstr "クールダウン"
@@ -168,7 +168,7 @@ msgid "Date"
 msgstr "日付"
 
 msgid "Delete Directory?"
-msgstr ""
+msgstr "ストレージを削除しますか？"
 
 msgid "Delete File?"
 msgstr "ファイルを削除しますか？"
@@ -259,7 +259,7 @@ msgid "Full Update"
 msgstr "フルアップデート"
 
 msgid "Fullscreen"
-msgstr ""
+msgstr "全体アップデート"
 
 msgid "Go Back"
 msgstr "戻る"
@@ -280,46 +280,46 @@ msgid "Hide temp."
 msgstr "温度を非表示にする."
 
 msgid "Home All"
-msgstr ""
+msgstr "全溝移動"
 
 msgid "Home X"
-msgstr "Home X"
+msgstr "X軸溝移動"
 
 msgid "Home XY"
-msgstr "Home XY"
+msgstr "XY軸溝移動"
 
 msgid "Home Y"
-msgstr "Home Y"
+msgstr "Y軸溝移動"
 
 msgid "Home Z"
-msgstr "Home Z"
+msgstr "Z軸溝移動"
 
 msgid "Homing"
-msgstr "Homing"
+msgstr "ツールヘッド位置初期化"
 
 msgid "Host"
-msgstr ""
+msgstr "司会者"
 
 msgid "Hostname"
-msgstr "Hostname"
+msgstr "司会者名前"
 
 msgid "Icon Theme"
 msgstr "アイコンテーマ"
 
 msgid "Initializing printer..."
-msgstr ""
+msgstr "プリンター初期化中.."
 
 msgid "Input Shaper"
-msgstr ""
+msgstr "入力シェーパー"
 
 msgid "Interface"
 msgstr "インターフェース"
 
 msgid "Invalid"
-msgstr "不正"
+msgstr "無効"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "無効なパスワード"
 
 msgid "Invert X"
 msgstr "X軸を反対にする"
@@ -367,7 +367,7 @@ msgid "Limits"
 msgstr "制限"
 
 msgid "Load"
-msgstr ""
+msgstr "フィラメントを入れる"
 
 msgid "Lower Nozzle"
 msgstr "ノズルが低い"
@@ -419,6 +419,9 @@ msgstr "変更"
 
 msgid "Moonraker: connected"
 msgstr "Moonraker: 接続済"
+
+msgid "More"
+msgstr "もっと見る"
 
 msgid "Move"
 msgstr "移動"
