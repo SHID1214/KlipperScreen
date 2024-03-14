@@ -330,25 +330,25 @@ msgstr "Y軸を反対にする"
 msgid "Invert Z"
 msgstr "X軸を反対にする"
 
-msgid "OS Restart"
+msgid "Klipper Restart"
 msgstr "OSを再起動する"
 
-msgid "OS has disconnected"
+msgid "Klipper has disconnected"
 msgstr "OSの接続が切れました"
 
-msgid "OS has encountered an error."
+msgid "Klipper has encountered an error."
 msgstr "OSのエラーが発生しました."
 
-msgid "OS has shutdown"
+msgid "Klipper has shutdown"
 msgstr "OSはシャットダウンしました"
 
-msgid "OS is attempting to start"
+msgid "Klipper is attempting to start"
 msgstr "OSは起動中です"
 
-msgid "OS will reboot"
+msgid "Klipper will reboot"
 msgstr "OSは再起動します"
 
-msgid "OSScreen will reboot"
+msgid "KlipperScreen will reboot"
 msgstr "OSScreenは再起動します"
 
 msgid "Language"
