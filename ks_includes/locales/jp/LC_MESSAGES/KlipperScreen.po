@@ -49,11 +49,11 @@ msgstr "適用する"
 
 #, python-format
 msgid "Apply %s%.3f offset to Endstop?"
-msgstr ""
+msgstr "%s%.3fオフセットをEndstopに適用しますか？"
 
 #, python-format
 msgid "Apply %s%.3f offset to Probe?"
-msgstr ""
+msgstr "%s%.3fオフセットをProbeに適用しますか？"
 
 msgid "Are you sure do you want to exclude the object?"
 msgstr "対象を除外しますか？"
@@ -130,8 +130,8 @@ msgstr "チャンネル"
 msgid "Check ADXL Wiring"
 msgstr "ADXL加速度計配線を確認してください"
 
-msgid "更新を確認しています。お待ちください···"
-msgstr ""
+msgid "Checking for updates, please wait..."
+msgstr "更新を確認しています。お待ちください..."
 
 msgid "Clear"
 msgstr "クリア"
@@ -238,7 +238,7 @@ msgid "Finding ADXL"
 msgstr "ADXLを検索中"
 
 msgid "Fine Tuning"
-msgstr "Fine Tuning"
+msgstr "微調整"
 
 msgid "Finish"
 msgstr "完了"
@@ -445,23 +445,25 @@ msgid ""
 "Not supported for auto-detection, it needs to be configured in OSscreen."
 "conf"
 msgstr ""
+"自動検知は対応しておりませんので、klipperscreen.confにて構成する必要があ"
+"ります"
 
 msgid "Nothing selected"
 msgstr "未選択"
 
 #, python-format
 msgid "Outdated by %d"
-msgstr ""
+msgstr "%dより古い"
 
 msgid "PSK for"
-msgstr ""
+msgstr "PSK キー値(パスワード)"
 
 msgid "Package will be updated"
 msgid_plural "Packages will be updated"
-msgstr[0] ""
+msgstr[0] "パッケージがアップデートされます"
 
 msgid "Part Fan"
-msgstr ""
+msgstr "パーツ·ファン"
 
 msgid "Password saved"
 msgstr "パスワードを保存しました"
@@ -488,7 +490,7 @@ msgid "Power On Printer"
 msgstr "プリンター電源"
 
 msgid "Pressure Advance:"
-msgstr ""
+msgstr "プレッシャー·アドバンス:"
 
 msgid "Print"
 msgstr "印刷"
@@ -518,31 +520,31 @@ msgid "Profile Name:"
 msgstr "プロファイル:"
 
 msgid "Provide OSScreen.log when asking for help.\n"
-msgstr ""
+msgstr "助けを求めると、KlipperScreen.logを提供します\n"
 
 msgid "Quad Gantry Level"
 msgstr "ガントリーレベル"
 
 msgid "Raise Nozzle"
-msgstr ""
+msgstr "ノズルアップ"
 
 msgid "Recover"
-msgstr ""
+msgstr "復元"
 
 msgid "Recover Hard"
-msgstr ""
+msgstr "江華復元"
 
 msgid "Recover Soft"
-msgstr ""
+msgstr "一般復元"
 
 msgid "Reference"
-msgstr ""
+msgstr "参照"
 
 msgid "Refresh"
 msgstr "最新表示"
 
 msgid "Rename/Move:"
-msgstr ""
+msgstr "名前変更/移動:"
 
 msgid "Restart"
 msgstr "再起動"
@@ -588,19 +590,19 @@ msgid "Saved offset: %s"
 msgstr "保存しました offset: %s"
 
 msgid "Screen DPMS"
-msgstr ""
+msgstr "画面DPMS"
 
 msgid "Screen Power Off Time"
-msgstr ""
+msgstr "画面節電時間"
 
 msgid "Screws Adjust"
-msgstr ""
+msgstr "ベッドスクリュー調整"
 
 msgid "Select"
-msgstr ""
+msgstr "選択"
 
 msgid "Send"
-msgstr ""
+msgstr "送信"
 
 msgid "Set Temp"
 msgstr "温度設定"
@@ -612,7 +614,7 @@ msgid "Show"
 msgstr "表示"
 
 msgid "Show Heater Power"
-msgstr ""
+msgstr "ヒーターの電源を見る"
 
 msgid "Shutdown"
 msgstr "シャットダウン"
@@ -630,16 +632,16 @@ msgid "Small"
 msgstr "小"
 
 msgid "Speed (mm/s)"
-msgstr ""
+msgstr "速度 (mm/s)"
 
 msgid "Speed +"
-msgstr ""
+msgstr "速度 +"
 
 msgid "Speed -"
-msgstr ""
+msgstr "速度 -"
 
 msgid "Speed:"
-msgstr ""
+msgstr "速度:"
 
 msgid "Square Corner Velocity"
 msgstr "四隅の速度"
@@ -684,10 +686,10 @@ msgid "Unload"
 msgstr "アンロード"
 
 msgid "Unretract Extra Length"
-msgstr ""
+msgstr "退出追加長さ"
 
 msgid "Unretract Speed"
-msgstr ""
+msgstr "退出速度"
 
 msgid "Up To Date"
 msgstr "最新"
@@ -714,40 +716,40 @@ msgid "Z Move Speed (mm/s)"
 msgstr "X軸 移動速度 (mm/s)"
 
 msgid "Z Speed (mm/s)"
-msgstr ""
+msgstr "Z 速度 (mm/s)"
 
 msgid "Z Tilt"
-msgstr ""
+msgstr "Z勾配"
 
 msgid "Z offset:"
-msgstr ""
+msgstr "Zオフセット:"
 
 msgid "commit"
 msgid_plural "commits"
-msgstr[0] ""
+msgstr[0] "コミット"
 
 msgid "dBm"
-msgstr ""
+msgstr "dBm"
 
 msgid "hour"
 msgid_plural "hours"
-msgstr[0] ""
+msgstr[0] "時間"
 
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
+msgstr[0] "分"
 
 msgid "mm"
-msgstr ""
+msgstr "mm"
 
 msgid "mm/s"
-msgstr ""
+msgstr "mm/s"
 
 msgid "mm/s²"
-msgstr ""
+msgstr "mm/s²"
 
 msgid "mm³/s"
-msgstr ""
+msgstr "mm³/s"
 
 msgid "KlipperScreen"
 msgstr "OS Screen"
