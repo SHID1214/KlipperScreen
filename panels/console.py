@@ -1,17 +1,11 @@
 import time
 import re
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk
-
 from datetime import datetime
 from ks_includes.screen_panel import ScreenPanel
-
-
-def create_panel(*args):
-    return ConsolePanel(*args)
 
 
 COLORS = {
@@ -23,53 +17,37 @@ COLORS = {
 }
 
 
-class ConsolePanel(ScreenPanel):
+class Panel(ScreenPanel):
     def __init__(self, screen, title):
+        title = title or _("Console")
         super().__init__(screen, title)
         self.autoscroll = True
-        self.hidetemps = True
 
         o1_button = self._gtk.Button("arrow-down", _("Auto-scroll") + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
         o1_button.get_style_context().add_class("button_active")
         o1_button.get_style_context().add_class("buttons_slim")
         o1_button.connect("clicked", self.set_autoscroll)
 
-        o2_button = self._gtk.Button("heat-up", _("Hide temp.") + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
-        o2_button.get_style_context().add_class("button_active")
+        o2_button = self._gtk.Button("refresh", _('Clear') + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
         o2_button.get_style_context().add_class("buttons_slim")
-        o2_button.connect("clicked", self.hide_temps)
+        o2_button.connect("clicked", self.clear)
 
-        o3_button = self._gtk.Button("refresh", _('Clear') + " ", None, self.bts, Gtk.PositionType.RIGHT, 1)
-        o3_button.get_style_context().add_class("buttons_slim")
-        o3_button.connect("clicked", self.clear)
-
-        options = Gtk.Grid()
-        options.set_vexpand(False)
+        options = Gtk.Grid(vexpand=False)
         options.attach(o1_button, 0, 0, 1, 1)
         options.attach(o2_button, 1, 0, 1, 1)
-        options.attach(o3_button, 2, 0, 1, 1)
 
-        sw = Gtk.ScrolledWindow()
-        sw.set_hexpand(True)
-        sw.set_vexpand(True)
+        sw = Gtk.ScrolledWindow(hexpand=True, vexpand=True)
 
         tb = Gtk.TextBuffer()
-        tv = Gtk.TextView()
-        tv.set_buffer(tb)
-        tv.set_editable(False)
-        tv.set_cursor_visible(False)
+        tv = Gtk.TextView(buffer=tb, editable=False, cursor_visible=False)
         tv.connect("size-allocate", self._autoscroll)
         tv.connect("focus-in-event", self._screen.remove_keyboard)
 
         sw.add(tv)
 
-        ebox = Gtk.Box()
-        ebox.set_hexpand(True)
-        ebox.set_vexpand(False)
+        ebox = Gtk.Box(hexpand=True, vexpand=False)
 
-        entry = Gtk.Entry()
-        entry.set_hexpand(True)
-        entry.set_vexpand(False)
+        entry = Gtk.Entry(hexpand=True, vexpand=False)
         entry.connect("button-press-event", self._screen.show_keyboard)
         entry.connect("focus-in-event", self._screen.show_keyboard)
         entry.connect("activate", self._send_command)
@@ -109,7 +87,7 @@ class ConsolePanel(ScreenPanel):
         elif message.startswith("//"):
             color = COLORS['warning']
             message = message.replace("// ", "")
-        elif self.hidetemps and re.match('^(?:ok\\s+)?(B|C|T\\d*):', message):
+        elif re.match('^(?:ok\\s+)?(B|C|T\\d*):', message):
             return
         else:
             color = COLORS['response']
@@ -137,10 +115,6 @@ class ConsolePanel(ScreenPanel):
     def process_update(self, action, data):
         if action == "notify_gcode_response":
             self.add_gcode("response", time.time(), data)
-
-    def hide_temps(self, widget):
-        self.hidetemps ^= True
-        self.toggle_active_class(widget, self.hidetemps)
 
     def set_autoscroll(self, widget):
         self.autoscroll ^= True

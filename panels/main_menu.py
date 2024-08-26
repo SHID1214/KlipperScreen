@@ -1,60 +1,47 @@
 import logging
-
 import gi
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
-from panels.menu import MenuPanel
-
+from panels.menu import Panel as MenuPanel
 from ks_includes.widgets.heatergraph import HeaterGraph
 from ks_includes.widgets.keypad import Keypad
+from ks_includes.KlippyGtk import find_widget
 
 
-def create_panel(*args, **kwargs):
-    return MainPanel(*args, **kwargs)
-
-
-class MainPanel(MenuPanel):
+class Panel(MenuPanel):
     def __init__(self, screen, title, items=None):
         super().__init__(screen, title, items)
-        self.graph_retry_timeout = None
         self.left_panel = None
         self.devices = {}
         self.graph_update = None
         self.active_heater = None
         self.h = self.f = 0
-        self.main_menu = self._gtk.HomogeneousGrid()
-        self.main_menu.set_hexpand(True)
-        self.main_menu.set_vexpand(True)
-        self.graph_retry = 0
+        self.main_menu = Gtk.Grid(row_homogeneous=True, column_homogeneous=True, hexpand=True, vexpand=True)
+        scroll = self._gtk.ScrolledWindow()
+        self.numpad_visible = False
 
         logging.info("### Making MainMenu")
 
         stats = self._printer.get_printer_status_data()["printer"]
         if stats["temperature_devices"]["count"] > 0 or stats["extruders"]["count"] > 0:
             self._gtk.reset_temp_color()
-            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
         if self._screen.vertical_mode:
+            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 3)
             self.labels['menu'] = self.arrangeMenuItems(items, 3, True)
-            self.main_menu.attach(self.labels['menu'], 0, 1, 1, 1)
+            scroll.add(self.labels['menu'])
+            self.main_menu.attach(scroll, 0, 3, 1, 2)
         else:
+            self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
             self.labels['menu'] = self.arrangeMenuItems(items, 2, True)
-            self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
+            scroll.add(self.labels['menu'])
+            self.main_menu.attach(scroll, 1, 0, 1, 1)
         self.content.add(self.main_menu)
 
-    def update_graph_visibility(self):
-        if self.left_panel is None or not self._printer.get_temp_store_devices():
-            if self._printer.get_temp_store_devices():
-                logging.info("Retrying to create left panel")
-                self._gtk.reset_temp_color()
-                self.main_menu.attach(self.create_left_panel(), 0, 0, 1, 1)
-            self.graph_retry += 1
-            if self.graph_retry < 5:
-                if self.graph_retry_timeout is None:
-                    self.graph_retry_timeout = GLib.timeout_add_seconds(5, self.update_graph_visibility)
-            else:
-                logging.debug(f"Could not create graph {self.left_panel} {self._printer.get_temp_store_devices()}")
-            return False
+    def update_graph_visibility(self, force_hide=False):
+        if self.left_panel is None:
+            logging.info("No left panel")
+            return
         count = 0
         for device in self.devices:
             visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}",
@@ -63,12 +50,10 @@ class MainPanel(MenuPanel):
             self.labels['da'].set_showing(device, visible)
             if visible:
                 count += 1
-                self.devices[device]['name'].get_style_context().add_class(self.devices[device]['class'])
-                self.devices[device]['name'].get_style_context().remove_class("graph_label_hidden")
+                self.devices[device]['name'].get_style_context().add_class("graph_label")
             else:
-                self.devices[device]['name'].get_style_context().add_class("graph_label_hidden")
-                self.devices[device]['name'].get_style_context().remove_class(self.devices[device]['class'])
-        if count > 0:
+                self.devices[device]['name'].get_style_context().remove_class("graph_label")
+        if count > 0 and not force_hide:
             if self.labels['da'] not in self.left_panel:
                 self.left_panel.add(self.labels['da'])
             self.labels['da'].queue_draw()
@@ -81,20 +66,17 @@ class MainPanel(MenuPanel):
             if self.graph_update is not None:
                 GLib.source_remove(self.graph_update)
                 self.graph_update = None
-        self.graph_retry = 0
         return False
 
     def activate(self):
+        if not self._printer.tempstore:
+            self._screen.init_tempstore()
         self.update_graph_visibility()
-        self._screen.base_panel_show_all()
 
     def deactivate(self):
         if self.graph_update is not None:
             GLib.source_remove(self.graph_update)
             self.graph_update = None
-        if self.graph_retry_timeout is not None:
-            GLib.source_remove(self.graph_retry_timeout)
-            self.graph_retry_timeout = None
         if self.active_heater is not None:
             self.hide_numpad()
 
@@ -102,7 +84,7 @@ class MainPanel(MenuPanel):
 
         logging.info(f"Adding device: {device}")
 
-        temperature = self._printer.get_dev_stat(device, "temperature")
+        temperature = self._printer.get_stat(device, "temperature")
         if temperature is None:
             return False
 
@@ -144,21 +126,23 @@ class MainPanel(MenuPanel):
         rgb = self._gtk.get_temp_color(dev_type)
 
         can_target = self._printer.device_has_target(device)
-        self.labels['da'].add_object(device, "temperatures", rgb, False, True)
+        self.labels['da'].add_object(device, "temperatures", rgb, False, False)
         if can_target:
-            self.labels['da'].add_object(device, "targets", rgb, True, False)
+            self.labels['da'].add_object(device, "targets", rgb, False, True)
+        if self._show_heater_power and self._printer.device_has_power(device):
+            self.labels['da'].add_object(device, "powers", rgb, True, False)
 
-        name = self._gtk.Button(image, devname.capitalize().replace("_", " "), None, self.bts, Gtk.PositionType.LEFT, 1)
+        name = self._gtk.Button(image, self.prettify(devname), None, self.bts, Gtk.PositionType.LEFT, 1)
         name.connect("clicked", self.toggle_visibility, device)
         name.set_alignment(0, .5)
+        name.get_style_context().add_class(class_name)
         visible = self._config.get_config().getboolean(f"graph {self._screen.connected_printer}", device, fallback=True)
         if visible:
-            name.get_style_context().add_class(class_name)
-        else:
-            name.get_style_context().add_class("graph_label_hidden")
+            name.get_style_context().add_class("graph_label")
         self.labels['da'].set_showing(device, visible)
 
         temp = self._gtk.Button(label="", lines=1)
+        find_widget(temp, Gtk.Label).set_ellipsize(False)
         if can_target:
             temp.connect("clicked", self.show_numpad, device)
 
@@ -208,7 +192,6 @@ class MainPanel(MenuPanel):
         else:
             logging.info(f"Unknown heater: {self.active_heater}")
             self._screen.show_popup_message(_("Unknown Heater") + " " + self.active_heater)
-        self._printer.set_dev_stat(self.active_heater, "target", temp)
 
     def verify_max_temp(self, temp):
         temp = int(temp)
@@ -220,40 +203,41 @@ class MainPanel(MenuPanel):
         return max(temp, 0)
 
     def pid_calibrate(self, temp):
+        heater = self.active_heater.split(' ', maxsplit=1)[-1]
         if self.verify_max_temp(temp):
-            script = {"script": f"PID_CALIBRATE HEATER={self.active_heater} TARGET={temp}"}
+            script = {"script": f"PID_CALIBRATE HEATER={heater} TARGET={temp}"}
             self._screen._confirm_send_action(
                 None,
-                _("Initiate a PID calibration for:") + f" {self.active_heater} @ {temp} ºC"
-                + "\n\n" + _("It may take more than 5 minutes depending on the heater power."),
+                _("Initiate a PID calibration for:")
+                + f" {heater} @ {temp} ºC"
+                + "\n\n"
+                + _("It may take more than 5 minutes depending on the heater power."),
                 "printer.gcode.script",
                 script
             )
 
     def create_left_panel(self):
 
-        self.labels['devices'] = Gtk.Grid()
+        self.labels['devices'] = Gtk.Grid(vexpand=False)
         self.labels['devices'].get_style_context().add_class('heater-grid')
-        self.labels['devices'].set_vexpand(False)
 
-        name = Gtk.Label(label="")
-        temp = Gtk.Label(_("Temp (°C)"))
-        temp.get_style_context().add_class("heater-grid-temp")
+        name = Gtk.Label()
+        temp = Gtk.Label(label=_("Temp (°C)"))
 
         self.labels['devices'].attach(name, 0, 0, 1, 1)
         self.labels['devices'].attach(temp, 1, 0, 1, 1)
 
-        self.labels['da'] = HeaterGraph(self._printer, self._gtk.font_size)
-        self.labels['da'].set_vexpand(True)
+        self.labels['da'] = HeaterGraph(self._screen, self._printer, self._gtk.font_size)
 
-        scroll = self._gtk.ScrolledWindow()
+        scroll = self._gtk.ScrolledWindow(steppers=False)
         scroll.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
+        scroll.get_style_context().add_class('heater-list')
         scroll.add(self.labels['devices'])
 
-        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=0)
+        self.left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         self.left_panel.add(scroll)
 
-        for d in (self._printer.get_tools() + self._printer.get_heaters()):
+        for d in self._printer.get_temp_devices():
             self.add_device(d)
 
         return self.left_panel
@@ -263,24 +247,32 @@ class MainPanel(MenuPanel):
         self.active_heater = None
 
         if self._screen.vertical_mode:
-            self.main_menu.remove_row(1)
-            self.main_menu.attach(self.labels['menu'], 0, 1, 1, 1)
+            if not self._gtk.ultra_tall:
+                self.update_graph_visibility(force_hide=False)
+            top = self.main_menu.get_child_at(0, 0)
+            bottom = self.main_menu.get_child_at(0, 2)
+            self.main_menu.remove(top)
+            self.main_menu.remove(bottom)
+            self.main_menu.attach(top, 0, 0, 1, 3)
+            self.main_menu.attach(self.labels["menu"], 0, 3, 1, 2)
         else:
             self.main_menu.remove_column(1)
-            self.main_menu.attach(self.labels['menu'], 1, 0, 1, 1)
+            self.main_menu.attach(self.labels["menu"], 1, 0, 1, 1)
         self.main_menu.show_all()
+        self.numpad_visible = False
+        self._screen.base_panel.set_control_sensitive(False, control='back')
 
     def process_update(self, action, data):
         if action != "notify_status_update":
             return
-        for x in (self._printer.get_tools() + self._printer.get_heaters()):
-            self.update_temp(
-                x,
-                self._printer.get_dev_stat(x, "temperature"),
-                self._printer.get_dev_stat(x, "target"),
-                self._printer.get_dev_stat(x, "power"),
-            )
-        return False
+        for x in self._printer.get_temp_devices():
+            if x in data:
+                self.update_temp(
+                    x,
+                    self._printer.get_stat(x, "temperature"),
+                    self._printer.get_stat(x, "target"),
+                    self._printer.get_stat(x, "power"),
+                )
 
     def show_numpad(self, widget, device):
 
@@ -291,19 +283,33 @@ class MainPanel(MenuPanel):
 
         if "keypad" not in self.labels:
             self.labels["keypad"] = Keypad(self._screen, self.change_target_temp, self.pid_calibrate, self.hide_numpad)
-        can_pid = self._printer.state not in ["printing", "paused"] \
+        can_pid = self._printer.state not in ("printing", "paused") \
             and self._screen.printer.config[self.active_heater]['control'] == 'pid'
         self.labels["keypad"].show_pid(can_pid)
         self.labels["keypad"].clear()
 
         if self._screen.vertical_mode:
-            self.main_menu.remove_row(1)
-            self.main_menu.attach(self.labels["keypad"], 0, 1, 1, 1)
+            if not self._gtk.ultra_tall:
+                self.update_graph_visibility(force_hide=True)
+            top = self.main_menu.get_child_at(0, 0)
+            bottom = self.main_menu.get_child_at(0, 3)
+            self.main_menu.remove(top)
+            self.main_menu.remove(bottom)
+            self.main_menu.attach(top, 0, 0, 1, 2)
+            self.main_menu.attach(self.labels["keypad"], 0, 2, 1, 2)
         else:
             self.main_menu.remove_column(1)
             self.main_menu.attach(self.labels["keypad"], 1, 0, 1, 1)
         self.main_menu.show_all()
+        self.numpad_visible = True
+        self._screen.base_panel.set_control_sensitive(True, control='back')
 
     def update_graph(self):
         self.labels['da'].queue_draw()
         return True
+
+    def back(self):
+        if self.numpad_visible:
+            self.hide_numpad()
+            return True
+        return False

@@ -1,50 +1,54 @@
-# Wi-Fi networks not listed
+# Network
 
-Check if network-manager is installed:
+The network panel relies on Network-Manager for its operation.
 
-```
-dpkg -s network-manager                                                                                                                                                                                      
-```
+!!! info "Note for Forks"
+    The network panel's behavior and dependencies may differ. Please refer to your specific fork documentation or support resources for instructions tailored to your setup.
 
-if the response is the following:
+## Loss of Connection After Installing Network-Manager
 
-```
-dpkg-query: the package `network-manager' is not installed
-```
+If you lose network connection after installing Network-Manager, follow these steps to reconnect:
 
-go to [wpa_supplicant](wpa_supplicant.md)
+### Reconnect using KlipperScreen
+- **Go to the network panel in KlipperScreen:**
+  - Access the network panel in KlipperScreen and select your Wi-Fi network to reconnect.
 
-if the response is the following:
+!!! info "Alternative: using the console"
 
-```
-Package: network-manager
-Status: install ok installed
-```
+    - **Option 1: Switch to a local console with keyboard:**
+        1. Use `Ctrl + Alt + F1` (or other function keys up to F6) to access a virtual terminal.
+        2. Log in and run `nmtui` to manage Wi-Fi connections directly from the console.
 
-this line may appear in KlipperScreen.log:
-
-`[wifi_nm.py:rescan()] [...] NetworkManager.wifi.scan request failed: not authorized`
+    - **Option 2: Connect a LAN cable for SSH access:**
+        1. Use SSH to remotely connect to your system.
+        2. Run `nmtui` to manage your network connections.
 
 
-in order to fix this polkit needs to be configured or disabled:
+## Wi-Fi networks not listed
 
-here is how to disable polkit for network-manager:
+The initial scan may take a while, first be patient before assuming it's an issue. and check with other tools like `nmtui`
 
-```sh
-mkdir -p /etc/NetworkManager/conf.d
-sudo nano /etc/NetworkManager/conf.d/any-user.conf
-```
+## Permission error
+Usually permissions are set with the installer, try to update and then re-run the installer and reboot
 
-in the editor paste this:
 
-```conf
-[main]
-auth-polkit=false
-```
+???+ "Alternative workaround for network-manager not having permissions"
 
-Then restart the service (or reboot):
+    ```sh
+    mkdir -p /etc/NetworkManager/conf.d
+    sudo nano /etc/NetworkManager/conf.d/any-user.conf
+    ```
 
-```sh
-systemctl restart NetworkManager.service
-systemctl restart KlipperScreen.service
-```
+    in the editor paste this:
+
+    ```ini
+    [main]
+    auth-polkit=false
+    ```
+
+    Then restart the service (or reboot):
+
+    ```sh
+    systemctl restart NetworkManager.service
+    systemctl restart KlipperScreen.service
+    ```

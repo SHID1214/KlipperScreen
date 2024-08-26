@@ -3,7 +3,8 @@ import datetime
 import gi
 
 gi.require_version("Gtk", "3.0")
-from gi.repository import Gtk
+from gi.repository import Gtk, Pango
+from ks_includes.KlippyGtk import find_widget
 
 
 class ScreenPanel:
@@ -15,7 +16,7 @@ class ScreenPanel:
     ks_printer_cfg = None
 
     def __init__(self, screen, title, **kwargs):
-        self.menu = None
+        self.menu = []
         ScreenPanel._screen = screen
         ScreenPanel._config = screen._config
         ScreenPanel._files = screen.files
@@ -26,10 +27,8 @@ class ScreenPanel:
         self.title = title
         self.devices = {}
         self.active_heaters = []
-        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
+        self.content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, hexpand=True, vexpand=True)
         self.content.get_style_context().add_class("content")
-        self.content.set_hexpand(True)
-        self.content.set_vexpand(True)
         self._show_heater_power = self._config.get_main_config().getboolean('show_heater_power', False)
         self.bts = self._gtk.bsidescale
 
@@ -60,11 +59,13 @@ class ScreenPanel:
             return self._gtk.PixbufFromHttp(loc[1], width, height)
         return None
 
-    def menu_item_clicked(self, widget, panel_type, item):
+    def menu_item_clicked(self, widget, item):
+        panel_args = {}
+        if 'name' in item:
+            panel_args['title'] = item['name']
         if 'extra' in item:
-            self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False, extra=item['extra'])
-            return
-        self._screen.show_panel(panel_type, item['panel'], item['name'], 1, False)
+            panel_args['extra'] = item['extra']
+        self._screen.show_panel(item['panel'], **panel_args)
 
     def load_menu(self, widget, name, title=None):
         logging.info(f"loading menu {name}")
@@ -76,21 +77,28 @@ class ScreenPanel:
             self.content.remove(child)
 
         self.menu.append(f'{name}_menu')
+        logging.debug(f"self.menu: {self.menu}")
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
         if title:
             self._screen.base_panel.set_title(f"{self.title} | {title}")
 
     def unload_menu(self, widget=None):
-        logging.debug(f"self.menu: {self.menu}")
         if len(self.menu) <= 1 or self.menu[-2] not in self.labels:
             return
         self._screen.base_panel.set_title(self._screen.panels[self._screen._cur_panels[-1]].title)
         self.menu.pop()
+        logging.debug(f"self.menu: {self.menu}")
         for child in self.content.get_children():
             self.content.remove(child)
         self.content.add(self.labels[self.menu[-1]])
         self.content.show_all()
+
+    def back(self):
+        if len(self.menu) > 1:
+            self.unload_menu()
+            return True
+        return False
 
     def on_dropdown_change(self, combo, section, option, callback=None):
         tree_iter = combo.get_active_iter()
@@ -121,18 +129,23 @@ class ScreenPanel:
 
     @staticmethod
     def format_time(seconds):
-        if seconds is None or seconds <= 0:
+        spc = "\u00A0"  # Non breakable space
+        if seconds is None or seconds < 1:
             return "-"
         days = seconds // 86400
+        day_units = ngettext("day", "days", days)
         seconds %= 86400
         hours = seconds // 3600
+        hour_units = ngettext("hour", "hours", hours)
         seconds %= 3600
-        minutes = seconds // 60
+        minutes = round(seconds / 60)
+        min_units = ngettext("minute", "minutes", minutes)
         seconds %= 60
-        return f"{f'{days:2.0f}d ' if days > 0 else ''}" \
-               f"{f'{hours:2.0f}h ' if hours > 0 else ''}" \
-               f"{f'{minutes:2.0f}m ' if minutes > 0 else ''}" \
-               f"{f'{seconds:2.0f}s' if days == 0 and hours == 0 and minutes == 0 else ''}"
+        sec_units = ngettext("second", "seconds", seconds)
+        return f"{f'{days:2.0f}{spc}{day_units}{spc}' if days > 0 else ''}" \
+               f"{f'{hours:2.0f}{spc}{hour_units}{spc}' if hours > 0 else ''}" \
+               f"{f'{minutes:2.0f}{spc}{min_units}{spc}' if minutes > 0 and days == 0 else ''}" \
+               f"{f'{seconds:2.0f}{spc}{sec_units}' if days == 0 and hours == 0 and minutes == 0 else ''}"
 
     def format_eta(self, total, elapsed):
         if total is None:
@@ -159,29 +172,119 @@ class ScreenPanel:
             if size < unit:
                 return f"{(1024 * size / unit):.1f} {suffix}"
 
-    def update_temp(self, dev, temp, target, power, lines=1):
-        if temp is None:
-            return
+    @staticmethod
+    def format_speed(bitrate):
+        bitrate = float(bitrate)
+        suffixes = ["Kbits/s", "Mbits/s", "Gbits/s", "Tbits/s", "Pbits/s", "Ebits/s", "Zbits/s", "Ybits/s"]
+        for i, suffix in enumerate(suffixes, start=1):
+            unit = 1000 ** i
+            if bitrate < unit:
+                return f"{(1000 * bitrate / unit):.0f} {suffix}"
 
-        show_target = bool(target)
-        if dev in self.devices and not self.devices[dev]["can_target"]:
-            show_target = False
+    @staticmethod
+    def prettify(name: str):
+        name = name.replace("_", " ")
+        if name.islower():
+            name = name.title()
+        return name
 
-        show_power = show_target and self._show_heater_power and power is not None
-
-        new_label_text = f"{int(temp):3}"
-        if show_target:
-            new_label_text += f"/{int(target)}"
+    def update_temp(self, dev, temp, target, power, lines=1, digits=1):
+        new_label_text = f"{temp or 0:.{digits}f}"
+        if self._printer.device_has_target(dev) and target:
+            new_label_text += f"/{target:.0f}"
         if dev not in self.devices:
             new_label_text += "°"
+
+        show_power = self._show_heater_power and power
         if show_power:
-            if lines == 2:
-                # The label should wrap, but it doesn't work
-                # this is a workaround
-                new_label_text += "\n  "
-            new_label_text += f" {int(power*100):3}%"
+            new_label_text += f" {power * 100:3.0f}%"
 
         if dev in self.labels:
-            self.labels[dev].set_label(new_label_text)
+            # Job_Status
+            find_widget(self.labels[dev], Gtk.Label).set_text(new_label_text)
         elif dev in self.devices:
-            self.devices[dev]["temp"].get_child().set_label(new_label_text)
+            # Temperature and Main_Menu
+            find_widget(self.devices[dev]["temp"], Gtk.Label).set_text(new_label_text)
+
+    def add_option(self, boxname, opt_array, opt_name, option):
+        if option['type'] is None:
+            return
+        name = Gtk.Label(
+            hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+            wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR, xalign=0)
+        name.set_markup(f"<big><b>{option['name']}</b></big>")
+
+        labels = Gtk.Box(spacing=0, orientation=Gtk.Orientation.VERTICAL, valign=Gtk.Align.CENTER)
+        labels.add(name)
+        if 'tooltip' in option:
+            tooltip = Gtk.Label(
+                label=option['tooltip'],
+                hexpand=True, vexpand=True, halign=Gtk.Align.START, valign=Gtk.Align.CENTER,
+                wrap=True, wrap_mode=Pango.WrapMode.WORD_CHAR, xalign=0)
+            labels.add(tooltip)
+
+        row_box = Gtk.Box(spacing=5, valign=Gtk.Align.CENTER, hexpand=True, vexpand=False)
+        row_box.get_style_context().add_class("frame-item")
+        row_box.add(labels)
+
+        setting = {}
+        if option['type'] == "binary":
+            switch = Gtk.Switch(active=self._config.get_config().getboolean(option['section'], opt_name, fallback=True))
+            switch.set_vexpand(False)
+            switch.set_valign(Gtk.Align.CENTER)
+            switch.connect("notify::active", self.switch_config_option, option['section'], opt_name,
+                           option['callback'] if "callback" in option else None)
+            row_box.add(switch)
+            setting = {opt_name: switch}
+        elif option['type'] == "dropdown":
+            dropdown = Gtk.ComboBoxText()
+            for i, opt in enumerate(option['options']):
+                dropdown.append(opt['value'], opt['name'])
+                if opt['value'] == self._config.get_config()[option['section']].get(opt_name, option['value']):
+                    dropdown.set_active(i)
+            dropdown.connect("changed", self.on_dropdown_change, option['section'], opt_name,
+                             option['callback'] if "callback" in option else None)
+            dropdown.set_entry_text_column(0)
+            row_box.add(dropdown)
+            setting = {opt_name: dropdown}
+        elif option['type'] == "scale":
+            row_box.set_orientation(Gtk.Orientation.VERTICAL)
+            scale = Gtk.Scale.new_with_range(Gtk.Orientation.HORIZONTAL,
+                                             min=option['range'][0], max=option['range'][1], step=option['step'])
+            scale.set_hexpand(True)
+            scale.set_value(int(self._config.get_config().get(option['section'], opt_name, fallback=option['value'])))
+            scale.set_digits(0)
+            scale.connect("button-release-event", self.scale_moved, option['section'], opt_name)
+            row_box.add(scale)
+            setting = {opt_name: scale}
+        elif option['type'] == "printer":
+            box = Gtk.Box(vexpand=False)
+            label = Gtk.Label(f"{option['moonraker_host']}:{option['moonraker_port']}")
+            box.add(label)
+            row_box.add(box)
+        elif option['type'] == "menu":
+            open_menu = self._gtk.Button("settings", style="color3")
+            open_menu.connect("clicked", self.load_menu, option['menu'], option['name'])
+            open_menu.set_hexpand(False)
+            open_menu.set_halign(Gtk.Align.END)
+            row_box.add(open_menu)
+        elif option['type'] == "button":
+            select = self._gtk.Button("load", style="color3")
+            if "callback" in option:
+                select.connect("clicked", option['callback'], option['name'])
+            select.set_hexpand(False)
+            select.set_halign(Gtk.Align.END)
+            row_box.add(select)
+
+        opt_array[opt_name] = {
+            "name": option['name'],
+            "row": row_box
+        }
+
+        opts = sorted(list(opt_array), key=lambda x: opt_array[x]['name'].casefold())
+        pos = opts.index(opt_name)
+
+        self.labels[boxname].insert_row(pos)
+        self.labels[boxname].attach(opt_array[opt_name]['row'], 0, pos, 1, 1)
+        self.labels[boxname].show_all()
+        return setting
