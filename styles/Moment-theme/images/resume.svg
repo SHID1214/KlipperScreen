@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-dc869ee3-ef95-44ed-9d65-3e6365097aee" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-2390594c-c1ea-4501-ae5c-36d1f886f88d {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="uuid-eecb6d41-4a6b-4bfc-80f2-54bb0154c94e" data-name="Media / Play">
+    <path id="uuid-6cc8826e-866e-4a9c-971d-dc82a271ed5a" data-name="Vector" class="uuid-2390594c-c1ea-4501-ae5c-36d1f886f88d" d="m5.063,17.334V6.667c0-.88,0-1.32.185-1.58.162-.227.411-.376.687-.412.317-.041.705.166,1.48.58l10,5.333.004.002c.857.457,1.286.686,1.426.991.123.266.123.573,0,.839-.141.305-.571.535-1.43.993l-10,5.333c-.776.414-1.164.62-1.48.579-.276-.036-.525-.185-.687-.412-.185-.26-.185-.7-.185-1.579Z"/>
+  </g>
+</svg>

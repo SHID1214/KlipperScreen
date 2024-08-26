@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-d719d24c-9d78-4ff8-8c44-72edf1f636b6" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-5d7ba0ba-24da-4c2a-9493-f07e96fda40a {
+        fill: #e2e2e2;
+        stroke-width: 0px;
+      }
+
+      .uuid-5d7ba0ba-24da-4c2a-9493-f07e96fda40a, .uuid-22d0823b-3c71-417d-aef3-aacb78b71932 {
+        isolation: isolate;
+        opacity: .995;
+      }
+
+      .uuid-22d0823b-3c71-417d-aef3-aacb78b71932 {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+        stroke-width: 1.5px;
+      }
+    </style>
+  </defs>
+  <path class="uuid-22d0823b-3c71-417d-aef3-aacb78b71932" d="m13.95,12.5s1-1.6,1-2.2-1.9-1.6-1.9-2.2,1-2.2,1-2.2"/>
+  <path class="uuid-22d0823b-3c71-417d-aef3-aacb78b71932" d="m9.35,12.5s1-1.6,1-2.2-1.9-1.6-1.9-2.2,1-2.2,1-2.2"/>
+  <path class="uuid-22d0823b-3c71-417d-aef3-aacb78b71932" d="m18.65,12.5s1-1.6,1-2.2-1.9-1.6-1.9-2.2,1-2.2,1-2.2"/>
+  <path class="uuid-22d0823b-3c71-417d-aef3-aacb78b71932" d="m4.65,12.5s1-1.6,1-2.2-1.9-1.6-1.9-2.2,1-2.2,1-2.2"/>
+  <path class="uuid-5d7ba0ba-24da-4c2a-9493-f07e96fda40a" d="m4.95,16.7h.7c.4,0,.7.3.7.7s-.3.7-.7.7h-.7c-.4,0-.7-.3-.7-.7s.3-.7.7-.7Z"/>
+  <path class="uuid-5d7ba0ba-24da-4c2a-9493-f07e96fda40a" d="m18.35,16.7h.6c.4,0,.7.3.7.7s-.3.7-.7.7h-.7c-.4,0-.7-.3-.7-.7.1-.4.4-.7.8-.7Z"/>
+  <path class="uuid-5d7ba0ba-24da-4c2a-9493-f07e96fda40a" d="m3.45,14.7h17.1c.4,0,.7.3.7.7v1c0,.4-.3.7-.7.7H3.45c-.4,0-.7-.3-.7-.7v-1c0-.4.3-.7.7-.7Z"/>
+  <path class="uuid-5d7ba0ba-24da-4c2a-9493-f07e96fda40a" d="m21.15,14.7H2.75v.7h18.4v-.7Z"/>
+</svg>
