@@ -1,6 +1,4 @@
 .idea/
-.vscode/
-.DS_Store
 KlipperScreen.conf
 __pycache__/
 *.py[cod]
@@ -8,4 +6,9 @@ __pycache__/
 dist/
 build/
 venv/
-.venv/
+
+.vs/
+.vs/*
+.bin/
+.obj/
+.vs
