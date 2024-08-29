@@ -19,6 +19,8 @@ class Panel(ScreenPanel):
         macros = self._printer.get_config_section_list("gcode_macro ")
         self.load_filament = any("LOAD_FILAMENT" in macro.upper() for macro in macros)
         self.unload_filament = any("UNLOAD_FILAMENT" in macro.upper() for macro in macros)
+        self.unload_filament = any("STATUS_READY" in macro.upper() for macro in macros)
+        self.unload_filament = any("STATUS_LOAD_UNLOAD" in macro.upper() for macro in macros)
 
         self.speeds = ['1', '3', '5']
         self.distances = ['5', '25', '50', '100']
@@ -288,8 +290,12 @@ class Panel(ScreenPanel):
     def extrude(self, widget, direction):
         self._screen._ws.klippy.gcode_script(KlippyGcodes.EXTRUDE_REL)
         self._screen._send_action(widget, "printer.gcode.script",
+                                  {"script": "STATUS_load_unload"})
+        self._screen._send_action(widget, "printer.gcode.script",
                                   {"script": f"G1 E{direction}{self.distance} F{self.speed * 60}"})
-
+        self._screen._send_action(widget,  "printer.gcode.script",
+                                  {"script": f"STATUS_ready"})
+        
     def load_unload(self, widget, direction):
         if direction == "-":
             if not self.unload_filament:
