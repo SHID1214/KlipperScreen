@@ -293,9 +293,9 @@ class Panel(ScreenPanel):
                                   {"script": "STATUS_load_unload"})
         self._screen._send_action(widget, "printer.gcode.script",
                                   {"script": f"G1 E{direction}{self.distance} F{self.speed * 60}"})
-        self._screen._send_action(widget,  "printer.gcode.script",
+        self._screen._send_action(widget, "printer.gcode.script",
                                   {"script": f"STATUS_ready"})
-        
+
     def load_unload(self, widget, direction):
         if direction == "-":
             if not self.unload_filament:

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-04-13 16:48+0000\n"
+"PO-Revision-Date: 2024-08-30 16:19+0900\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ja/>\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #, python-format
 msgid "%s will be updated to version"
@@ -25,7 +25,7 @@ msgid "24 Hour Time"
 msgstr "24時間表記"
 
 msgid "A FIRMWARE_RESTART may fix the issue."
-msgstr "ファームウェアの更新を行うと不具合が解決する場合があります"
+msgstr "ファームウェアの更新を行うと不具合が解決する場合があります."
 
 msgid "ADXL Not Configured"
 msgstr "ADXL が構成されていません"
@@ -60,22 +60,22 @@ msgid "Archived"
 msgstr ""
 
 msgid "Are you sure do you want to exclude the object?"
-msgstr "対象を除外しますか？"
+msgstr "対象を除外しますか?"
 
 msgid "Are you sure you want to run Emergency Stop?"
-msgstr "緊急停止しますか？"
+msgstr "緊急停止しますか?"
 
 msgid "Are you sure you wish to cancel this print?"
-msgstr "印刷を中断しますか？"
+msgstr "印刷を中断しますか?"
 
 msgid "Are you sure you wish to disable motors?"
-msgstr "モーターの制御を無効にしますか？"
+msgstr "モーターの制御を無効にしますか?"
 
 msgid "Are you sure you wish to reboot the system?"
-msgstr "システムを再起動しますか？"
+msgstr "システムを再起動しますか?"
 
 msgid "Are you sure you wish to shutdown the system?"
-msgstr "システムをシャットダウンしますか？"
+msgstr "システムをシャットダウンしますか?"
 
 msgid "Asks for confirmation before stopping"
 msgstr ""
@@ -205,7 +205,7 @@ msgid "Delete Directory?"
 msgstr ""
 
 msgid "Delete File?"
-msgstr "ファイルを削除しますか？"
+msgstr "ファイルを削除しますか?"
 
 msgid "Disable Motors"
 msgstr "モーターの無効化"
@@ -225,7 +225,7 @@ msgstr ""
 
 #, python-format
 msgid "Do you want to recover %s?"
-msgstr "元に戻しますか %s ？"
+msgstr "元に戻しますか %s ?"
 
 msgid "Elapsed:"
 msgstr "経過時間:"
@@ -360,10 +360,10 @@ msgid "Hide"
 msgstr "隠す"
 
 msgid "Hide sensors in Temp."
-msgstr "温度を非表示にする"
+msgstr "温度を非表示にする."
 
 msgid "Hide temp."
-msgstr "温度を非表示にする"
+msgstr "温度を非表示にする."
 
 msgid "Home"
 msgstr ""
@@ -438,22 +438,22 @@ msgid "Job Status"
 msgstr ""
 
 msgid "Klipper Restart"
-msgstr "Klipperを再起動する"
+msgstr "OSを再起動する"
 
 msgid "Klipper has disconnected"
-msgstr "Klipperの接続が切れました"
+msgstr "OSの接続が切れました"
 
 msgid "Klipper has encountered an error."
-msgstr "Klipperのエラーが発生しました"
+msgstr "Klipperのエラーが発生しました."
 
 msgid "Klipper has shutdown"
-msgstr "Klipperはシャットダウンしました"
+msgstr "OSはシャットダウンしました"
 
 msgid "Klipper is attempting to start"
-msgstr "Klipperは起動中です"
+msgstr "OSは起動中です"
 
 msgid "Klipper will reboot"
-msgstr "Klipperは再起動します"
+msgstr "OSは再起動します"
 
 msgid ""
 "LOAD_FILAMENT/UNLOAD_FILAMENT are hidden and should be used from extrude"
@@ -642,13 +642,13 @@ msgid "Paused"
 msgstr "一時停止中"
 
 msgid "Perform a full upgrade?"
-msgstr "フルアップデートしますか？"
+msgstr "フルアップデートしますか?"
 
 msgid "Pins"
 msgstr "Pins"
 
 msgid "Please recompile and flash the micro-controller."
-msgstr "マイクロコントローラーをリコンパイル＆フラッシュしてください"
+msgstr "マイクロコントローラーをリコンパイル＆フラッシュしてください."
 
 msgid "Please wait"
 msgstr ""
@@ -759,7 +759,7 @@ msgid "Save Z"
 msgstr "Z軸の保存"
 
 msgid "Save configuration?"
-msgstr "設定を保存しますか？"
+msgstr "設定を保存しますか?"
 
 msgid "Saved"
 msgstr "保存しました"
