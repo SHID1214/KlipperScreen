@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: KlipperScreen\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-27 18:24-0300\n"
-"PO-Revision-Date: 2024-08-30 17:02+0900\n"
+"PO-Revision-Date: 2024-08-30 17:33+0900\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/klipperscreen/"
 "klipperscreen/ja/>\n"
@@ -695,7 +695,7 @@ msgid "Profile Name:"
 msgstr "プロファイル:"
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr "ヘルプを求めるときは、KlipperScreen.log を提供してください。\n"
+msgstr "ヘルプを求めるときは、OSScreen.log を提供してください。\n"
 
 msgid "Quad Gantry Level"
 msgstr "ガントリーレベル"
@@ -980,6 +980,9 @@ msgstr ""
 
 msgid "s"
 msgstr ""
+
+msgid "KlipperScreen"
+msgstr "OS画面"
 
 msgid "second"
 msgid_plural "seconds"

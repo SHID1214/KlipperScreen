@@ -692,7 +692,7 @@ msgid "Profile Name:"
 msgstr ""
 
 msgid "Provide KlipperScreen.log when asking for help.\n"
-msgstr ""
+msgstr "Provide OSScreen.log when asking for help.\n"
 
 msgid "Quad Gantry Level"
 msgstr ""
@@ -981,6 +981,9 @@ msgstr ""
 
 msgid "s"
 msgstr ""
+
+msgid "KlipperScreen"
+msgstr "OSScreen"
 
 msgid "second"
 msgid_plural "seconds"
