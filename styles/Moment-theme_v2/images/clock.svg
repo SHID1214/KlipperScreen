@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-1ddb5f4b-7cc7-48f9-ad9f-94e91b29c963" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-8fbbb1c6-c545-4a92-8aea-0259671ba0fc {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="uuid-925386b8-cda8-4dfc-91f7-0808f44157b0" data-name="Calendar / Clock">
+    <path id="uuid-67622dd1-21f8-4df6-bdbd-2be186e63898" data-name="Vector" class="uuid-8fbbb1c6-c545-4a92-8aea-0259671ba0fc" d="m12,7v5h5m-5,9c-4.971,0-9-4.029-9-9S7.029,3,12,3s9,4.029,9,9-4.029,9-9,9Z"/>
+  </g>
+</svg>

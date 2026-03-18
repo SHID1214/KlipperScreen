@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-608c3149-41f4-4d85-85ac-618fd79451aa" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-e1d0f7d5-9db0-4b44-a30f-33e315032b52 {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="uuid-4ad57cc8-775d-4fb1-bb3b-d87a04b7913b" data-name="Navigation / House_03">
+    <path id="uuid-fb95a7d2-4a4a-4ac3-bebc-97637eda6354" data-name="Vector" class="uuid-e1d0f7d5-9db0-4b44-a30f-33e315032b52" d="m2,20.171h2m0,0h6m-6,0v-8.548c0-.534,0-.802.065-1.05.058-.22.153-.429.281-.617.144-.213.345-.389.747-.741l4.802-4.201c.745-.652,1.118-.978,1.538-1.103.37-.109.765-.109,1.135,0,.42.124.793.451,1.54,1.104l4.8,4.2c.402.352.603.528.747.741.128.188.222.397.28.617.065.249.065.516.065,1.05v8.548m-10,0h4m-4,0v-4c0-1.105.895-2,2-2s2,.895,2,2v4m0,0h6m0,0h2"/>
+  </g>
+</svg>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-987affe4-8ca0-4de7-a626-f652462058eb" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .uuid-c95814c1-7d7a-42f0-bf1e-f8490b98dec1 {
+        fill: #e2e2e2;
+        isolation: isolate;
+        opacity: .995;
+        stroke-width: 0px;
+      }
+
+      .uuid-ba7cc72b-72dd-4089-b3f6-155bf90726bc {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g>
+    <path class="uuid-c95814c1-7d7a-42f0-bf1e-f8490b98dec1" d="m4.95,17.32h.7c.4,0,.7.3.7.7s-.3.7-.7.7h-.7c-.4,0-.7-.3-.7-.7s.3-.7.7-.7Z"/>
+    <path class="uuid-c95814c1-7d7a-42f0-bf1e-f8490b98dec1" d="m18.35,17.32h.6c.4,0,.7.3.7.7s-.3.7-.7.7h-.7c-.4,0-.7-.3-.7-.7.1-.4.4-.7.8-.7Z"/>
+    <path class="uuid-c95814c1-7d7a-42f0-bf1e-f8490b98dec1" d="m3.45,15.32h17.1c.4,0,.7.3.7.7v1c0,.4-.3.7-.7.7H3.45c-.4,0-.7-.3-.7-.7v-1c0-.4.3-.7.7-.7Z"/>
+    <path class="uuid-c95814c1-7d7a-42f0-bf1e-f8490b98dec1" d="m21.15,15.32H2.75v.7h18.4v-.7Z"/>
+  </g>
+  <g>
+    <line class="uuid-ba7cc72b-72dd-4089-b3f6-155bf90726bc" x1="9" y1="8.28" x2="12" y2="5.28"/>
+    <line class="uuid-ba7cc72b-72dd-4089-b3f6-155bf90726bc" x1="12" y1="5.28" x2="15" y2="8.28"/>
+    <line class="uuid-ba7cc72b-72dd-4089-b3f6-155bf90726bc" x1="12" y1="5.28" x2="12" y2="12.28"/>
+  </g>
+</svg>

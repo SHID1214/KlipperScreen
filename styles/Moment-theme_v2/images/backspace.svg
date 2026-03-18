@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="8.5mm" height="8.5mm" version="1.1" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #e2e2e2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <!-- Generator: Adobe Illustrator 28.7.0, SVG Export Plug-In . SVG Version: 1.2.0 Build 136)  -->
+  <g>
+    <g id="uuid-8a0703f1-92a1-4116-84e7-0cf2be88926e">
+      <g>
+        <g id="Arrow__x2F__Chevron_x5F_Left">
+          <path id="Vector" class="cls-1" d="M8.3,19l-5-7,5-7h12.4v14h-12.4Z"/>
+        </g>
+        <g>
+          <line class="cls-1" x1="11.4" y1="9.6" x2="13.8" y2="12"/>
+          <line class="cls-1" x1="13.8" y1="12" x2="16.1" y2="14.4"/>
+          <line class="cls-1" x1="13.8" y1="12" x2="11.4" y2="14.4"/>
+          <line class="cls-1" x1="13.8" y1="12" x2="16.1" y2="9.6"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
